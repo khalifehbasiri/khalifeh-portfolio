@@ -21,6 +21,13 @@ export function Hero() {
           View Projects
         </a>
         <a
+          href="/Khalifeh_Basiri_Resume.pdf"
+          download
+          className="rounded-full border border-border px-5 py-2.5 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
+        >
+          Resume
+        </a>
+        <a
           href={`mailto:${contact.email}`}
           className="rounded-full border border-border px-5 py-2.5 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
         >

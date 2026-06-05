@@ -28,6 +28,13 @@ export function Contact() {
         </div>
 
         <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <a
+            href="/Khalifeh_Basiri_Resume.pdf"
+            download
+            className="rounded-full border border-border px-5 py-2.5 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
+          >
+            Download Resume
+          </a>
           {socialLinks.map((link) => (
             <a
               key={link.href}
