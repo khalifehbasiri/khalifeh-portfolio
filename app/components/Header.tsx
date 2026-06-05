@@ -16,7 +16,7 @@ export function Header() {
           href="#"
           className="font-mono text-sm font-medium tracking-tight text-foreground"
         >
-          kbasiri<span className="text-accent">.</span>dev
+          kbasiri<span className="text-accent">.</span>com
         </a>
 
         <nav className="hidden items-center gap-6 sm:flex">
