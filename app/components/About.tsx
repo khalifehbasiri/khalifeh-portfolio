@@ -13,7 +13,7 @@ export function About() {
           </p>
 
           <p>
-            Conversational in Arabic and Farsi, and fluent in English. When I&apos;m
+            ,Fluent in English, and conversational in Arabic and Farsi. When I&apos;m
             not at a keyboard, you&apos;ll usually find me at the gym, gaming,
             reading, catching up with friends, or working on my car.
             I enjoy the challenge of diagnosing problems and getting things running
