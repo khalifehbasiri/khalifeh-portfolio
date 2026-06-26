@@ -1,4 +1,4 @@
-# Khalifeh Basiri — Portfolio
+# Khalifeh Basiri - Portfolio
 
 Personal portfolio site showcasing projects, work experience, and skills. Built with Next.js and deployed as a static single-page site.
 
@@ -48,7 +48,7 @@ app/
 └── page.tsx
 ```
 
-Content is centralized in `app/data/portfolio.ts` — edit that file to update projects, experience, skills, or contact details without touching component code.
+Content is centralized in `app/data/portfolio.ts` - edit that file to update projects, experience, skills, or contact details without touching component code.
 
 ## Deploy
 
