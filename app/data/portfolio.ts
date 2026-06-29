@@ -50,10 +50,18 @@ export const projects: Project[] = [
       "Docker",
       "AWS EC2",
     ],
-    links: [],
+    links: [
+      {
+        label: "Live Site",
+        href: "https://real-time-sign-language-translator-woad.vercel.app/",
+      },
+      {
+        label: "GitHub",
+        href: "https://github.com/khalifehbasiri/Real-Time-Sign-Language-Translator",
+      },
+    ],
     featured: true,
-    category: "personal",
-    note: "Coming soon",
+    category: "personal"
   },
   {
     id: "collaborative-board",
