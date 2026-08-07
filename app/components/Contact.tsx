@@ -1,4 +1,5 @@
 import { contact, socialLinks } from "../data/portfolio";
+import { ContactForm } from "./ContactForm";
 
 export function Contact() {
   return (
@@ -6,34 +7,28 @@ export function Contact() {
       id="contact"
       className="border-t border-border/60 bg-surface/40 py-20"
     >
-      <div className="mx-auto max-w-5xl px-6 text-center">
+      <div className="mx-auto max-w-5xl px-6">
         <p className="mb-2 font-mono text-sm text-accent">Get in Touch</p>
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">
           Let&apos;s connect
         </h2>
-        <p className="mx-auto mt-3 max-w-md text-muted">
+        <p className="mt-3 max-w-md text-muted">
           Open to software engineering roles. Reach out by email or LinkedIn.
         </p>
 
         <div className="mt-6 space-y-1 font-mono text-sm text-muted">
-          <p>
-            <a
-              href={`mailto:${contact.email}`}
-              className="transition-colors hover:text-accent"
-            >
-              {contact.email}
-            </a>
-          </p>
+          <p>{contact.email}</p>
           <p>{contact.location}</p>
         </div>
 
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
+        <ContactForm />
+
+        <div className="mt-8 flex flex-wrap gap-3">
           <a
-            href="/Khalifeh_Basiri_Resume.pdf"
-            download
+            href="/resume"
             className="rounded-full border border-border px-5 py-2.5 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
           >
-            Download Resume
+            View Resume
           </a>
           {socialLinks.map((link) => (
             <a
