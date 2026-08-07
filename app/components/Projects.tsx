@@ -40,7 +40,7 @@ function ProjectCard({ project }: { project: Project }) {
               className="inline-flex items-center gap-1 text-sm font-medium text-accent transition-opacity hover:opacity-80"
             >
               {link.label}
-              <span aria-hidden="true">↗</span>
+              <span aria-hidden="true">-&gt;</span>
             </a>
           ))
         ) : project.note ? (
@@ -53,7 +53,10 @@ function ProjectCard({ project }: { project: Project }) {
 
 export function Projects({ projects }: { projects: Project[] }) {
   return (
-    <section id="projects" className="border-t border-border/60 bg-surface/40 py-20">
+    <section
+      id="projects"
+      className="border-t border-border/60 bg-surface/40 py-20"
+    >
       <div className="mx-auto max-w-5xl px-6">
         <p className="mb-2 font-mono text-sm text-accent">Selected Work</p>
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">

@@ -36,19 +36,22 @@ export const contact = {
   location: "Ottawa, ON",
 };
 
+export const profileSummary =
+  "Software developer focused on Python, cloud data tools, and full-stack web apps. I have led production internal tools, built real-time machine learning interfaces, and shipped responsive Next.js products used by real customers.";
+
 export const projects: Project[] = [
   {
     id: "sign-language-translator",
     title: "Real-Time Sign Language Translator",
     description:
-      "Built a real-time ASL translation system using TensorFlow and MediaPipe for gesture recognition, integrated with a React frontend for live webcam processing. Flask backend for inference, containerized with Docker and deployed on AWS EC2.",
+      "Built a real-time ASL translation system that converts 21 MediaPipe hand landmarks into 63-feature prediction vectors. Served confidence-scored TensorFlow Lite inference through a Flask API with a live React webcam interface.",
     tags: [
+      "Python",
       "TensorFlow",
+      "TensorFlow Lite",
       "MediaPipe",
       "React",
       "Flask",
-      "Docker",
-      "AWS EC2",
     ],
     links: [
       {
@@ -61,13 +64,13 @@ export const projects: Project[] = [
       },
     ],
     featured: true,
-    category: "personal"
+    category: "personal",
   },
   {
     id: "collaborative-board",
     title: "Collaborative Board",
     description:
-      "Full-stack social board app with real-time post feeds, voting, comment threads, and light/dark theme. Clerk authentication with protected actions, Convex real-time queries/mutations, per-user vote tracking, and cascade deletes - deployed on Vercel with Bun pipelines.",
+      "Built and deployed a real-time community board with authenticated posts, voting, threaded comments, live updates, protected actions, per-user vote tracking, ownership checks, and cascade deletion using Next.js, Convex, and Clerk.",
     tags: ["Next.js", "TypeScript", "Convex", "Clerk", "Tailwind CSS"],
     links: [
       {
@@ -86,8 +89,8 @@ export const projects: Project[] = [
     id: "floxy-landing-page",
     title: "Floxy Marketing Site",
     description:
-      "Built and shipped Floxy's marketing landing page serving 20,000+ customers, growing to 23.9K monthly visits within 4 months. Implemented conversion-focused UI with mobile nav, proxy-type selector, auto-scrolling testimonials, and language-based API code snippets.",
-    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "SEO"],
+      "Built and shipped Floxy's production marketing website supporting 20,000+ customers and reaching 23.9K monthly visits within four months. Implemented responsive, SEO-focused UI with mobile nav, proxy selectors, testimonials, API examples, and reusable content models.",
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "SEO", "Vercel"],
     links: [
       {
         label: "Live Site",
@@ -100,21 +103,35 @@ export const projects: Project[] = [
     id: "storage-explorer",
     title: "Azure Storage Explorer",
     description:
-      "Built an internal Storage Explorer app to navigate 420 TB of Azure data for DFO employees - streamlining access for habitat protection, species management, and scientific research teams.",
-    tags: ["Python", "Microsoft Azure", "MongoDB", "SQLite"],
+      "Engineered a multithreaded internal app for searching and exporting records across approximately 420 TB of Azure enterprise data. Used Azure Blob Inventory, MongoDB, SQLite, and a fault-tolerant daily refresh that preserved the active database after failed updates.",
+    tags: [
+      "Python",
+      "Microsoft Azure",
+      "Azure Blob Storage",
+      "MongoDB",
+      "SQLite",
+      "Multithreading",
+    ],
     links: [],
     category: "work",
-    note: "Internal · DFO",
+    note: "Internal - DFO",
   },
   {
     id: "geo-names-validator",
-    title: "Geographical Names Validator",
+    title: "Bilingual Name Manager",
     description:
-      "Bilingual Python tool that validates departmental geographic names against GNBC records, flagging discrepancies and Indigenous language variants using geospatial libraries.",
-    tags: ["Python", "Geospatial", "Bilingual", "Data Validation"],
+      "Architected a bilingual, modular, multithreaded Python tool integrating the Geographical Names Board of Canada API and geospatial matching to validate names, coordinates, languages, and authoritative records.",
+    tags: [
+      "Python",
+      "REST APIs",
+      "Geospatial",
+      "Bilingual",
+      "Data Validation",
+      "Multithreading",
+    ],
     links: [],
     category: "work",
-    note: "Internal · DFO",
+    note: "Internal - DFO",
   },
 ];
 
@@ -137,16 +154,24 @@ export const skillGroups = [
     skills: [
       "Next.js",
       "React",
+      "Node.js",
+      "Express.js",
       "Tailwind CSS",
-      "TensorFlow",
-      "MediaPipe",
       "Flask",
+      "TensorFlow",
+      "TensorFlow Lite",
+      "MediaPipe",
       "Docker",
       "AWS",
+      "Microsoft Azure",
+      "Azure Blob Storage",
       "Clerk",
       "Vercel",
       "Bun",
       "Git",
+      "GitHub",
+      "Linux/Unix",
+      "REST APIs",
     ],
   },
   {
@@ -161,20 +186,24 @@ export const skillGroups = [
       "Computer Vision",
       "Cloud & Containers",
       "Database Management",
+      "Geospatial Data",
+      "Testing & Release Management",
+      "Stakeholder Collaboration",
     ],
   },
 ];
 
 export const workExperience: WorkExperience[] = [
   {
-    role: "Programmer - Internship",
+    role: "Software Developer - Programmer Intern",
     company: "Department of Fisheries and Oceans Canada",
     location: "Ottawa, ON",
-    period: "Oct 2023 – Dec 2025",
+    period: "Sep 2023 - Dec 2025",
     highlights: [
-      "Built a Storage Explorer app to navigate 420 TB of Azure data and a bilingual Python tool to validate departmental geographic names against GNBC records.",
-      "Engineered a data management solution using Python, MongoDB, and SQLite with real-time Azure sync and advanced search; maintained bilingual user manuals and presented at multisector meetings.",
-      "Maintained and supported enterprise cloud-based systems handling large-scale departmental data, including troubleshooting, synchronization workflows, and secure data management.",
+      "Led end-to-end delivery of two production Python applications and coordinated a cross-departmental team through requirements, architecture, testing, staged deployment, and support.",
+      "Engineered a multithreaded Azure Storage Explorer using Python, Azure Blob Inventory, MongoDB, and SQLite to search and export records across approximately 420 TB of enterprise data.",
+      "Architected a bilingual, modular Name Manager integrating the GNBC API and geospatial matching to validate names, coordinates, languages, and authoritative records.",
+      "Managed Git-based version control, integration, regression, and user-acceptance testing with stakeholder feedback from DFO's five administrative regions and the Canadian Coast Guard.",
     ],
   },
   {
@@ -183,16 +212,16 @@ export const workExperience: WorkExperience[] = [
     location: "Remote",
     period: "2025",
     highlights: [
-      "Built and shipped Floxy's marketing landing page using Next.js, React, TypeScript, and Tailwind CSS - serving 20,000+ customers and growing to 23.9K monthly visits within 4 months.",
-      "Implemented conversion-focused UI including mobile nav, proxy-type selector, auto-scrolling testimonials, language-based API code snippets with copy-to-clipboard, and SEO metadata.",
-      "Structured codebase with reusable section components and centralized data models.",
+      "Built and shipped a production marketing website supporting 20,000+ customers and reaching 23.9K monthly visits within four months.",
+      "Used Next.js, React, TypeScript, and Tailwind CSS to deliver a responsive, SEO-focused user experience.",
+      "Implemented mobile navigation, a proxy-type selector, auto-scrolling testimonials, language-specific API examples with copy-to-clipboard, reusable components, and centralized content models.",
     ],
   },
   {
     role: "System Administrator - Internship",
     company: "Tahan Business Services Inc.",
     location: "Ottawa, ON",
-    period: "May 2023 – Aug 2023",
+    period: "May 2023 - Aug 2023",
     highlights: [
       "Managed Microsoft Cloud infrastructure with automated real-time backups, on-site hardware/software support, and computer configuration.",
       "Tracked corporate financials using Excel (bank statements, payroll, taxes) and handled administrative operations including scheduling and client communications.",

@@ -1,4 +1,4 @@
-import { contact, socialLinks } from "../data/portfolio";
+import { contact, profileSummary, socialLinks } from "../data/portfolio";
 
 export function Hero() {
   return (
@@ -10,7 +10,11 @@ export function Hero() {
       </h1>
 
       <p className="mt-4 font-mono text-sm text-muted">
-        {contact.location} · {contact.email}
+        {contact.location} | {contact.email}
+      </p>
+
+      <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted">
+        {profileSummary}
       </p>
 
       <div className="mt-10 flex flex-wrap gap-3">

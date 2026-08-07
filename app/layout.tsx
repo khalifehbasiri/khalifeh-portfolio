@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Khalifeh Basiri - Software Developer",
   description:
-    "Portfolio of Khalifeh Basiri - CS student and programmer at DFO building Python, Azure, and real-time applications.",
+    "Portfolio of Khalifeh Basiri - software developer building Python, Azure, machine learning, and full-stack web applications.",
 };
 
 export default function RootLayout({

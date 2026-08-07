@@ -26,7 +26,7 @@ function TimelineEntry({
           {highlights.map((highlight) => (
             <li
               key={highlight}
-              className="text-sm leading-relaxed text-muted before:mr-2 before:text-accent before:content-['→']"
+              className="text-sm leading-relaxed text-muted before:mr-2 before:text-accent before:content-['->']"
             >
               {highlight}
             </li>
