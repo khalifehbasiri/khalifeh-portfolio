@@ -195,7 +195,7 @@ export const skillGroups = [
 
 export const workExperience: WorkExperience[] = [
   {
-    role: "Software Developer - Programmer Intern",
+    role: "Software Developer",
     company: "Department of Fisheries and Oceans Canada",
     location: "Ottawa, ON",
     period: "Sep 2023 - Dec 2025",
