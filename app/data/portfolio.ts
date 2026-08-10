@@ -54,7 +54,7 @@ export const projects: Project[] = [
     ],
     links: [
       {
-        label: "Coming Soon",
+        label: "Coming Soon - View Progress",
         href: "/projects/z32-telemetry",
       },
     ],
