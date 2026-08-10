@@ -41,6 +41,27 @@ export const profileSummary =
 
 export const projects: Project[] = [
   {
+    id: "z32-telemetry",
+    title: "300ZX Telemetry System",
+    description:
+      "Building a Raspberry Pi and Python-powered CONSULT-I system for my 1990 Nissan 300ZX, with live diagnostics, trip logging, an in-car display, and a phone-friendly dashboard.",
+    tags: [
+      "Python",
+      "Raspberry Pi",
+      "FastAPI",
+      "WebSockets",
+      "Embedded Systems",
+    ],
+    links: [
+      {
+        label: "Coming Soon",
+        href: "/projects/z32-telemetry",
+      },
+    ],
+    featured: true,
+    category: "personal",
+  },
+  {
     id: "sign-language-translator",
     title: "Real-Time Sign Language Translator",
     description:

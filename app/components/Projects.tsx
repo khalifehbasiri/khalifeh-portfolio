@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Project } from "../data/portfolio";
 
 function ProjectCard({ project }: { project: Project }) {
@@ -31,18 +32,29 @@ function ProjectCard({ project }: { project: Project }) {
 
       <div className="flex flex-wrap gap-3">
         {project.links.length > 0 ? (
-          project.links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-sm font-medium text-accent transition-opacity hover:opacity-80"
-            >
-              {link.label}
-              <span aria-hidden="true">-&gt;</span>
-            </a>
-          ))
+          project.links.map((link) =>
+            link.href.startsWith("/") ? (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="inline-flex items-center gap-1 text-sm font-medium text-accent transition-opacity hover:opacity-80"
+              >
+                {link.label}
+                <span aria-hidden="true">-&gt;</span>
+              </Link>
+            ) : (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-sm font-medium text-accent transition-opacity hover:opacity-80"
+              >
+                {link.label}
+                <span aria-hidden="true">-&gt;</span>
+              </a>
+            ),
+          )
         ) : project.note ? (
           <span className="text-sm text-muted">{project.note}</span>
         ) : null}

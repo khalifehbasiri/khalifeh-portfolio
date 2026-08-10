@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://kbasiri.com"),
   title: "Khalifeh Basiri - Software Developer",
   description:
     "Portfolio of Khalifeh Basiri - software developer building Python, Azure, machine learning, and full-stack web applications.",
