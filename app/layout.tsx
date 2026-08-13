@@ -17,6 +17,28 @@ export const metadata: Metadata = {
   title: "Khalifeh Basiri - Software Developer",
   description:
     "Portfolio of Khalifeh Basiri - software developer building Python, Azure, machine learning, and full-stack web applications.",
+  openGraph: {
+    title: "Khalifeh Basiri - Software Developer",
+    description:
+      "Software developer building Python, Azure, machine learning, and full-stack web applications.",
+    url: "/",
+    siteName: "Khalifeh Basiri",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Khalifeh Basiri - Software Developer portfolio",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Khalifeh Basiri - Software Developer",
+    description:
+      "Software developer building Python, Azure, machine learning, and full-stack web applications.",
+    images: ["/opengraph-image"],
+  },
 };
 
 export default function RootLayout({
