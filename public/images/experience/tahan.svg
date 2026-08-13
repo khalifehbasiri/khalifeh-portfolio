@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title description">
+  <title id="title">Tahan Business Services</title>
+  <desc id="description">TB monogram for Tahan Business Services.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#171a21"/>
+      <stop offset="1" stop-color="#292e3b"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fbbf24"/>
+      <stop offset="1" stop-color="#f97316"/>
+    </linearGradient>
+  </defs>
+  <rect width="240" height="240" rx="46" fill="url(#background)"/>
+  <rect x="18" y="18" width="204" height="204" rx="36" fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="2"/>
+  <text x="120" y="143" text-anchor="middle" fill="url(#accent)" font-family="Arial, sans-serif" font-size="82" font-weight="800">TB</text>
+  <path d="M70 171h100" stroke="url(#accent)" stroke-width="8" stroke-linecap="round"/>
+</svg>

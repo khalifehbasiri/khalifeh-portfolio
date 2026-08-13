@@ -1,4 +1,5 @@
 import { skillGroups } from "../data/portfolio";
+import { getSkillGroupColors } from "../lib/tech-stack-colors";
 
 export function Skills() {
   return (
@@ -12,14 +13,16 @@ export function Skills() {
         <div className="mt-10 grid gap-8 sm:grid-cols-2">
           {skillGroups.map((group) => (
             <div key={group.label}>
-              <h3 className="mb-3 text-sm font-medium text-foreground">
+              <h3
+                className={`mb-3 text-sm font-medium ${getSkillGroupColors(group.label).heading}`}
+              >
                 {group.label}
               </h3>
               <div className="flex flex-wrap gap-2">
                 {group.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="rounded-full border border-border px-3 py-1 text-sm text-muted"
+                    className={`rounded-full border px-3 py-1 text-sm ${getSkillGroupColors(group.label).badge}`}
                   >
                     {skill}
                   </span>

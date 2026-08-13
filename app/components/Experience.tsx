@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { education, workExperience } from "../data/portfolio";
 
 function TimelineEntry({
@@ -6,17 +7,38 @@ function TimelineEntry({
   subtitle,
   location,
   highlights,
+  image,
+  imageAlt,
+  imageFit = "contain",
 }: {
   period: string;
   title: string;
   subtitle: string;
   location: string;
   highlights: string[];
+  image?: string;
+  imageAlt?: string;
+  imageFit?: "cover" | "contain";
 }) {
   return (
-    <div className="grid gap-4 sm:grid-cols-[200px_1fr]">
-      <div>
-        <p className="font-mono text-xs text-muted">{period}</p>
+    <div className="grid grid-cols-[84px_1fr] gap-5 sm:grid-cols-[144px_1fr] sm:gap-8">
+      <div className="flex flex-col items-center sm:items-start">
+        {image && imageAlt ? (
+          <div className="relative size-20 overflow-hidden rounded-xl border border-border bg-surface-raised sm:size-28">
+            <Image
+              src={image}
+              alt={imageAlt}
+              fill
+              sizes="(min-width: 640px) 112px, 80px"
+              className={
+                imageFit === "cover" ? "object-cover" : "object-contain"
+              }
+            />
+          </div>
+        ) : null}
+        <p className="mt-3 text-center font-mono text-[11px] leading-relaxed text-muted sm:text-left sm:text-xs">
+          {period}
+        </p>
       </div>
       <div>
         <h3 className="font-medium text-foreground">{title}</h3>
@@ -63,6 +85,9 @@ export function Experience() {
                   subtitle={item.company}
                   location={item.location}
                   highlights={item.highlights}
+                  image={item.image}
+                  imageAlt={item.imageAlt}
+                  imageFit={item.imageFit}
                 />
               ))}
             </div>
@@ -81,6 +106,9 @@ export function Experience() {
                   subtitle={item.school}
                   location={item.location}
                   highlights={item.details}
+                  image={item.image}
+                  imageAlt={item.imageAlt}
+                  imageFit={item.imageFit}
                 />
               ))}
             </div>

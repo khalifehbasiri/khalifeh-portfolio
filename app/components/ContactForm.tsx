@@ -107,7 +107,6 @@ export function ContactForm() {
         >
           {status === "sending" ? "Sending..." : "Send Message"}
         </button>
-
         {message ? (
           <p
             className={`text-sm ${

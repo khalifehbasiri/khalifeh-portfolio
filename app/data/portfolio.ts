@@ -7,6 +7,9 @@ export type Project = {
   id: string;
   title: string;
   description: string;
+  image: string;
+  imageAlt: string;
+  imageFit?: "cover" | "contain";
   tags: string[];
   links: ProjectLink[];
   featured?: boolean;
@@ -20,6 +23,9 @@ export type WorkExperience = {
   company: string;
   location: string;
   period: string;
+  image: string;
+  imageAlt: string;
+  imageFit?: "cover" | "contain";
   highlights: string[];
 };
 
@@ -28,6 +34,9 @@ export type Education = {
   school: string;
   location: string;
   period: string;
+  image: string;
+  imageAlt: string;
+  imageFit?: "cover" | "contain";
   details: string[];
 };
 
@@ -45,6 +54,8 @@ export const projects: Project[] = [
     title: "300ZX Telemetry System",
     description:
       "Building a Raspberry Pi and Python-powered CONSULT-I system for my 1990 Nissan 300ZX, with live diagnostics, trip logging, an in-car display, and a phone-friendly dashboard.",
+    image: "/images/projects/z32-cartoon-orange.png",
+    imageAlt: "Cartoon-style orange Nissan 300ZX Z32 with telemetry graphics",
     tags: [
       "Python",
       "Raspberry Pi",
@@ -66,6 +77,8 @@ export const projects: Project[] = [
     title: "Real-Time Sign Language Translator",
     description:
       "Built a real-time ASL translation system that converts 21 MediaPipe hand landmarks into 63-feature prediction vectors. Served confidence-scored TensorFlow Lite inference through a Flask API with a live React webcam interface.",
+    image: "/images/projects/sign-language-translator.png",
+    imageAlt: "SignTranslate AI project website",
     tags: [
       "Python",
       "TensorFlow",
@@ -92,6 +105,8 @@ export const projects: Project[] = [
     title: "Collaborative Board",
     description:
       "Built and deployed a real-time community board with authenticated posts, voting, threaded comments, live updates, protected actions, per-user vote tracking, ownership checks, and cascade deletion using Next.js, Convex, and Clerk.",
+    image: "/images/projects/collaborative-board.png",
+    imageAlt: "Collaborative Board project website",
     tags: ["Next.js", "TypeScript", "Convex", "Clerk", "Tailwind CSS"],
     links: [
       {
@@ -111,6 +126,8 @@ export const projects: Project[] = [
     title: "Floxy Marketing Site",
     description:
       "Built and shipped Floxy's production marketing website supporting 20,000+ customers and reaching 23.9K monthly visits within four months. Implemented responsive, SEO-focused UI with mobile nav, proxy selectors, testimonials, API examples, and reusable content models.",
+    image: "/images/projects/floxy-marketing-site.png",
+    imageAlt: "Floxy marketing website",
     tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "SEO", "Vercel"],
     links: [
       {
@@ -125,6 +142,9 @@ export const projects: Project[] = [
     title: "Azure Storage Explorer",
     description:
       "Engineered a multithreaded internal app for searching and exporting records across approximately 420 TB of Azure enterprise data. Used Azure Blob Inventory, MongoDB, SQLite, and a fault-tolerant daily refresh that preserved the active database after failed updates.",
+    image: "/images/brand/dfo-project-sharp.webp",
+    imageAlt: "Fisheries and Oceans Canada logo",
+    imageFit: "cover",
     tags: [
       "Python",
       "Microsoft Azure",
@@ -142,6 +162,9 @@ export const projects: Project[] = [
     title: "Bilingual Name Manager",
     description:
       "Architected a bilingual, modular, multithreaded Python tool integrating the Geographical Names Board of Canada API and geospatial matching to validate names, coordinates, languages, and authoritative records.",
+    image: "/images/brand/dfo-project-sharp.webp",
+    imageAlt: "Fisheries and Oceans Canada logo",
+    imageFit: "cover",
     tags: [
       "Python",
       "REST APIs",
@@ -220,6 +243,9 @@ export const workExperience: WorkExperience[] = [
     company: "Department of Fisheries and Oceans Canada",
     location: "Ottawa, ON",
     period: "Sep 2023 - Dec 2025",
+    image: "/images/brand/dfo-canada-mark.png",
+    imageAlt: "Government of Canada logo",
+    imageFit: "contain",
     highlights: [
       "Led end-to-end delivery of two production Python applications and coordinated a cross-departmental team through requirements, architecture, testing, staged deployment, and support.",
       "Engineered a multithreaded Azure Storage Explorer using Python, Azure Blob Inventory, MongoDB, and SQLite to search and export records across approximately 420 TB of enterprise data.",
@@ -232,6 +258,8 @@ export const workExperience: WorkExperience[] = [
     company: "Floxy",
     location: "Remote",
     period: "2025",
+    image: "/images/brand/floxy-logo.png",
+    imageAlt: "Floxy logo",
     highlights: [
       "Built and shipped a production marketing website supporting 20,000+ customers and reaching 23.9K monthly visits within four months.",
       "Used Next.js, React, TypeScript, and Tailwind CSS to deliver a responsive, SEO-focused user experience.",
@@ -243,6 +271,8 @@ export const workExperience: WorkExperience[] = [
     company: "Tahan Business Services Inc.",
     location: "Ottawa, ON",
     period: "May 2023 - Aug 2023",
+    image: "/images/experience/tahan.svg",
+    imageAlt: "Tahan Business Services branded visual",
     highlights: [
       "Managed Microsoft Cloud infrastructure with automated real-time backups, on-site hardware/software support, and computer configuration.",
       "Tracked corporate financials using Excel (bank statements, payroll, taxes) and handled administrative operations including scheduling and client communications.",
@@ -256,6 +286,9 @@ export const education: Education[] = [
     school: "Carleton University",
     location: "Ottawa, ON",
     period: "Graduated 2026",
+    image: "/images/brand/carleton-logo-red.png",
+    imageAlt: "Carleton University crest",
+    imageFit: "cover",
     details: [
       "Coursework in algorithms, databases, software engineering, systems programming, and machine learning.",
     ],

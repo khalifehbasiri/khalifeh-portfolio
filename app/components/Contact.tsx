@@ -1,5 +1,6 @@
 import { contact, socialLinks } from "../data/portfolio";
 import { ContactForm } from "./ContactForm";
+import { EmailCopyButton } from "./EmailCopyButton";
 
 export function Contact() {
   return (
@@ -15,12 +16,10 @@ export function Contact() {
         <p className="mt-3 max-w-md text-muted">
           Open to software engineering roles. Reach out by email or LinkedIn.
         </p>
-
-        <div className="mt-6 space-y-1 font-mono text-sm text-muted">
-          <p>{contact.email}</p>
-          <p>{contact.location}</p>
+        <div className="mt-4 flex items-center gap-2 font-mono text-sm text-foreground">
+          <span>{contact.email}</span>
+          <EmailCopyButton email={contact.email} />
         </div>
-
         <ContactForm />
 
         <div className="mt-8 flex flex-wrap gap-3">
