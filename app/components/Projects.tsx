@@ -113,7 +113,7 @@ function ProjectRow({
         </span>
       </div>
 
-      <div className="-mx-6 snap-x snap-mandatory overflow-x-auto overscroll-x-contain px-6 pb-4 [scrollbar-color:var(--border)_transparent] [scrollbar-width:thin]">
+      <div className="snap-x snap-mandatory overflow-x-auto overscroll-x-contain pb-4 [scrollbar-color:var(--border)_transparent] [scrollbar-width:thin]">
         <div className="flex w-max gap-5">
           {projects.map((project, index) => (
             <ProjectCard
