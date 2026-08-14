@@ -4,7 +4,14 @@ import { FormEvent, useState } from "react";
 
 type FormStatus = "idle" | "sending" | "sent" | "error";
 
-export function ContactForm() {
+type ContactFormProps = {
+  actionLinks?: {
+    label: string;
+    href: string;
+  }[];
+};
+
+export function ContactForm({ actionLinks = [] }: ContactFormProps) {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [message, setMessage] = useState("");
 
@@ -99,23 +106,41 @@ export function ContactForm() {
         />
       </label>
 
-      <div className="flex flex-wrap items-center gap-3">
-        <button
-          type="submit"
-          disabled={status === "sending"}
-          className="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
-        >
-          {status === "sending" ? "Sending..." : "Send Message"}
-        </button>
-        {message ? (
-          <p
-            className={`text-sm ${
-              status === "sent" ? "text-accent" : "text-muted"
-            }`}
-            role="status"
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div className="flex flex-wrap items-center gap-3">
+          <button
+            type="submit"
+            disabled={status === "sending"}
+            className="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {message}
-          </p>
+            {status === "sending" ? "Sending..." : "Send Message"}
+          </button>
+          {message ? (
+            <p
+              className={`text-sm ${
+                status === "sent" ? "text-accent" : "text-muted"
+              }`}
+              role="status"
+            >
+              {message}
+            </p>
+          ) : null}
+        </div>
+
+        {actionLinks.length > 0 ? (
+          <div className="flex flex-wrap gap-3 sm:justify-end">
+            {actionLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full border border-border px-5 py-2.5 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
         ) : null}
       </div>
     </form>

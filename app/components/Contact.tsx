@@ -20,27 +20,7 @@ export function Contact() {
           <span>{contact.email}</span>
           <EmailCopyButton email={contact.email} />
         </div>
-        <ContactForm />
-
-        <div className="mt-8 flex flex-wrap gap-3">
-          <a
-            href="/resume"
-            className="rounded-full border border-border px-5 py-2.5 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
-          >
-            View Resume
-          </a>
-          {socialLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
+        <ContactForm actionLinks={socialLinks} />
       </div>
     </section>
   );

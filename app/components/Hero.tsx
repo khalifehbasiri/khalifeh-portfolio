@@ -25,18 +25,6 @@ export function Hero() {
           View Projects
         </a>
         <a
-          href="/resume"
-          className="rounded-full border border-border px-5 py-2.5 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
-        >
-          Resume
-        </a>
-        <a
-          href="#contact"
-          className="rounded-full border border-border px-5 py-2.5 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
-        >
-          Contact
-        </a>
-        <a
           href={socialLinks[0].href}
           target="_blank"
           rel="noopener noreferrer"
@@ -51,6 +39,12 @@ export function Hero() {
           className="rounded-full border border-border px-5 py-2.5 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
         >
           LinkedIn
+        </a>
+        <a
+          href="#contact"
+          className="rounded-full border border-border px-5 py-2.5 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
+        >
+          Contact
         </a>
       </div>
     </section>

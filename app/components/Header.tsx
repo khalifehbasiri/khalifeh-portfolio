@@ -4,7 +4,6 @@ const navItems = [
   { label: "Projects", href: "#projects" },
   { label: "Skills", href: "#skills" },
   { label: "Experience", href: "#experience" },
-  { label: "Resume", href: "/resume" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ];
@@ -33,12 +32,12 @@ export function Header() {
         </nav>
 
         <a
-          href={socialLinks[1].href}
+          href={"/resume"}
           target="_blank"
           rel="noopener noreferrer"
           className="rounded-full border border-border px-3 py-1.5 text-xs font-medium transition-colors hover:border-accent hover:text-accent"
         >
-          Connect
+          Resume
         </a>
       </div>
     </header>
