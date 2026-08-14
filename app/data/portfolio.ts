@@ -104,7 +104,7 @@ export const projects: Project[] = [
     id: "collaborative-board",
     title: "Collaborative Board",
     description:
-      "Built and deployed a real-time community board with authenticated posts, voting, threaded comments, live updates, protected actions, per-user vote tracking, ownership checks, and cascade deletion using Next.js, Convex, and Clerk.",
+      "Built and deployed a real-time community platform with Next.js, Convex, and Clerk, implementing reactive updates, server-side authorization, threaded comments, per-user vote state, ownership checks, and cascade deletion.",
     image: "/images/projects/collaborative-board.png",
     imageAlt: "Collaborative Board project website",
     tags: ["Next.js", "TypeScript", "Convex", "Clerk", "Tailwind CSS"],
@@ -116,6 +116,24 @@ export const projects: Project[] = [
       {
         label: "GitHub",
         href: "https://github.com/khalifehbasiri/collaborative-board",
+      },
+    ],
+    featured: true,
+    category: "personal",
+  },
+  {
+    id: "tandem-insulin-pump-simulator",
+    title: "Tandem t:slim X2 Insulin Pump Simulator",
+    description:
+      "Engineered bolus and automated insulin-delivery logic within a four-person C++/Qt team, including carbohydrate and correction calculations, manual and extended dosing, CGM-driven basal adjustments, safety limits, suspend/resume behavior, and alerts.",
+    image: "/images/projects/tandem-insulin-pump-simulator.jpg",
+    imageAlt:
+      "Tandem t:slim X2 insulin pump simulator showing a glucose chart and an extended insulin-delivery interval",
+    tags: ["C++", "Qt", "Qt Charts", "SQLite", "UML"],
+    links: [
+      {
+        label: "GitHub",
+        href: "https://github.com/khalifehbasiri/Tandem-t-slim-Insulin-Pump-Simulator",
       },
     ],
     featured: true,
@@ -189,6 +207,7 @@ export const skillGroups = [
       "C",
       "C++",
       "Java",
+      "SQL",
       "HTML",
       "CSS",
     ],
@@ -202,6 +221,8 @@ export const skillGroups = [
       "Express.js",
       "Tailwind CSS",
       "Flask",
+      "Qt",
+      "Qt Charts",
       "TensorFlow",
       "TensorFlow Lite",
       "MediaPipe",
@@ -247,10 +268,11 @@ export const workExperience: WorkExperience[] = [
     imageAlt: "Government of Canada logo",
     imageFit: "contain",
     highlights: [
-      "Led end-to-end delivery of two production Python applications and coordinated a cross-departmental team through requirements, architecture, testing, staged deployment, and support.",
-      "Engineered a multithreaded Azure Storage Explorer using Python, Azure Blob Inventory, MongoDB, and SQLite to search and export records across approximately 420 TB of enterprise data.",
-      "Architected a bilingual, modular Name Manager integrating the GNBC API and geospatial matching to validate names, coordinates, languages, and authoritative records.",
-      "Managed Git-based version control, integration, regression, and user-acceptance testing with stakeholder feedback from DFO's five administrative regions and the Canadian Coast Guard.",
+      "Delivered two production Python applications through the full Software Development Life Cycle, translating stakeholder requirements into maintainable solutions and providing post-release support.",
+      "Engineered a multithreaded Azure Storage Explorer using Python, Azure Blob Inventory, MongoDB, and SQLite to index, search, and export metadata spanning approximately 420 TB while preserving UI responsiveness and the last valid database after failed refreshes.",
+      "Reduced geographic-name validation turnaround by 80% by architecting a bilingual, modular, multithreaded Python Name Manager integrating the GNBC REST API with geospatial matching.",
+      "Led a three-person team to deliver a user-requested Name Manager module, coordinating design, implementation, and integration across technical and domain contributors while collaborating with GNBC stakeholders.",
+      "Performed defect reproduction, root-cause analysis, regression testing, and user-acceptance testing across multithreading, REST API, database, and geospatial workflows; validated staged releases with users across DFO's five regions and the Canadian Coast Guard.",
     ],
   },
   {
@@ -267,7 +289,7 @@ export const workExperience: WorkExperience[] = [
     ],
   },
   {
-    role: "System Administrator - Internship",
+    role: "System Administrator Intern",
     company: "Tahan Business Services Inc.",
     location: "Ottawa, ON",
     period: "May 2023 - Aug 2023",
@@ -282,7 +304,7 @@ export const workExperience: WorkExperience[] = [
 
 export const education: Education[] = [
   {
-    degree: "Bachelor of Computer Science - GPA: 3.7",
+    degree: "Bachelor of Computer Science - GPA: 3.5",
     school: "Carleton University",
     location: "Ottawa, ON",
     period: "Graduated 2026",
