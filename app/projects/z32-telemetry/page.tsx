@@ -21,7 +21,6 @@ type StageStatus = "completed" | "current" | "upcoming";
 type Stage = {
   number: string;
   title: string;
-  date: string;
   status: StageStatus;
   description: string;
   deliverable: string;
@@ -31,7 +30,6 @@ const stages: Stage[] = [
   {
     number: "01",
     title: "Parts & prototype setup",
-    date: "Started Aug 2026",
     status: "current",
     description:
       "Gather the Version 1 hardware and verify each component before anything is permanently installed in the car.",
@@ -40,7 +38,6 @@ const stages: Stage[] = [
   {
     number: "02",
     title: "First ECU connection",
-    date: "Date TBD",
     status: "upcoming",
     description:
       "Connect the CONSULT cable to a laptop and prove that the 300ZX ECU can stream a reliable live RPM reading.",
@@ -49,7 +46,6 @@ const stages: Stage[] = [
   {
     number: "03",
     title: "Python CONSULT library",
-    date: "Date TBD",
     status: "upcoming",
     description:
       "Turn the protocol work into a clean Python library that decodes coolant, TPS, MAF, battery, timing, and other ECU values.",
@@ -58,7 +54,6 @@ const stages: Stage[] = [
   {
     number: "04",
     title: "Drive data logger",
-    date: "Date TBD",
     status: "upcoming",
     description:
       "Record timestamped sensor data to SQLite so drives can be reviewed and intermittent problems can be diagnosed later.",
@@ -67,7 +62,6 @@ const stages: Stage[] = [
   {
     number: "05",
     title: "Live web dashboard",
-    date: "Date TBD",
     status: "upcoming",
     description:
       "Build a FastAPI and WebSocket dashboard with live gauges, warning thresholds, diagnostics, and trip summaries.",
@@ -76,7 +70,6 @@ const stages: Stage[] = [
   {
     number: "06",
     title: "Raspberry Pi integration",
-    date: "Date TBD",
     status: "upcoming",
     description:
       "Move the software onto the Pi, launch it automatically at startup, and make the dashboard available over local Wi-Fi.",
@@ -85,7 +78,6 @@ const stages: Stage[] = [
   {
     number: "07",
     title: "In-car installation",
-    date: "Date TBD",
     status: "upcoming",
     description:
       "Install the screen, enclosure, fused automotive power, and safe shutdown hardware for a clean and reliable finish.",
@@ -253,8 +245,8 @@ export default function Z32TelemetryPage() {
           <p className="font-mono text-sm text-accent">Build roadmap</p>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight">From first part to finished install</h2>
           <p className="mt-4 leading-7 text-muted">
-            Dates will be added as each milestone is completed. Finished and active
-            stages will light up; future work stays muted until I reach it.
+            Finished and active stages will light up; future work stays muted
+            until I reach it.
           </p>
         </div>
 
@@ -267,7 +259,7 @@ export default function Z32TelemetryPage() {
             return (
               <li
                 key={stage.number}
-                className={`grid gap-5 rounded-2xl border p-6 sm:grid-cols-[4rem_1fr_auto] sm:items-start ${
+                className={`grid gap-5 rounded-2xl border p-6 sm:grid-cols-[4rem_1fr] sm:items-start ${
                   isHighlighted
                     ? "border-accent/40 bg-accent/[0.07] shadow-[0_0_50px_rgba(110,231,183,0.04)]"
                     : "border-border/70 bg-surface/50 opacity-60"
@@ -294,9 +286,6 @@ export default function Z32TelemetryPage() {
                     <span className="text-muted">Outcome:</span> {stage.deliverable}
                   </p>
                 </div>
-                <time className={`font-mono text-xs sm:text-right ${isHighlighted ? "text-accent" : "text-muted"}`}>
-                  {stage.date}
-                </time>
               </li>
             );
           })}
