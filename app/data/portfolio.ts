@@ -50,23 +50,17 @@ export const profileSummary =
 
 export const projects: Project[] = [
   {
-    id: "z32-telemetry",
-    title: "300ZX Telemetry System",
+    id: "zdash",
+    title: "ZDash",
     description:
-      "Building a Raspberry Pi and Python-powered CONSULT-I system for my 1990 Nissan 300ZX, with live diagnostics, trip logging, an in-car display, and a phone-friendly dashboard.",
+      "Desktop diagnostics and ownership workspace for classic Nissan and Infiniti vehicles, built from my experience maintaining a 1990 Nissan 300ZX. Focused on live vehicle insight, saved sessions, maintenance history, issue tracking, and cleaner workflows for understanding older cars.",
     image: "/images/projects/z32-cartoon-orange.png",
-    imageAlt: "Cartoon-style orange Nissan 300ZX Z32 with telemetry graphics",
-    tags: [
-      "Python",
-      "Raspberry Pi",
-      "FastAPI",
-      "WebSockets",
-      "Embedded Systems",
-    ],
+    imageAlt: "Abstract automotive illustration for the ZDash product",
+    tags: ["TypeScript", "React", "Electron", "SQLite", "Automotive Software"],
     links: [
       {
-        label: "Coming Soon - View Progress",
-        href: "/projects/z32-telemetry",
+        label: "Product Case Study",
+        href: "/projects/zdash",
       },
     ],
     featured: true,

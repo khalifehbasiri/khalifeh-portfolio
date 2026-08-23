@@ -145,8 +145,7 @@ export function Projects({ projects }: { projects: Project[] }) {
           Projects
         </h2>
         <p className="mt-3 max-w-2xl text-muted">
-          Production tools, contract work, and personal builds - curated from
-          my resume and GitHub.
+          Production tools, contract work, and product-minded personal builds.
         </p>
         <div className="mt-10 space-y-12">
           <ProjectRow
