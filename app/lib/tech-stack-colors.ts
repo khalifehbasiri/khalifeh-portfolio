@@ -28,6 +28,7 @@ const projectOnlyTagGroups: Record<string, SkillGroupLabel> = {
   Electron: "Frameworks & Tools",
   "Embedded Systems": "Domains",
   "Automotive Software": "Domains",
+  "AI Integration": "Domains",
   SEO: "Domains",
   Multithreading: "Domains",
   Geospatial: "Domains",

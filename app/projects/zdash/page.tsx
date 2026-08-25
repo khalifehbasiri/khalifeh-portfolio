@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { getTechTagColors } from "../../lib/tech-stack-colors";
 
 export const metadata: Metadata = {
   title: "ZDash - Product Case Study | Khalifeh Basiri",
   description:
-    "A public-safe look at ZDash, a desktop diagnostics and ownership workspace for classic Nissan and Infiniti vehicles.",
+    "A public-safe look at ZDash, an AI-enabled desktop diagnostics and ownership workspace for classic Nissan and Infiniti vehicles.",
   alternates: {
     canonical: "/projects/zdash",
   },
   openGraph: {
     title: "ZDash - Automotive Software Case Study",
     description:
-      "A desktop product exploration focused on making classic vehicle ownership easier to understand and organize.",
+      "An AI-enabled desktop product exploration focused on making classic vehicle ownership easier to understand and organize.",
     url: "/projects/zdash",
     images: [
       {
@@ -61,6 +62,13 @@ const productAreas = [
     description:
       "Context and observations preserved with the rest of the ownership record for easier future reference.",
   },
+  {
+    number: "07",
+    title: "AI-assisted workflows",
+    description:
+      "AI helps organize and surface useful context across diagnostic notes, maintenance records, saved sessions, and tracked issues.",
+    featured: true,
+  },
 ];
 
 const roadmap = [
@@ -91,6 +99,7 @@ const strengths = [
   "Hardware-adjacent software",
   "Product thinking",
   "UX for technical workflows",
+  "Applied AI integration",
 ];
 
 export default function ZDashPage() {
@@ -124,9 +133,9 @@ export default function ZDashPage() {
               A clearer way to understand, maintain, and organize a classic car.
             </p>
             <p className="mt-5 max-w-xl leading-7 text-muted">
-              ZDash is a desktop diagnostics and ownership workspace for
-              classic Nissan and Infiniti vehicles. It brings vehicle insight and
-              the long-term ownership record into one focused product experience.
+              ZDash is an AI-enabled desktop diagnostics and ownership workspace
+              for classic Nissan and Infiniti vehicles. It brings vehicle insight
+              and the long-term ownership record into one focused product experience.
             </p>
             <div className="mt-8 flex flex-wrap gap-2 font-mono text-xs">
               {[
@@ -135,10 +144,11 @@ export default function ZDashPage() {
                 "Electron",
                 "SQLite",
                 "Automotive Software",
+                "AI Integration",
               ].map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-md border border-border bg-surface px-2.5 py-1.5 text-muted"
+                  className={`rounded-md border px-2.5 py-1.5 ${getTechTagColors(tag)}`}
                 >
                   {tag}
                 </span>
@@ -252,7 +262,11 @@ export default function ZDashPage() {
             {productAreas.map((area) => (
               <article
                 key={area.number}
-                className="rounded-xl border border-border bg-background/60 p-6"
+                className={`rounded-xl border p-6 ${
+                  area.featured
+                    ? "border-accent/30 bg-accent/[0.06] md:col-span-2 lg:col-span-3"
+                    : "border-border bg-background/60"
+                }`}
               >
                 <p className="font-mono text-xs text-accent">{area.number}</p>
                 <h3 className="mt-5 text-lg font-medium">{area.title}</h3>
@@ -303,7 +317,9 @@ export default function ZDashPage() {
               {strengths.map((strength) => (
                 <div
                   key={strength}
-                  className="flex min-h-24 items-end rounded-xl border border-accent/20 bg-accent/[0.06] p-5"
+                  className={`flex min-h-24 items-end rounded-xl border border-accent/20 bg-accent/[0.06] p-5 ${
+                    strength === "Applied AI integration" ? "sm:col-span-2" : ""
+                  }`}
                 >
                   <p className="font-medium">{strength}</p>
                 </div>

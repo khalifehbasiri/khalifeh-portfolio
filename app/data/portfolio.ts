@@ -53,10 +53,17 @@ export const projects: Project[] = [
     id: "zdash",
     title: "ZDash",
     description:
-      "Desktop diagnostics and ownership workspace for classic Nissan and Infiniti vehicles, built from my experience maintaining a 1990 Nissan 300ZX. Focused on live vehicle insight, saved sessions, maintenance history, issue tracking, and cleaner workflows for understanding older cars.",
+      "Desktop diagnostics and ownership workspace for classic Nissan and Infiniti vehicles, built from my experience maintaining a 1990 Nissan 300ZX. Focused on live vehicle insight, saved sessions, maintenance history, issue tracking, and AI-assisted workflows for understanding older cars.",
     image: "/images/projects/z32-cartoon-orange.png",
     imageAlt: "Abstract automotive illustration for the ZDash product",
-    tags: ["TypeScript", "React", "Electron", "SQLite", "Automotive Software"],
+    tags: [
+      "TypeScript",
+      "React",
+      "Electron",
+      "SQLite",
+      "Automotive Software",
+      "AI Integration",
+    ],
     links: [
       {
         label: "Product Case Study",
