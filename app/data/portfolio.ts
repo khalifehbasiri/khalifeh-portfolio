@@ -46,14 +46,14 @@ export const contact = {
 };
 
 export const profileSummary =
-  "Software developer focused on Python, cloud data tools, and full-stack web apps. I have led production internal tools, built real-time machine learning interfaces, and shipped responsive Next.js products used by real customers.";
+  "Software developer focused on Python, AI-enabled automotive diagnostics, and full-stack applications. I have led production internal tools, built real-time machine learning interfaces, and shipped responsive Next.js products used by real customers.";
 
 export const projects: Project[] = [
   {
     id: "zdash",
     title: "ZDash",
     description:
-      "Built an Electron/TypeScript vehicle diagnostic copilot for ECU telemetry, faults, and ownership records. Integrated OpenAI Responses with Zod-validated, human-approved tools and designed grounded RAG and evaluation workflows for technical docs.",
+      "Engineered a Windows diagnostics platform for Nissan and Infiniti CONSULT-I ECUs with 9600-baud serial handshakes, framed-stream decoding for up to 22 channels, guarded fault-code workflows, and SQLite/WAL session recording. Integrated OpenAI Responses with complete vehicle context, Zod-validated human-approved tools, and grounded RAG workflows for service documentation.",
     image: "/images/projects/zdash-webpage.png",
     imageAlt:
       "ZDash website showing a classic Nissan 300ZX, live vehicle telemetry, and automotive ownership features",
@@ -279,23 +279,21 @@ export const workExperience: WorkExperience[] = [
     imageAlt: "Government of Canada logo",
     imageFit: "contain",
     highlights: [
-      "Delivered two production Python applications through the full Software Development Life Cycle, translating stakeholder requirements into maintainable solutions and providing post-release support.",
-      "Engineered a multithreaded Azure Storage Explorer using Python, Azure Blob Inventory, MongoDB, and SQLite to index, search, and export metadata spanning approximately 420 TB while preserving UI responsiveness and the last valid database after failed refreshes.",
-      "Reduced geographic-name validation turnaround by 80% by architecting a bilingual, modular, multithreaded Python Name Manager integrating the GNBC REST API with geospatial matching.",
-      "Led a three-person team to deliver a user-requested Name Manager module, coordinating design, implementation, and integration across technical and domain contributors while collaborating with GNBC stakeholders.",
+      "Engineered a multithreaded Python data explorer indexing and exporting metadata across 420 TB of Microsoft Azure Storage using Azure Blob Inventory, MongoDB, and SQLite while preserving UI responsiveness and the last valid database during failed refreshes.",
+      "Reduced geographic-name validation time by 80% by building a bilingual, multithreaded Python application integrating the GNBC REST API and geospatial matching.",
+      "Led a three-person Agile team through the design, implementation, and integration of a user-requested Name Manager module; collaborated with GNBC stakeholders to improve API usability.",
       "Performed defect reproduction, root-cause analysis, regression testing, and user-acceptance testing across multithreading, REST API, database, and geospatial workflows; validated staged releases with users across DFO's five regions and the Canadian Coast Guard.",
     ],
   },
   {
-    role: "Frontend Developer - Contract",
+    role: "Freelance Frontend Developer",
     company: "Floxy",
     location: "Remote",
-    period: "2025",
+    period: "Apr 2025 - May 2025",
     image: "/images/brand/floxy-logo.png",
     imageAlt: "Floxy logo",
     highlights: [
-      "Built and shipped a production marketing website supporting 20,000+ customers and reaching 23.9K monthly visits within four months.",
-      "Used Next.js, React, TypeScript, and Tailwind CSS to deliver a responsive, SEO-focused user experience.",
+      "Built and shipped a responsive Next.js marketing site supporting 20,000+ customers and reaching 23.9K monthly visits within four months of launch.",
       "Implemented mobile navigation, a proxy-type selector, auto-scrolling testimonials, language-specific API examples with copy-to-clipboard, reusable components, and centralized content models.",
     ],
   },
@@ -315,10 +313,10 @@ export const workExperience: WorkExperience[] = [
 
 export const education: Education[] = [
   {
-    degree: "Bachelor of Computer Science - GPA: 3.5",
+    degree: "Bachelor of Computer Science - GPA: 3.5/4.0",
     school: "Carleton University",
     location: "Ottawa, ON",
-    period: "Graduated 2026",
+    period: "2026",
     image: "/images/brand/carleton-logo-red.png",
     imageAlt: "Carleton University crest",
     imageFit: "cover",
