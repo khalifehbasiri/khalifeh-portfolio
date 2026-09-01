@@ -69,7 +69,7 @@ export const projects: Project[] = [
     ],
     links: [
       {
-        label: "Live Site",
+        label: "Product Site",
         href: "https://www.zdash.app/",
       },
     ],
