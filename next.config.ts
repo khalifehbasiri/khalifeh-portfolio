@@ -1,6 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async rewrites() {
+    return ["projects", "skills", "experience", "about", "contact"].map(
+      (section) => ({
+        source: `/${section}`,
+        destination: "/",
+      }),
+    );
+  },
   async redirects() {
     return [
       {

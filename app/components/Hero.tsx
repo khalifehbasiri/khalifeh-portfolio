@@ -1,6 +1,15 @@
+'use client';
+
+import Link from 'next/link';
+import { scrollToSection } from '../lib/navigation';
 import { contact, profileSummary, socialLinks } from "../data/portfolio";
 
 export function Hero() {
+  const handleNavClick = (e: React.MouseEvent, sectionId: string) => {
+    e.preventDefault();
+    scrollToSection(sectionId);
+  };
+
   return (
     <section className="mx-auto max-w-5xl px-6 pb-20 pt-24">
       <p className="mb-4 font-mono text-sm text-accent">Software Developer</p>
@@ -18,12 +27,13 @@ export function Hero() {
       </p>
 
       <div className="mt-10 flex flex-wrap gap-3">
-        <a
-          href="#projects"
+        <Link
+          href="/projects"
+          onClick={(e) => handleNavClick(e, "projects")}
           className="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
         >
           View Projects
-        </a>
+        </Link>
         <a
           href={socialLinks[0].href}
           target="_blank"
@@ -40,12 +50,13 @@ export function Hero() {
         >
           LinkedIn
         </a>
-        <a
-          href="#contact"
+        <Link
+          href="/contact"
+          onClick={(e) => handleNavClick(e, 'contact')}
           className="rounded-full border border-border px-5 py-2.5 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
         >
           Contact
-        </a>
+        </Link>
       </div>
     </section>
   );
