@@ -16,7 +16,11 @@ function ProjectCard({
         project.featured ? "border-accent/30" : "border-border"
       }`}
     >
-      <div className="relative aspect-[16/9] overflow-hidden border-b border-border/70 bg-surface-raised">
+      <div
+        className={`relative aspect-[16/9] overflow-hidden border-b border-border/70 ${
+          project.imageBackground === "white" ? "bg-white" : "bg-surface-raised"
+        }`}
+      >
         <Image
           src={project.image}
           alt={project.imageAlt}

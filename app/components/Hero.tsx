@@ -35,6 +35,14 @@ export function Hero() {
           View Projects
         </Link>
         <a
+          href="/resume"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded-full border border-border px-5 py-2.5 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
+        >
+          Resume
+        </a>
+        <a
           href={socialLinks[0].href}
           target="_blank"
           rel="noopener noreferrer"

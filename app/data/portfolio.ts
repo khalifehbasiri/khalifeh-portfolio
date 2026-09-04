@@ -10,6 +10,7 @@ export type Project = {
   image: string;
   imageAlt: string;
   imageFit?: "cover" | "contain";
+  imageBackground?: "white";
   tags: string[];
   links: ProjectLink[];
   featured?: boolean;
@@ -71,6 +72,39 @@ export const projects: Project[] = [
       {
         label: "Product Site",
         href: "https://www.zdash.app/",
+      },
+    ],
+    featured: true,
+    category: "personal",
+  },
+  {
+    id: "leetbridge",
+    title: "LeetBridge",
+    description:
+      "Published a Manifest V3 Chrome extension that captures accepted LeetCode submissions and saves source code with generated documentation to a user-selected GitHub repository. Built privacy-first GitHub authorization, duplicate prevention, resumable historical imports, and guided repository onboarding without a developer-operated backend.",
+    image: "/images/projects/leetbridge.png",
+    imageAlt: "LeetBridge logo with code brackets, sync arrows, and a bridge",
+    imageFit: "cover",
+    imageBackground: "white",
+    tags: [
+      "JavaScript",
+      "Chrome Extensions",
+      "Manifest V3",
+      "GitHub API",
+      "REST APIs",
+    ],
+    links: [
+      {
+        label: "Chrome Web Store",
+        href: "https://chromewebstore.google.com/detail/gbaehcgejpbkdpmihkhapjkinclpajko",
+      },
+      {
+        label: "GitHub",
+        href: "https://github.com/khalifehbasiri/leetbridge",
+      },
+      {
+        label: "Case Study",
+        href: "/projects/leetbridge",
       },
     ],
     featured: true,
