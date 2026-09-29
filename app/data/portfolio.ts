@@ -323,7 +323,7 @@ export const workExperience: WorkExperience[] = [
     role: "Freelance Frontend Developer",
     company: "Floxy",
     location: "Remote",
-    period: "Apr 2025 - May 2025",
+    period: "Mar 2025 - May 2025",
     image: "/images/brand/floxy-logo.png",
     imageAlt: "Floxy logo",
     highlights: [
