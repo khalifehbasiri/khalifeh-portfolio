@@ -1,5 +1,43 @@
 import Image from "next/image";
-import { education, workExperience } from "../data/portfolio";
+import { education, workExperience, type WorkExperience } from "../data/portfolio";
+
+function EmployerEntry({ experience }: { experience: WorkExperience }) {
+  return (
+    <div className="grid grid-cols-[84px_1fr] gap-5 sm:grid-cols-[144px_1fr] sm:gap-8">
+      <div className="relative size-20 overflow-hidden rounded-xl border border-border bg-surface-raised sm:size-28">
+        <Image
+          src={experience.image}
+          alt={experience.imageAlt}
+          fill
+          sizes="(min-width: 640px) 112px, 80px"
+          className={experience.imageFit === "cover" ? "object-cover" : "object-contain"}
+        />
+      </div>
+      <div>
+        <h3 className="font-medium text-foreground">{experience.company}</h3>
+        <p className="mt-0.5 text-xs text-muted">{experience.location}</p>
+        <div className="mt-4 space-y-6">
+          {experience.positions.map((position) => (
+            <div key={position.role + position.period}>
+              <h4 className="text-sm font-medium text-accent">{position.role}</h4>
+              <p className="mt-0.5 font-mono text-xs text-muted">{position.period}</p>
+              <ul className="mt-3 space-y-2">
+                {position.highlights.map((highlight) => (
+                  <li
+                    key={highlight}
+                    className="text-sm leading-relaxed text-muted before:mr-2 before:text-accent before:content-['->']"
+                  >
+                    {highlight}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function TimelineEntry({
   period,
@@ -78,17 +116,7 @@ export function Experience() {
             </h3>
             <div className="space-y-10">
               {workExperience.map((item) => (
-                <TimelineEntry
-                  key={item.company + item.period}
-                  period={item.period}
-                  title={item.role}
-                  subtitle={item.company}
-                  location={item.location}
-                  highlights={item.highlights}
-                  image={item.image}
-                  imageAlt={item.imageAlt}
-                  imageFit={item.imageFit}
-                />
+                <EmployerEntry key={item.company} experience={item} />
               ))}
             </div>
           </div>

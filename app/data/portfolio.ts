@@ -20,14 +20,16 @@ export type Project = {
 };
 
 export type WorkExperience = {
-  role: string;
   company: string;
   location: string;
-  period: string;
   image: string;
   imageAlt: string;
   imageFit?: "cover" | "contain";
-  highlights: string[];
+  positions: {
+    role: string;
+    period: string;
+    highlights: string[];
+  }[];
 };
 
 export type Education = {
@@ -54,7 +56,7 @@ export const projects: Project[] = [
     id: "zdash",
     title: "ZDash",
     description:
-      "Engineered a Windows diagnostics platform for Nissan and Infiniti CONSULT-I ECUs with 9600-baud serial handshakes, framed-stream decoding for up to 22 channels, guarded fault-code workflows, and SQLite/WAL session recording. Integrated OpenAI Responses with complete vehicle context, Zod-validated human-approved tools, and grounded RAG workflows for service documentation.",
+      "Building a Windows diagnostics app for Nissan and Infiniti CONSULT-I ECUs with live telemetry and guarded fault-code workflows. Integrated an AI assistant with Zod-validated, user-approved tools; prototyped Retrieval-Augmented Generation (RAG) over 8,618 service-manual pages using PostgreSQL/pgvector hybrid search and page-level citations.",
     image: "/images/projects/zdash-webpage.png",
     imageAlt:
       "ZDash website showing a classic Nissan 300ZX, live vehicle telemetry, and automotive ownership features",
@@ -63,10 +65,10 @@ export const projects: Project[] = [
       "React",
       "Electron",
       "SQLite",
+      "PostgreSQL/pgvector",
       "OpenAI API",
-      "Zod",
-      "Automotive Diagnostics",
       "AI Engineering",
+      "RAG",
     ],
     links: [
       {
@@ -114,7 +116,7 @@ export const projects: Project[] = [
     id: "sign-language-translator",
     title: "Real-Time Sign Language Translator",
     description:
-      "Built a real-time ASL translation system that converts 21 MediaPipe hand landmarks into 63-feature prediction vectors. Served confidence-scored TensorFlow Lite inference through a Flask API with a live React webcam interface.",
+      "Built a real-time ASL alphabet recognizer that converts 21 MediaPipe hand landmarks into 63-feature prediction vectors. Served confidence-scored TensorFlow Lite inference through a Flask API with a live React webcam interface.",
     image: "/images/projects/sign-language-translator.png",
     imageAlt: "SignTranslate AI project website",
     tags: [
@@ -181,7 +183,7 @@ export const projects: Project[] = [
     id: "floxy-landing-page",
     title: "Floxy Marketing Site",
     description:
-      "Built and shipped Floxy's production marketing website supporting 20,000+ customers and reaching 23.9K monthly visits within four months. Implemented responsive, SEO-focused UI with mobile nav, proxy selectors, testimonials, API examples, and reusable content models.",
+      "Built a responsive Next.js site for a platform serving 20,000+ customers; the site reached 23.9K monthly visits within four months. Used reusable components and centralized content models for consistent product pages and API examples.",
     image: "/images/projects/floxy-marketing-site.png",
     imageAlt: "Floxy marketing website",
     tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "SEO", "Vercel"],
@@ -197,7 +199,7 @@ export const projects: Project[] = [
     id: "storage-explorer",
     title: "Azure Storage Explorer",
     description:
-      "Engineered a multithreaded internal app for searching and exporting records across approximately 420 TB of Azure enterprise data. Used Azure Blob Inventory, MongoDB, SQLite, and a fault-tolerant daily refresh that preserved the active database after failed updates.",
+      "Engineered a multithreaded Python app for searching and exporting metadata across approximately 420 TB of Azure enterprise data, cutting staff file-location searches from hours to seconds or minutes. Used Azure Blob Inventory, MongoDB, SQLite, and metadata refreshes that preserved the last valid database after failed updates.",
     image: "/images/brand/dfo-project-sharp.webp",
     imageAlt: "Fisheries and Oceans Canada logo",
     imageFit: "cover",
@@ -217,7 +219,7 @@ export const projects: Project[] = [
     id: "geo-names-validator",
     title: "Bilingual Name Manager",
     description:
-      "Architected a bilingual, modular, multithreaded Python tool integrating the Geographical Names Board of Canada API and geospatial matching to validate names, coordinates, languages, and authoritative records.",
+      "Architected a bilingual, modular, multithreaded Python tool integrating the Geographical Names Board of Canada API and geospatial matching to validate names, coordinates, languages, and authoritative records. Worked directly with DFO clients from requirements and demos through deployment, training, and support. CHS Atlantic separately reported that one process fell from two weeks to a few hours.",
     image: "/images/brand/dfo-project-sharp.webp",
     imageAlt: "Fisheries and Oceans Canada logo",
     imageFit: "cover",
@@ -268,7 +270,6 @@ export const skillGroups = [
       "OpenAI API",
       "Zod",
       "Docker",
-      "AWS",
       "Microsoft Azure",
       "Azure Blob Storage",
       "Clerk",
@@ -282,7 +283,7 @@ export const skillGroups = [
   },
   {
     label: "Databases",
-    skills: ["MongoDB", "SQLite", "SQL", "Oracle", "Convex"],
+    skills: ["MongoDB", "SQLite", "PostgreSQL/pgvector", "SQL", "Oracle", "Convex"],
   },
   {
     label: "Domains",
@@ -305,42 +306,61 @@ export const skillGroups = [
 
 export const workExperience: WorkExperience[] = [
   {
-    role: "Software Developer Intern",
-    company: "Department of Fisheries and Oceans Canada",
+    company: "Fisheries and Oceans Canada",
     location: "Ottawa, ON",
-    period: "Sep 2023 - Dec 2025",
     image: "/images/brand/dfo-canada-mark.png",
     imageAlt: "Government of Canada logo",
     imageFit: "contain",
-    highlights: [
-      "Engineered a multithreaded Python data explorer indexing and exporting metadata across 420 TB of Microsoft Azure Storage using Azure Blob Inventory, MongoDB, and SQLite while preserving UI responsiveness and the last valid database during failed refreshes.",
-      "Reduced geographic-name validation time by 80% by building a bilingual, multithreaded Python application integrating the GNBC REST API and geospatial matching.",
-      "Led a three-person Agile team through the design, implementation, and integration of a user-requested Name Manager module; collaborated with GNBC stakeholders to improve API usability.",
-      "Performed defect reproduction, root-cause analysis, regression testing, and user-acceptance testing across multithreading, REST API, database, and geospatial workflows; validated staged releases with users across DFO's five regions and the Canadian Coast Guard.",
+    positions: [
+      {
+        role: "Software Developer",
+        period: "Aug 2024–Dec 2025",
+        highlights: [
+          "Built a bilingual Python geographic-name validator that replaced manual entry-by-entry checks with validation completed in minutes.",
+          "Expanded it into the modular Name Manager; CHS Atlantic reported that one process fell from two weeks to a few hours.",
+          "Led a three-person Agile team and worked directly with DFO clients from requirements and demos through deployment, training, and support.",
+        ],
+      },
+      {
+        role: "Programmer",
+        period: "Sep 2023–Aug 2024",
+        highlights: [
+          "Built a multithreaded Python Storage Explorer for metadata across an approximately 420 TB Azure storage estate, cutting staff file-location searches from hours to seconds or minutes.",
+          "Kept searches responsive during updates and preserved the last valid database when a refresh failed.",
+        ],
+      },
     ],
   },
   {
-    role: "Freelance Frontend Developer",
     company: "Floxy",
     location: "Remote",
-    period: "Mar 2025 - May 2025",
     image: "/images/brand/floxy-logo.png",
     imageAlt: "Floxy logo",
-    highlights: [
-      "Built and shipped a responsive Next.js marketing site supporting 20,000+ customers and reaching 23.9K monthly visits within four months of launch.",
-      "Implemented mobile navigation, a proxy-type selector, auto-scrolling testimonials, language-specific API examples with copy-to-clipboard, reusable components, and centralized content models.",
+    positions: [
+      {
+        role: "Freelance Frontend Developer",
+        period: "Mar 2025 - May 2025",
+        highlights: [
+          "Built and shipped a responsive Next.js marketing site supporting 20,000+ customers and reaching 23.9K monthly visits within four months of launch.",
+          "Implemented mobile navigation, a proxy-type selector, auto-scrolling testimonials, language-specific API examples with copy-to-clipboard, reusable components, and centralized content models.",
+        ],
+      },
     ],
   },
   {
-    role: "System Administrator Intern",
     company: "Tahan Business Services Inc.",
     location: "Ottawa, ON",
-    period: "May 2023 - Aug 2023",
     image: "/images/experience/tahan.svg",
     imageAlt: "Tahan Business Services branded visual",
-    highlights: [
-      "Managed Microsoft Cloud infrastructure with automated real-time backups, on-site hardware/software support, and computer configuration.",
-      "Tracked corporate financials using Excel (bank statements, payroll, taxes) and handled administrative operations including scheduling and client communications.",
+    positions: [
+      {
+        role: "System Administrator Intern",
+        period: "May 2023 - Aug 2023",
+        highlights: [
+          "Managed Microsoft Cloud infrastructure with automated real-time backups, on-site hardware/software support, and computer configuration.",
+          "Tracked corporate financials using Excel (bank statements, payroll, taxes) and handled administrative operations including scheduling and client communications.",
+        ],
+      },
     ],
   },
 ];

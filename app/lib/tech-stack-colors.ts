@@ -33,6 +33,7 @@ const projectOnlyTagGroups: Record<string, SkillGroupLabel> = {
   "Automotive Software": "Domains",
   "Automotive Diagnostics": "Domains",
   "AI Integration": "Domains",
+  RAG: "Domains",
   SEO: "Domains",
   Multithreading: "Domains",
   Geospatial: "Domains",
