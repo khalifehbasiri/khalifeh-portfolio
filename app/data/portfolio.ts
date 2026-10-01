@@ -80,6 +80,24 @@ export const projects: Project[] = [
     category: "personal",
   },
   {
+    id: "tandem-insulin-pump-simulator",
+    title: "Tandem t:slim X2 Insulin Pump Simulator",
+    description:
+      "Engineered bolus and automated insulin-delivery logic within a four-person C++/Qt team, including carbohydrate and correction calculations, manual and extended dosing, CGM-driven basal adjustments, safety limits, suspend/resume behavior, and alerts.",
+    image: "/images/projects/tandem-insulin-pump-simulator.jpg",
+    imageAlt:
+      "Tandem t:slim X2 insulin pump simulator showing a glucose chart and an extended insulin-delivery interval",
+    tags: ["C++", "Qt", "Qt Charts", "SQLite", "UML"],
+    links: [
+      {
+        label: "GitHub",
+        href: "https://github.com/khalifehbasiri/Tandem-t-slim-Insulin-Pump-Simulator",
+      },
+    ],
+    featured: true,
+    category: "personal",
+  },
+  {
     id: "leetbridge",
     title: "LeetBridge",
     description:
@@ -156,24 +174,6 @@ export const projects: Project[] = [
       {
         label: "GitHub",
         href: "https://github.com/khalifehbasiri/collaborative-board",
-      },
-    ],
-    featured: true,
-    category: "personal",
-  },
-  {
-    id: "tandem-insulin-pump-simulator",
-    title: "Tandem t:slim X2 Insulin Pump Simulator",
-    description:
-      "Engineered bolus and automated insulin-delivery logic within a four-person C++/Qt team, including carbohydrate and correction calculations, manual and extended dosing, CGM-driven basal adjustments, safety limits, suspend/resume behavior, and alerts.",
-    image: "/images/projects/tandem-insulin-pump-simulator.jpg",
-    imageAlt:
-      "Tandem t:slim X2 insulin pump simulator showing a glucose chart and an extended insulin-delivery interval",
-    tags: ["C++", "Qt", "Qt Charts", "SQLite", "UML"],
-    links: [
-      {
-        label: "GitHub",
-        href: "https://github.com/khalifehbasiri/Tandem-t-slim-Insulin-Pump-Simulator",
       },
     ],
     featured: true,
@@ -338,7 +338,7 @@ export const workExperience: WorkExperience[] = [
     imageAlt: "Floxy logo",
     positions: [
       {
-        role: "Freelance Frontend Developer",
+        role: "Frontend Developer",
         period: "Mar 2025 - May 2025",
         highlights: [
           "Built and shipped a responsive Next.js marketing site supporting 20,000+ customers and reaching 23.9K monthly visits within four months of launch.",
