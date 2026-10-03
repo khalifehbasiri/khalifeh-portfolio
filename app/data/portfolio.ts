@@ -339,7 +339,7 @@ export const workExperience: WorkExperience[] = [
     positions: [
       {
         role: "Frontend Developer",
-        period: "Mar 2025 - May 2025",
+        period: "2025",
         highlights: [
           "Built and shipped a responsive Next.js marketing site supporting 20,000+ customers and reaching 23.9K monthly visits within four months of launch.",
           "Implemented mobile navigation, a proxy-type selector, auto-scrolling testimonials, language-specific API examples with copy-to-clipboard, reusable components, and centralized content models.",
