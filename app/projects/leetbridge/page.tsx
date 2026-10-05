@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Footer } from "../../components/Footer";
-
-const chromeStoreUrl =
-  "https://chromewebstore.google.com/detail/gbaehcgejpbkdpmihkhapjkinclpajko";
-const githubUrl = "https://github.com/khalifehbasiri/leetbridge";
+import { CaseStudyNav } from "../gallery-web-app/CaseStudyNav";
+import { projects } from "../../data/portfolio";
+import { getTechTagColors } from "../../lib/tech-stack-colors";
+import styles from "../gallery-web-app/case-study.module.css";
+import leetStyles from "./case-study.module.css";
+const project = projects.find((entry) => entry.id === "leetbridge")!;
 
 export const metadata: Metadata = {
   title: "LeetBridge Case Study | Khalifeh Basiri",
@@ -56,13 +58,6 @@ const decisions = [
   },
 ];
 
-const flow = [
-  ["01", "Detect", "Observe an accepted result on a LeetCode problem page."],
-  ["02", "Validate", "Extract the problem, language, code, and submission ID."],
-  ["03", "Authorize", "Use the GitHub App's user-selected repository scope."],
-  ["04", "Publish", "Write the solution and refresh generated documentation."],
-];
-
 const learnings = [
   {
     title: "How browser extensions work",
@@ -86,248 +81,415 @@ const learnings = [
   },
 ];
 
+const chapters = [
+  { id: "overview", label: "The idea" },
+  { id: "workflow", label: "How it works" },
+  { id: "decisions", label: "Design decisions" },
+  { id: "learning", label: "What I learned" },
+  { id: "release", label: "Release & outcome" },
+];
+const storeUrl = project.links.find(
+  (link) => link.label === "Chrome Web Store",
+)!.href;
+const githubUrl = project.links.find((link) => link.label === "GitHub")!.href;
+
+function Arrow({ diagonal = false }: { diagonal?: boolean }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      aria-hidden="true"
+      className={styles.arrow}
+    >
+      {diagonal ? (
+        <path d="M6 18 18 6M6 6h12v12" />
+      ) : (
+        <path d="M5 12h14m-6-6 6 6-6 6" />
+      )}
+    </svg>
+  );
+}
+
+function ChapterHeading({
+  number,
+  label,
+  title,
+  children,
+}: {
+  number: string;
+  label: string;
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className={styles.chapterHeading}>
+      <p className={styles.eyebrow}>
+        <span>{number}</span> / {label}
+      </p>
+      <h2>{title}</h2>
+      <p className={styles.chapterIntro}>{children}</p>
+    </div>
+  );
+}
+
 export default function LeetBridgeCaseStudy() {
   return (
-    <>
-      <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
-        <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
-          <Link
-            href="/"
-            className="font-mono text-sm font-medium tracking-tight text-foreground"
-          >
-            kbasiri<span className="text-accent">.</span>com
+    <div className={styles.page}>
+      <a className={styles.skipLink} href="#overview">
+        Skip to case study
+      </a>
+      <header className={styles.header}>
+        <div className={styles.headerInner}>
+          <Link href="/" className={styles.brand}>
+            kbasiri<span>.</span>com
           </Link>
-          <Link
-            href="/projects"
-            className="text-sm text-muted transition-colors hover:text-foreground"
-          >
-            Back to projects
+          <span className={styles.headerLabel}>PROJECT NOTES / LEETBRIDGE</span>
+          <Link href="/projects" className={styles.backLink}>
+            <span aria-hidden="true">←</span> All projects
           </Link>
         </div>
       </header>
-
       <main>
-        <section className="border-b border-border/60">
-          <div className="mx-auto grid max-w-5xl gap-12 px-6 py-20 md:grid-cols-[1.25fr_0.75fr] md:items-center">
-            <div>
-              <p className="mb-4 font-mono text-sm text-accent">
-                Chrome extension case study
-              </p>
-              <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-                Turning accepted solutions into a portfolio-ready GitHub archive
-              </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-                LeetBridge automatically captures accepted LeetCode submissions
-                and saves them to a repository selected by the user, including
-                organized source files, problem documentation, and a browsable
-                solution index.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <a
-                  href={chromeStoreUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-opacity hover:opacity-85"
-                >
-                  Install extension
-                </a>
-                <a
-                  href={githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-full border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-accent hover:text-accent"
-                >
-                  View source
-                </a>
-              </div>
-            </div>
-
-            <div className="overflow-hidden rounded-2xl border border-border bg-white p-7 shadow-2xl shadow-black/20">
-              <Image
-                src="/images/projects/leetbridge.png"
-                alt="LeetBridge logo"
-                width={1254}
-                height={1254}
-                priority
-                className="h-auto w-full"
-              />
-            </div>
-          </div>
-        </section>
-
-        <section className="mx-auto max-w-5xl px-6 py-16">
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              ["Platform", "Chrome, Manifest V3"],
-              ["Integration", "GitHub App and REST API"],
-              ["Architecture", "Client-side extension"],
-              ["Release", "Chrome Web Store"],
-            ].map(([label, value]) => (
-              <div
-                key={label}
-                className="rounded-xl border border-border bg-surface p-5"
-              >
-                <p className="font-mono text-xs uppercase tracking-wider text-accent">
-                  {label}
-                </p>
-                <p className="mt-2 text-sm font-medium text-foreground">
-                  {value}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="border-y border-border/60 bg-surface/40">
-          <div className="mx-auto grid max-w-5xl gap-12 px-6 py-16 md:grid-cols-2">
-            <div>
-              <p className="font-mono text-sm text-accent">Why I built it</p>
-              <h2 className="mt-3 text-2xl font-semibold tracking-tight text-foreground">
-                Useful automation, with less access
-              </h2>
-              <p className="mt-4 leading-relaxed text-muted">
-                I found existing Chrome extensions that synced LeetCode
-                solutions to GitHub. I liked the convenience, but I was not
-                comfortable giving a solution-syncing tool broad read and write
-                access across my GitHub repositories when it only needed to
-                save code in one place.
-              </p>
-              <p className="mt-4 leading-relaxed text-muted">
-                That led to the question behind LeetBridge: could I build the
-                same workflow while letting users grant access to just one
-                dedicated solutions repository?
-              </p>
-              <p className="mt-4 leading-relaxed text-muted">
-                I also wanted to understand how browser extensions are built.
-                This was a chance to learn the full process, from extracting
-                data from a live page to packaging and publishing something
-                other people could install.
-              </p>
-            </div>
-            <div>
-              <p className="font-mono text-sm text-accent">The solution</p>
-              <h2 className="mt-3 text-2xl font-semibold tracking-tight text-foreground">
-                Make repository scope a design requirement
-              </h2>
-              <p className="mt-4 leading-relaxed text-muted">
-                I chose a GitHub App so users can select only the repository
-                they want to use, rather than needing to grant access to every
-                repository. Keeping that scope narrow was a way to reduce
-                unnecessary exposure, not a claim that any integration is
-                risk-free.
-              </p>
-              <p className="mt-4 leading-relaxed text-muted">
-                LeetBridge listens for an accepted result, validates the
-                submission, checks for duplicates, and writes the solution to
-                the selected repository. It also generates documentation and
-                supports resumable historical imports, keeping the convenience
-                that drew me to the idea in the first place.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section className="mx-auto max-w-5xl px-6 py-16">
-          <p className="font-mono text-sm text-accent">System flow</p>
-          <h2 className="mt-3 text-2xl font-semibold tracking-tight text-foreground">
-            From accepted submission to documented repository
-          </h2>
-          <div className="mt-8 grid gap-4 md:grid-cols-4">
-            {flow.map(([number, title, body]) => (
-              <div
-                key={number}
-                className="relative rounded-xl border border-border bg-surface p-5"
-              >
-                <span className="font-mono text-xs text-accent">{number}</span>
-                <h3 className="mt-4 font-semibold text-foreground">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{body}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="border-y border-border/60 bg-surface/40">
-          <div className="mx-auto max-w-5xl px-6 py-16">
-            <p className="font-mono text-sm text-accent">
-              Engineering decisions
+        <section className={styles.hero} aria-labelledby="case-study-title">
+          <div className={styles.heroCopy}>
+            <p className={styles.eyebrow}>
+              <span className={styles.dot} /> LeetBridge · Browser-extension
+              case study
             </p>
-            <h2 className="mt-3 max-w-2xl text-2xl font-semibold tracking-tight text-foreground">
-              Designed for trust, recovery, and maintainable output
-            </h2>
-            <div className="mt-8 grid gap-5 md:grid-cols-2">
-              {decisions.map((decision) => (
-                <article
-                  key={decision.title}
-                  className="rounded-xl border border-border bg-background p-6"
-                >
-                  <h3 className="font-semibold text-foreground">
-                    {decision.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted">
-                    {decision.body}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="mx-auto max-w-5xl px-6 py-16">
-          <p className="font-mono text-sm text-accent">What I learned</p>
-          <h2 className="mt-3 text-2xl font-semibold tracking-tight text-foreground">
-            From a personal security concern to a shipped product
-          </h2>
-          <dl className="mt-8 divide-y divide-border/60">
-            {learnings.map((learning) => (
-              <div
-                key={learning.title}
-                className="grid gap-3 py-6 first:pt-0 last:pb-0 md:grid-cols-[1fr_2fr] md:gap-8"
-              >
-                <dt className="font-semibold text-foreground">
-                  {learning.title}
-                </dt>
-                <dd className="text-sm leading-relaxed text-muted">
-                  {learning.body}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </section>
-
-        <section className="mx-auto max-w-5xl px-6 pb-20">
-          <div className="rounded-2xl border border-accent/30 bg-surface p-8 sm:p-10">
-            <p className="font-mono text-sm text-accent">Outcome</p>
-            <h2 className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight text-foreground">
-              Shipped as a public Chrome extension with a complete onboarding
-              and repository workflow
-            </h2>
-            <p className="mt-5 max-w-2xl leading-relaxed text-muted">
-              The finished product combines browser integration, authenticated
-              third-party APIs, durable import state, generated documentation,
-              privacy disclosures, and store-ready packaging in one focused
-              user experience.
+            <h1 id="case-study-title">
+              Accepted solutions.
+              <br />
+              <em>A lasting archive.</em>
+            </h1>
+            <p className={styles.heroIntro}>
+              LeetCode solutions, safely synced to GitHub. Built around a simple
+              constraint: an extension that saves code should only have access
+              to the repository it needs.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className={styles.heroActions}>
               <a
-                href={chromeStoreUrl}
+                href={storeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-opacity hover:opacity-85"
+                className={styles.primaryLink}
               >
-                Install LeetBridge
+                Get the extension <Arrow diagonal />
               </a>
-              <Link
-                href="/projects"
-                className="rounded-full border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-accent hover:text-accent"
+              <a
+                href={githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.sourceLink}
               >
-                Explore more projects
-              </Link>
+                View source <Arrow diagonal />
+              </a>
             </div>
+            <dl className={styles.projectMeta}>
+              <div>
+                <dt>Platform</dt>
+                <dd>Chrome · Manifest V3</dd>
+              </div>
+              <div>
+                <dt>Integration</dt>
+                <dd>GitHub App · GitHub API</dd>
+              </div>
+            </dl>
           </div>
+          <figure className={styles.heroVisual}>
+            <div className={styles.previewFrame}>
+              <div className={styles.previewBar}>
+                <span aria-hidden="true">● ● ●</span>
+                <span>leetbridge / solution archive</span>
+                <Arrow diagonal />
+              </div>
+              <div
+                className={`${styles.previewImage} ${leetStyles.archivePreview}`}
+              >
+                <Image
+                  src="/images/projects/leetbridge-archive.png"
+                  alt="Generated GitHub solution archive with progress, languages, and difficulty breakdowns"
+                  fill
+                  sizes="(min-width: 1200px) 560px, (min-width: 900px) 48vw, 100vw"
+                  priority
+                  className={styles.screenshot}
+                />
+              </div>
+            </div>
+            <div className={styles.visualCaption}>
+              <span className={styles.dot} /> Solve a problem. Keep the work.
+            </div>
+            <figcaption>
+              Generated solution archive · screenshot from the Chrome Web Store
+              listing.
+            </figcaption>
+          </figure>
         </section>
+        <div className={styles.quickTake} aria-label="Three design principles">
+          {[
+            [
+              "01",
+              "Scope access to one repository.",
+              "Let the user choose where accepted code goes.",
+            ],
+            [
+              "02",
+              "Keep the path direct.",
+              "Browser → GitHub, with no developer-operated backend.",
+            ],
+            [
+              "03",
+              "Expect interrupted imports.",
+              "Save checkpoints and recover progress.",
+            ],
+          ].map(([number, heading, body]) => (
+            <div key={number}>
+              <span>{number}</span>
+              <div>
+                <h2>{heading}</h2>
+                <p>{body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className={styles.readingLayout}>
+          <CaseStudyNav
+            chapters={chapters}
+            liveUrl={storeUrl}
+            liveLabel="View on Chrome Web Store"
+          />
+          <div className={styles.chapters}>
+            <section id="overview" className={styles.chapter}>
+              <ChapterHeading
+                number="01"
+                label="The idea"
+                title="Useful automation. A smaller permission boundary."
+              >
+                Saving accepted solutions should be convenient without asking
+                for broad access to unrelated repositories.
+              </ChapterHeading>
+              <p className={styles.prose}>
+                I liked the convenience of extensions that saved accepted
+                LeetCode solutions to GitHub, but I was not comfortable giving a
+                solution-syncing tool broad read and write access across my
+                repositories. It only needed one place to save code.
+              </p>
+              <blockquote className={styles.pullQuote}>
+                “Give the tool the access its job requires.”
+              </blockquote>
+              <p className={styles.prose}>
+                That became the design constraint for LeetBridge: keep the
+                useful automation while letting the user choose exactly which
+                repository it can access. It was also a chance to learn the full
+                browser-extension lifecycle, from data extraction to a published
+                release.
+              </p>
+              <details className={`${styles.details} ${styles.stackDetails}`}>
+                <summary>
+                  The full stack <span aria-hidden="true">+</span>
+                </summary>
+                <div className={leetStyles.tags}>
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className={`rounded-md border px-2 py-1 font-mono text-xs ${getTechTagColors(tag)}`}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </details>
+            </section>
+            <section id="workflow" className={styles.chapter}>
+              <ChapterHeading
+                number="02"
+                label="How it works"
+                title="From an accepted submission to a useful archive."
+              >
+                The extension separates page data, privileged API work, and user
+                controls. Each part has a specific responsibility.
+              </ChapterHeading>
+              <figure className={styles.timeline}>
+                <div className={styles.timelinePhase}>
+                  <span className={styles.phaseLabel}>Inside the browser</span>
+                  <ol>
+                    <li>
+                      <span>01</span>
+                      <div>
+                        <h3>Detect and validate</h3>
+                        <p>
+                          Capture acceptance status, problem details, language,
+                          code, and submission ID. Check for duplicates.
+                        </p>
+                      </div>
+                    </li>
+                    <li>
+                      <span>02</span>
+                      <div>
+                        <h3>Use the selected repository</h3>
+                        <p>
+                          Guided GitHub App authorization connects the extension
+                          to the repository the user chooses.
+                        </p>
+                      </div>
+                    </li>
+                    <li>
+                      <span>03</span>
+                      <div>
+                        <h3>Publish organized output</h3>
+                        <p>
+                          Send code directly to GitHub with predictable solution
+                          folders, per-problem documentation, and a generated
+                          index.
+                        </p>
+                      </div>
+                    </li>
+                  </ol>
+                </div>
+                <div className={styles.timelineAsync}>
+                  <span className={styles.phaseLabel}>
+                    For previous solutions
+                  </span>
+                  <div className={styles.asyncStep}>
+                    <span>04</span>
+                    <h3>Import with recovery</h3>
+                    <p>
+                      Paginate history, pace requests, respect retry cooldowns,
+                      and save durable checkpoints so interruptions preserve
+                      progress.
+                    </p>
+                    <div className={styles.asyncPath}>
+                      Saved checkpoint <Arrow /> Resume import
+                    </div>
+                  </div>
+                </div>
+                <figcaption>
+                  Manifest V3 content scripts, the background service worker,
+                  and popup communicate through message passing.
+                </figcaption>
+              </figure>
+              <div className={leetStyles.screens}>
+                <figure>
+                  <Image
+                    src="/images/projects/leetbridge-popup.png"
+                    alt="LeetBridge popup with connected accounts and sync settings"
+                    width={1280}
+                    height={800}
+                    sizes="(min-width: 900px) 420px, 100vw"
+                  />
+                  <figcaption>Connected accounts and sync settings.</figcaption>
+                </figure>
+                <figure>
+                  <Image
+                    src="/images/projects/leetbridge-setup.png"
+                    alt="LeetBridge GitHub repository setup showing a verified connection"
+                    width={1280}
+                    height={800}
+                    sizes="(min-width: 900px) 420px, 100vw"
+                  />
+                  <figcaption>
+                    Repository access verified during onboarding.
+                  </figcaption>
+                </figure>
+              </div>
+            </section>
+            <section id="decisions" className={styles.chapter}>
+              <ChapterHeading
+                number="03"
+                label="Design decisions"
+                title="Trust comes from explicit boundaries."
+              >
+                Repository access, credential storage, and interrupted work all
+                affect whether an automatic sync feels safe to use.
+              </ChapterHeading>
+              <div className={styles.securityNote}>
+                <span aria-hidden="true">↳</span>
+                <p>
+                  <strong>Two separate controls</strong>Browser permission to
+                  contact GitHub is different from GitHub authorization to
+                  modify a repository. Both need deliberate boundaries.
+                </p>
+              </div>
+              <div className={styles.decisions}>
+                {decisions.map((decision, index) => (
+                  <article key={decision.title} className={styles.decision}>
+                    <p className={styles.decisionLabel}>
+                      Decision {String(index + 1).padStart(2, "0")}
+                    </p>
+                    <div>
+                      <h3>{decision.title}</h3>
+                      <p>{decision.body}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+            <section id="learning" className={styles.chapter}>
+              <ChapterHeading
+                number="04"
+                label="What I learned"
+                title="A browser extension is a system of lifecycles."
+              >
+                Building it taught me to separate page access from privileged
+                operations, validate extracted data, and treat interrupted API
+                work as an expected condition.
+              </ChapterHeading>
+              <div className={styles.decisions}>
+                {learnings.map((learning, index) => (
+                  <article key={learning.title} className={styles.decision}>
+                    <p className={styles.decisionLabel}>
+                      Lesson {String(index + 1).padStart(2, "0")}
+                    </p>
+                    <div>
+                      <h3>{learning.title}</h3>
+                      <p>{learning.body}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+            <section id="release" className={styles.chapter}>
+              <ChapterHeading
+                number="05"
+                label="Release & outcome"
+                title="Beyond a locally loaded extension."
+              >
+                LeetBridge is published on the Chrome Web Store. The result is a
+                complete workflow: connect a repository, sync accepted work,
+                import older solutions, and keep the archive readable.
+              </ChapterHeading>
+              <p className={styles.prose}>
+                Shipping meant preparing versioned packages, privacy
+                disclosures, permission explanations, and the store listing.
+                Review and follow-up updates became part of the project,
+                alongside the implementation.
+              </p>
+              <div className={styles.closing}>
+                <p className={styles.eyebrow}>What I’ll carry forward</p>
+                <h3>
+                  Convenience works best when users can understand the trust
+                  behind it.
+                </h3>
+                <p>
+                  Narrow access, visible connection state, and recoverable
+                  imports are part of the product experience. Designing those
+                  boundaries was as valuable as building the sync itself.
+                </p>
+                <div className={styles.closingLinks}>
+                  <a href={storeUrl} target="_blank" rel="noopener noreferrer">
+                    View on Chrome Web Store <Arrow diagonal />
+                  </a>
+                  <Link href="/projects">
+                    More projects <Arrow />
+                  </Link>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
       </main>
-
       <Footer />
-    </>
+    </div>
   );
 }

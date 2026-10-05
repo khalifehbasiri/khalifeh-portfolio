@@ -39,6 +39,7 @@ const projectOnlyTagGroups: Record<string, SkillGroupLabel> = {
   Geospatial: "Domains",
   Bilingual: "Domains",
   "Data Validation": "Domains",
+  UML: "Domains",
 };
 
 const neutralColors = {
@@ -69,5 +70,7 @@ export function getSkillGroupColors(label: string) {
 export function getTechTagColors(tag: string) {
   const groupLabel = techTagGroups.get(tag);
 
-  return groupLabel ? getSkillGroupColors(groupLabel).badge : neutralColors.badge;
+  return groupLabel
+    ? getSkillGroupColors(groupLabel).badge
+    : neutralColors.badge;
 }

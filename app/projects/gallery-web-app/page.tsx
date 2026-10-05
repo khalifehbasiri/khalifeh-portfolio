@@ -650,6 +650,12 @@ export default function GalleryCaseStudy() {
                   guarantee.
                 </h3>
                 <p>
+                  I learned system design principles by applying them to a
+                  working product: choosing sources of truth, defining
+                  consistency boundaries, isolating cached data, and designing
+                  recovery around partial failures.
+                </p>
+                <p>
                   An optimistic heart to a transaction. A fast feed to cache
                   isolation. Logout to distributed revocation. A successful
                   upload to publication recovery. Those connections were the

@@ -1,0 +1,31 @@
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  width: fit-content;
+  border-radius: 4px;
+  padding: 4px 7px;
+  font:
+    600 9px/1.2 var(--font-geist-mono),
+    monospace;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background: #ffffff08;
+  color: #a5a6b0;
+}
+.status::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.live {
+  background: #6ee7b711;
+  color: #7cd5ac;
+}
+.development {
+  background: #e4bd7011;
+  color: #e4bd70;
+}

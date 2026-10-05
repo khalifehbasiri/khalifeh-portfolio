@@ -5,8 +5,12 @@ import styles from "./case-study.module.css";
 
 export function CaseStudyNav({
   chapters,
+  liveUrl = "https://gallery-web-app-two.vercel.app/",
+  liveLabel = "Try the live app",
 }: {
   chapters: { id: string; label: string }[];
+  liveUrl?: string;
+  liveLabel?: string;
 }) {
   const [activeId, setActiveId] = useState(chapters[0].id);
   const listRef = useRef<HTMLOListElement>(null);
@@ -67,12 +71,12 @@ export function CaseStudyNav({
           ))}
         </ol>
         <a
-          href="https://gallery-web-app-two.vercel.app/"
+          href={liveUrl}
           target="_blank"
           rel="noopener noreferrer"
           className={styles.contentsDemo}
         >
-          Try the live app <span aria-hidden="true">↗</span>
+          {liveLabel} <span aria-hidden="true">↗</span>
         </a>
       </nav>
     </aside>

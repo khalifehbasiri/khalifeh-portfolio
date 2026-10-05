@@ -1,7 +1,34 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Project } from "../data/portfolio";
+import type { Project, ProjectLink } from "../data/portfolio";
 import { getTechTagColors } from "../lib/tech-stack-colors";
+import { ProjectImageGallery } from "./ProjectImageGallery";
+import { ProjectStatus } from "./ProjectStatus";
+import styles from "./project-card.module.css";
+
+function ProjectAction({ link }: { link: ProjectLink }) {
+  const content = (
+    <>
+      {link.label}
+      <span aria-hidden="true">→</span>
+    </>
+  );
+  const className = styles.projectLink;
+  return link.href.startsWith("/") ? (
+    <Link href={link.href} className={className}>
+      {content}
+    </Link>
+  ) : (
+    <a
+      href={link.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={className}
+    >
+      {content}
+    </a>
+  );
+}
 
 function ProjectCard({
   project,
@@ -11,41 +38,67 @@ function ProjectCard({
   eager?: boolean;
 }) {
   return (
-    <article
-      className={`group flex w-[min(84vw,22rem)] shrink-0 snap-start flex-col overflow-hidden rounded-xl border bg-surface transition-colors hover:border-accent/40 sm:w-[22rem] ${
-        project.featured ? "border-accent/30" : "border-border"
-      }`}
-    >
-      <div
-        className={`relative aspect-[16/9] overflow-hidden border-b border-border/70 ${
-          project.imageBackground === "white" ? "bg-white" : "bg-surface-raised"
-        }`}
-      >
-        <Image
-          src={project.image}
-          alt={project.imageAlt}
-          fill
-          loading={eager ? "eager" : "lazy"}
-          sizes="(min-width: 640px) 352px, 84vw"
-          className={`${project.imageFit === "contain" ? "object-contain p-5" : "object-cover"} transition-transform duration-500 group-hover:scale-[1.03]`}
-        />
+    <article className={styles.card}>
+      <div className={styles.media}>
+        {project.images && project.images.length > 1 ? (
+          <ProjectImageGallery
+            images={project.images}
+            title={project.title}
+            eager={eager}
+          />
+        ) : (
+          <div className={styles.staticImage}>
+            <Image
+              src={project.image}
+              alt={project.imageAlt}
+              fill
+              loading={eager ? "eager" : "lazy"}
+              sizes="(min-width: 640px) 316px, 84vw"
+              className={
+                project.imageFit === "contain"
+                  ? "object-contain p-5"
+                  : "object-cover"
+              }
+            />
+          </div>
+        )}
       </div>
-
-      <div className="flex flex-1 flex-col p-6">
-        <div className="mb-3 flex items-start justify-between gap-3">
-          <h4 className="text-lg font-medium text-foreground">
-            {project.title}
-          </h4>
-          <span className="shrink-0 rounded-full bg-surface-raised px-2.5 py-0.5 font-mono text-xs text-muted">
-            {project.category === "work" ? "Work" : "Personal"}
+      <div className={styles.body}>
+        <div className={styles.titleRow}>
+          <h4 className={styles.title}>{project.title}</h4>
+          <ProjectStatus status={project.status} />
+        </div>
+        <div className={styles.context}>
+          <span className={styles.role}>{project.role}</span>
+          <span>
+            {project.category === "work"
+              ? project.note
+                ? "Internal work"
+                : "Contract work"
+              : "Personal project"}
           </span>
         </div>
-
-        <p className="mb-5 flex-1 text-sm leading-relaxed text-muted">
-          {project.description}
+        <p className={styles.summary}>{project.summary}</p>
+        <p className={styles.contribution}>
+          <svg
+            width="13"
+            height="14"
+            viewBox="0 0 16 18"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.2"
+            aria-hidden="true"
+          >
+            <circle cx="8" cy="5" r="3" />
+            <path d="M2 17v-2a6 6 0 0 1 12 0v2" />
+          </svg>
+          <span>{project.contribution}</span>
         </p>
-
-        <div className="mb-5 flex flex-wrap gap-2">
+        <div className={styles.outcome}>
+          <strong>{project.outcome.headline}</strong>
+          <p>{project.outcome.detail}</p>
+        </div>
+        <div className={styles.tags}>
           {project.tags.map((tag) => (
             <span
               key={tag}
@@ -55,35 +108,14 @@ function ProjectCard({
             </span>
           ))}
         </div>
-
-        <div className="flex flex-wrap gap-3">
-          {project.links.length > 0 ? (
-            project.links.map((link) =>
-              link.href.startsWith("/") ? (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="inline-flex items-center gap-1 text-sm font-medium text-accent transition-opacity hover:opacity-80"
-                >
-                  {link.label}
-                  <span aria-hidden="true">-&gt;</span>
-                </Link>
-              ) : (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-sm font-medium text-accent transition-opacity hover:opacity-80"
-                >
-                  {link.label}
-                  <span aria-hidden="true">-&gt;</span>
-                </a>
-              ),
-            )
-          ) : project.note ? (
-            <span className="text-sm text-muted">{project.note}</span>
-          ) : null}
+        <div className={styles.links}>
+          {project.links.length ? (
+            project.links.map((link) => (
+              <ProjectAction key={link.href} link={link} />
+            ))
+          ) : (
+            <span className={styles.privateNote}>{project.note}</span>
+          )}
         </div>
       </div>
     </article>
@@ -136,7 +168,9 @@ export function Projects({ projects }: { projects: Project[] }) {
   const personalProjects = projects.filter(
     (project) => project.category === "personal",
   );
-  const workProjects = projects.filter((project) => project.category === "work");
+  const workProjects = projects.filter(
+    (project) => project.category === "work",
+  );
 
   return (
     <section
