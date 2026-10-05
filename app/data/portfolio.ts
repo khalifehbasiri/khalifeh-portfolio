@@ -53,6 +53,42 @@ export const profileSummary =
 
 export const projects: Project[] = [
   {
+    id: "gallery-web-app",
+    title: "Atelier — Art & Community",
+    description:
+      "Rebuilt a full-stack art community around deliberate data and failure boundaries: MongoDB artwork documents, transactional PostgreSQL relationships, and Redis caching with private viewer state kept separate. Designed staged image publication, revocable sessions, and a durable notification outbox so speed does not come at the cost of correctness.",
+    image: "/images/projects/atelier.png",
+    imageAlt:
+      "Atelier gallery demo displaying credited public-domain artwork from The Met",
+    tags: [
+      "Angular",
+      "TypeScript",
+      "RxJS",
+      "NgRx SignalStore",
+      "Express.js",
+      "MongoDB",
+      "PostgreSQL",
+      "Redis",
+      "System Design",
+    ],
+    links: [
+      {
+        label: "Live Site",
+        href: "https://gallery-web-app-two.vercel.app/",
+      },
+      {
+        label: "GitHub",
+        href: "https://github.com/khalifehbasiri/Gallery-web-app",
+      },
+      {
+        label: "Case Study",
+        href: "/projects/gallery-web-app",
+      },
+    ],
+    featured: true,
+    category: "personal",
+  },
+  {
     id: "zdash",
     title: "ZDash",
     description:
@@ -257,6 +293,9 @@ export const skillGroups = [
     skills: [
       "Next.js",
       "React",
+      "Angular",
+      "RxJS",
+      "NgRx SignalStore",
       "Node.js",
       "Express.js",
       "Tailwind CSS",
@@ -272,6 +311,7 @@ export const skillGroups = [
       "Docker",
       "Microsoft Azure",
       "Azure Blob Storage",
+      "Supabase Storage",
       "Clerk",
       "Vercel",
       "Bun",
@@ -283,12 +323,23 @@ export const skillGroups = [
   },
   {
     label: "Databases",
-    skills: ["MongoDB", "SQLite", "PostgreSQL/pgvector", "SQL", "Oracle", "Convex"],
+    skills: [
+      "MongoDB",
+      "SQLite",
+      "PostgreSQL",
+      "PostgreSQL/pgvector",
+      "Redis",
+      "SQL",
+      "Oracle",
+      "Convex",
+    ],
   },
   {
     label: "Domains",
     skills: [
       "Web Development",
+      "System Design",
+      "Web Security",
       "Machine Learning & AI",
       "AI Engineering",
       "Prompt Engineering",
