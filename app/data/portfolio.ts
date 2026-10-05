@@ -68,7 +68,7 @@ export const profileSummary =
 export const projects: Project[] = [
   {
     id: "gallery-web-app",
-    title: "Atelier — Art & Community",
+    title: "Atelier: Art & Community",
     summary:
       "An art community built for discovery, publishing, and social interaction. The rebuild makes data boundaries, private state, and recovery part of the product design.",
     role: "Full-stack developer",
@@ -76,8 +76,8 @@ export const projects: Project[] = [
       "Built the Angular frontend and Express API, including sessions, storage, caching, and background work.",
     status: "Live demo",
     outcome: {
-      headline: "Recovery by design",
-      detail: "Staged publication and durable notification jobs.",
+      headline: "System design in practice",
+      detail: "Data boundaries, caching, security, and recovery.",
     },
     description:
       "Rebuilt a full-stack art community around deliberate data and failure boundaries: MongoDB artwork documents, transactional PostgreSQL relationships, and Redis caching with private viewer state kept separate. Designed staged image publication, revocable sessions, and a durable notification outbox so speed does not come at the cost of correctness.",
@@ -137,7 +137,7 @@ export const projects: Project[] = [
   },
   {
     id: "zdash",
-    title: "ZDash — AI-Assisted Diagnostics",
+    title: "ZDash: AI-Assisted Diagnostics",
     summary:
       "A Windows workspace for Nissan and Infiniti CONSULT-I diagnostics. Live ECU telemetry meets an AI assistant grounded in vehicle context and service-manual evidence.",
     role: "Desktop & AI developer",
