@@ -4,6 +4,7 @@ import type { Project, ProjectLink } from "../data/portfolio";
 import { getTechTagColors } from "../lib/tech-stack-colors";
 import { ProjectImageGallery } from "./ProjectImageGallery";
 import { ProjectStatus } from "./ProjectStatus";
+import { ProjectCardRail } from "./ProjectCardRail";
 import styles from "./project-card.module.css";
 
 function ProjectAction({ link }: { link: ProjectLink }) {
@@ -33,12 +34,16 @@ function ProjectAction({ link }: { link: ProjectLink }) {
 function ProjectCard({
   project,
   eager = false,
+  leadOnDesktop = false,
 }: {
   project: Project;
   eager?: boolean;
+  leadOnDesktop?: boolean;
 }) {
   return (
-    <article className={styles.card}>
+    <article
+      className={`${styles.card} ${leadOnDesktop ? styles.leadingCard : ""}`}
+    >
       <div className={styles.media}>
         {project.images && project.images.length > 1 ? (
           <ProjectImageGallery
@@ -78,7 +83,24 @@ function ProjectCard({
               : "Personal project"}
           </span>
         </div>
-        <p className={styles.summary}>{project.summary}</p>
+        <p className={styles.summary}>
+          {project.summaryHighlights?.length
+            ? project.summary
+                .split(
+                  new RegExp(
+                    `(${project.summaryHighlights.map((phrase) => phrase.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})`,
+                    "g",
+                  ),
+                )
+                .map((part, index) =>
+                  project.summaryHighlights?.includes(part) ? (
+                    <strong key={index}>{part}</strong>
+                  ) : (
+                    part
+                  ),
+                )
+            : project.summary}
+        </p>
         <p className={styles.contribution}>
           <svg
             width="13"
@@ -128,16 +150,18 @@ function ProjectRow({
   description,
   projects,
   eagerFirstImage = false,
+  centerProjectId,
 }: {
   id: string;
   title: string;
   description: string;
   projects: Project[];
   eagerFirstImage?: boolean;
+  centerProjectId?: string;
 }) {
   return (
     <div aria-labelledby={id}>
-      <div className="mb-4 flex items-end justify-between gap-4">
+      <div className="mx-auto mb-4 flex max-w-5xl items-end justify-between gap-4 px-6">
         <div>
           <h3 id={id} className="text-lg font-medium text-foreground">
             {title}
@@ -145,29 +169,57 @@ function ProjectRow({
           <p className="mt-1 text-sm text-muted">{description}</p>
         </div>
         <span className="shrink-0 font-mono text-xs text-muted" aria-hidden>
-          Scroll -&gt;
+          Scroll &lt;-&gt;
         </span>
       </div>
 
-      <div className="snap-x snap-mandatory overflow-x-auto overscroll-x-contain pb-4 [scrollbar-color:var(--border)_transparent] [scrollbar-width:thin]">
-        <div className="flex w-max gap-5">
+      <div className="mx-auto max-w-5xl px-6 lg:max-w-[1600px] lg:px-8">
+        <ProjectCardRail
+          labelId={id}
+          initialIndex={
+            centerProjectId
+              ? Math.max(
+                  0,
+                  projects.findIndex(
+                    (project) => project.id === centerProjectId,
+                  ),
+                )
+              : Math.min(2, Math.floor(projects.length / 2))
+          }
+        >
           {projects.map((project, index) => (
             <ProjectCard
               key={project.id}
               project={project}
               eager={eagerFirstImage && index === 0}
+              leadOnDesktop={
+                id === "personal-projects" &&
+                project.id === "sign-language-translator"
+              }
             />
           ))}
-        </div>
+        </ProjectCardRail>
       </div>
     </div>
   );
 }
 
 export function Projects({ projects }: { projects: Project[] }) {
-  const personalProjects = projects.filter(
-    (project) => project.category === "personal",
-  );
+  const featuredProjectOrder = [
+    "job-tracker-ai",
+    "zdash",
+    "gallery-web-app",
+    "sign-language-translator",
+  ];
+  const personalProjects = projects
+    .filter((project) => project.category === "personal")
+    .sort((a, b) => {
+      const rank = (project: Project) => {
+        const index = featuredProjectOrder.indexOf(project.id);
+        return index === -1 ? featuredProjectOrder.length : index;
+      };
+      return rank(a) - rank(b);
+    });
   const workProjects = projects.filter(
     (project) => project.category === "work",
   );
@@ -183,23 +235,25 @@ export function Projects({ projects }: { projects: Project[] }) {
           Projects
         </h2>
         <p className="mt-3 max-w-2xl text-muted">
-          Production tools, contract work, and product-minded personal builds.
+          Applied AI, computer vision, and the systems that make useful products
+          reliable.
         </p>
-        <div className="mt-10 space-y-12">
-          <ProjectRow
-            id="personal-projects"
-            title="Personal Projects"
-            description="Independent builds and experiments."
-            projects={personalProjects}
-            eagerFirstImage
-          />
-          <ProjectRow
-            id="work-projects"
-            title="Internal & Contract Work"
-            description="Production tools and client work."
-            projects={workProjects}
-          />
-        </div>
+      </div>
+      <div className="mt-10 space-y-12">
+        <ProjectRow
+          id="personal-projects"
+          title="Personal Projects"
+          description="Independent builds and experiments."
+          projects={personalProjects}
+          eagerFirstImage
+          centerProjectId="zdash"
+        />
+        <ProjectRow
+          id="work-projects"
+          title="Internal & Contract Work"
+          description="Production tools and client work."
+          projects={workProjects}
+        />
       </div>
     </section>
   );

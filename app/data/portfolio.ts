@@ -15,9 +15,16 @@ export type Project = {
   id: string;
   title: string;
   summary: string;
+  summaryHighlights?: string[];
   role: string;
   contribution: string;
-  status: "Live" | "Live demo" | "In development" | "Completed" | "Internal";
+  status:
+    | "Live"
+    | "Live demo"
+    | "Released"
+    | "In development"
+    | "Completed"
+    | "Internal";
   outcome: { headline: string; detail: string };
   description: string;
   image: string;
@@ -67,13 +74,79 @@ export const profileSummary =
 
 export const projects: Project[] = [
   {
+    id: "job-tracker-ai",
+    title: "Job Tracker AI",
+    summary:
+      "An AI job tracker for Gmail and Outlook. GPT-6 Luna classifies hiring updates; GPT-5.4 mini extracts application details.",
+    summaryHighlights: ["AI job tracker"],
+    role: "AI & desktop developer",
+    contribution:
+      "Built the desktop app, evidence checks, human review, and resumable imports.",
+    status: "Released",
+    outcome: {
+      headline: "Two-stage AI pipeline",
+      detail: "OpenAI Decisions + Responses with Structured Outputs.",
+    },
+    description:
+      "Built a Windows-first AI job tracker using OpenAI Decisions for email relevance and event classification, Responses for schema-constrained extraction, and Python validation before application updates. Exact evidence checks, identity matching, chronological event history, and human review connect probabilistic outputs to durable SQLite records. Resumable imports, cached inference results, and spending reservations control recovery and API costs.",
+    image: "/images/projects/job-tracker-ai-dashboard.png",
+    imageAlt:
+      "Job Tracker AI desktop dashboard with fictional applications and hiring-stage summaries",
+    images: [
+      {
+        src: "/images/projects/job-tracker-ai-dashboard.png",
+        alt: "Job Tracker AI dark dashboard showing fictional applications, interview counts, and hiring stages",
+        label: "Application dashboard",
+        fit: "contain",
+      },
+      {
+        src: "/images/projects/job-tracker-ai-review.png",
+        alt: "Job Tracker AI review inbox showing uncertain email classifications that need human confirmation",
+        label: "AI review inbox",
+        fit: "contain",
+        background: "white",
+      },
+      {
+        src: "/images/projects/job-tracker-ai-imports.png",
+        alt: "Job Tracker AI historical email import page with a date range and persisted import history",
+        label: "Email import history",
+        fit: "contain",
+        background: "white",
+      },
+    ],
+    tags: [
+      "Python",
+      "OpenAI API",
+      "PySide6",
+      "Pydantic",
+      "SQLite",
+      "AI Engineering",
+      "Prompt Engineering",
+      "Structured Outputs",
+    ],
+    links: [
+      {
+        label: "Download",
+        href: "https://github.com/khalifehbasiri/Job-Tracker-AI/releases/latest",
+      },
+      {
+        label: "GitHub",
+        href: "https://github.com/khalifehbasiri/Job-Tracker-AI",
+      },
+      { label: "Case Study", href: "/projects/job-tracker-ai" },
+    ],
+    featured: true,
+    category: "personal",
+  },
+  {
     id: "gallery-web-app",
     title: "Atelier: Art & Community",
     summary:
-      "An art community built for discovery, publishing, and social interaction. The rebuild makes data boundaries, private state, and recovery part of the product design.",
+      "An art community for sharing work and discovering artists. A system design rebuild added Redis caching, secure sessions, and recoverable publishing.",
+    summaryHighlights: ["system design", "Redis caching"],
     role: "Full-stack developer",
     contribution:
-      "Built the Angular frontend and Express API, including sessions, storage, caching, and background work.",
+      "Built the Angular app, Express API, and workflows across MongoDB and PostgreSQL.",
     status: "Live demo",
     outcome: {
       headline: "System design in practice",
@@ -139,14 +212,15 @@ export const projects: Project[] = [
     id: "zdash",
     title: "ZDash: AI-Assisted Diagnostics",
     summary:
-      "A Windows workspace for Nissan and Infiniti CONSULT-I diagnostics. Live ECU telemetry meets an AI assistant grounded in vehicle context and service-manual evidence.",
+      "Live CONSULT-I diagnostics with an AI assistant. OpenAI and pgvector power RAG over service manuals, grounded in vehicle context.",
+    summaryHighlights: ["AI assistant", "RAG"],
     role: "Desktop & AI developer",
     contribution:
-      "Building the diagnostics app, guarded assistant tools, and retrieval pipeline for repair-manual references.",
+      "Building telemetry, hybrid retrieval, citations, and user-approved AI tools.",
     status: "In development",
     outcome: {
-      headline: "8,618 pages",
-      detail: "Indexed in the service-manual retrieval prototype.",
+      headline: "RAG over 8,618 manual pages",
+      detail: "Hybrid-search prototype with page-level citations.",
     },
     description:
       "Building a Windows diagnostics app for Nissan and Infiniti CONSULT-I ECUs with live telemetry and guarded fault-code workflows. Integrated an AI assistant with Zod-validated, user-approved tools; prototyped Retrieval-Augmented Generation (RAG) over 8,618 service-manual pages using PostgreSQL/pgvector hybrid search and page-level citations.",
@@ -187,6 +261,7 @@ export const projects: Project[] = [
         label: "Product Site",
         href: "https://www.zdash.app/",
       },
+      { label: "Case Study", href: "/projects/zdash" },
     ],
     featured: true,
     category: "personal",
@@ -195,10 +270,11 @@ export const projects: Project[] = [
     id: "tandem-insulin-pump-simulator",
     title: "Tandem t:slim X2 Insulin Pump Simulator",
     summary:
-      "An educational insulin-pump simulator with manual and extended boluses, automated basal adjustments, glucose charts, and safety scenarios.",
+      "An educational C++/Qt simulation of insulin delivery and glucose changes, with boluses, basal adjustments, and safety constraints.",
+    summaryHighlights: ["simulation", "safety constraints"],
     role: "C++ / Qt developer",
     contribution:
-      "Owned bolus and automated-delivery logic within a four-person team, including limits, alerts, and suspend/resume behavior.",
+      "Owned dosing logic, limits, alerts, and suspend/resume behavior in a four-person team.",
     status: "Completed",
     outcome: {
       headline: "4 scenario walkthroughs",
@@ -249,10 +325,11 @@ export const projects: Project[] = [
     id: "leetbridge",
     title: "LeetBridge",
     summary:
-      "Accepted LeetCode solutions, automatically saved to GitHub with a readable archive. Built around a simple constraint: access only the repository the user chooses.",
+      "Accepted LeetCode solutions synced through the GitHub API, with generated READMEs, least-privilege authorization, and resumable imports.",
+    summaryHighlights: ["GitHub API", "least-privilege authorization"],
     role: "Extension developer",
     contribution:
-      "Built the extension, GitHub authorization, resumable imports, generated documentation, and store release.",
+      "Built and published the extension, from repository setup to historical imports.",
     status: "Live",
     outcome: {
       headline: "Published on Chrome",
@@ -321,14 +398,15 @@ export const projects: Project[] = [
     id: "sign-language-translator",
     title: "Real-Time Sign Language Translator",
     summary:
-      "A live ASL alphabet recognizer that turns hand landmarks into confidence-scored predictions, with a webcam studio for building a translated message.",
+      "AI-powered computer vision for ASL alphabet recognition. MediaPipe hand landmarks feed a TensorFlow Lite classifier that returns letters and confidence.",
+    summaryHighlights: ["computer vision", "TensorFlow Lite"],
     role: "ML & full-stack developer",
     contribution:
-      "Connected MediaPipe landmarks, TensorFlow Lite inference, a Flask API, and the React webcam interface.",
+      "Built the React camera interface, Flask API, and TensorFlow training pipeline.",
     status: "Live demo",
     outcome: {
-      headline: "21 hand landmarks",
-      detail: "Converted into 63-feature prediction vectors.",
+      headline: "Landmark-based ML inference",
+      detail: "21 hand landmarks → 63 features per prediction.",
     },
     description:
       "Built a real-time ASL alphabet recognizer that converts 21 MediaPipe hand landmarks into 63-feature prediction vectors. Served confidence-scored TensorFlow Lite inference through a Flask API with a live React webcam interface.",
@@ -353,6 +431,7 @@ export const projects: Project[] = [
       "TensorFlow",
       "TensorFlow Lite",
       "MediaPipe",
+      "Computer Vision",
       "React",
       "Flask",
     ],
@@ -373,10 +452,11 @@ export const projects: Project[] = [
     id: "collaborative-board",
     title: "Collaborative Board",
     summary:
-      "A community board where posts, votes, and threaded conversations update in real time. Permissions and per-user vote state are enforced on the server.",
+      "Posts, votes, and threaded comments update in real time through a Convex reactive backend, with Clerk authentication and server-enforced permissions.",
+    summaryHighlights: ["reactive backend", "server-enforced permissions"],
     role: "Full-stack developer",
     contribution:
-      "Built and deployed the Next.js interface, reactive Convex backend, and Clerk authentication.",
+      "Built and deployed the Next.js app, authentication, and ownership checks.",
     status: "Live demo",
     outcome: {
       headline: "Live, reactive updates",
@@ -418,10 +498,11 @@ export const projects: Project[] = [
     id: "floxy-landing-page",
     title: "Floxy Marketing Site",
     summary:
-      "A responsive marketing site for a proxy platform serving 20,000+ customers, with reusable product pages and language-specific API examples.",
+      "A marketing site for a proxy platform serving 20,000+ customers, with reusable product pages and language-specific API examples.",
+    summaryHighlights: ["reusable product pages", "API examples"],
     role: "Frontend developer",
     contribution:
-      "Built and shipped the Next.js site, from mobile navigation to product selectors and API examples.",
+      "Shipped the responsive Next.js site, navigation, product selectors, and copyable API examples.",
     status: "Live",
     outcome: {
       headline: "23.9K monthly visits",
@@ -444,13 +525,14 @@ export const projects: Project[] = [
     id: "storage-explorer",
     title: "Azure Storage Explorer",
     summary:
-      "A desktop search tool for a large Azure data estate. Indexed metadata replaces slow file-location searches while background refreshes keep the interface responsive.",
+      "Find files across a large Azure data estate using indexed metadata. Background refreshes keep searches responsive.",
+    summaryHighlights: ["indexed metadata", "Background refreshes"],
     role: "Software developer",
     contribution:
-      "Engineered multithreaded search, metadata exports, and updates that preserve the last valid database after a failed refresh.",
+      "Built multithreaded search, exports, and refreshes that preserve the last valid database.",
     status: "Internal",
     outcome: {
-      headline: "~420 TB of data",
+      headline: "420TB+ of data",
       detail: "File-location searches reduced to seconds or minutes.",
     },
     description:
@@ -474,10 +556,11 @@ export const projects: Project[] = [
     id: "geo-names-validator",
     title: "Bilingual Name Manager",
     summary:
-      "A bilingual validation tool for geographic names and coordinates. API records and geospatial matching replace manual entry-by-entry checks.",
+      "Validate geographic names and coordinates against authoritative API records, using bilingual rules and geospatial matching.",
+    summaryHighlights: ["API records", "geospatial matching"],
     role: "Lead developer",
     contribution:
-      "Led a three-person team and worked with DFO clients from requirements and demos through deployment and training.",
+      "Led a three-person team through requirements, client demos, deployment, and training.",
     status: "Internal",
     outcome: {
       headline: "Weeks → hours",

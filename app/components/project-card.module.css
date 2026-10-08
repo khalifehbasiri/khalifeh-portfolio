@@ -1,3 +1,22 @@
+.rail {
+  position: relative;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-color: var(--border) transparent;
+  scrollbar-width: thin;
+  padding-bottom: 16px;
+}
+.rail:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 14px;
+}
+.track {
+  display: flex;
+  width: max-content;
+  gap: 20px;
+}
 .card {
   display: flex;
   flex-direction: column;
@@ -69,6 +88,10 @@
   font-size: 13px;
   line-height: 1.7;
   color: var(--muted);
+}
+.summary strong {
+  color: var(--foreground);
+  font-weight: 600;
 }
 .contribution {
   display: flex;
@@ -146,6 +169,26 @@
 @media (min-width: 640px) {
   .card {
     width: 22rem;
+  }
+}
+@media (min-width: 1024px) {
+  .rail {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black clamp(12px, calc((100% - 68.5rem) / 4), 56px),
+      black calc(100% - clamp(12px, calc((100% - 68.5rem) / 4), 56px)),
+      transparent
+    );
+  }
+  .track {
+    padding-inline: max(0px, calc(50% - 11rem));
+  }
+  .card {
+    scroll-snap-align: center;
+  }
+  .leadingCard {
+    order: -1;
   }
 }
 @media (prefers-reduced-motion: reduce) {
