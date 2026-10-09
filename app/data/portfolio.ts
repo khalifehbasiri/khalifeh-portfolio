@@ -70,7 +70,7 @@ export const contact = {
 };
 
 export const profileSummary =
-  "Software developer focused on Python, AI-enabled automotive diagnostics, and full-stack applications. I have led production internal tools, built real-time machine learning interfaces, and shipped responsive Next.js products used by real customers.";
+  "Software developer building focused on Python and TypeScript applications across desktop, full-stack, and applied AI. I’ve delivered government tools, shipped responsive Next.js products used by real customers, and built AI workflows with validation, human review, and recovery.";
 
 export const projects: Project[] = [
   {
@@ -679,17 +679,17 @@ export const workExperience: WorkExperience[] = [
         role: "Software Developer",
         period: "Aug 2024–Dec 2025",
         highlights: [
-          "Built a bilingual Python geographic-name validator that replaced manual entry-by-entry checks with validation completed in minutes.",
-          "Expanded it into the modular Name Manager; CHS Atlantic reported that one process fell from two weeks to a few hours.",
-          "Led a three-person Agile team and worked directly with DFO clients from requirements and demos through deployment, training, and support.",
+          "Built bilingual Python geographic-name tools using the GNBC REST API and geospatial matching; CHS Atlantic reported one workflow fell from two weeks to a few hours.",
+          "Led a three-person Agile team and worked directly with clients through requirements, demos, deployment, training, and production support.",
+          "Tested API, database, threading, and geospatial workflows; validated releases with users across five DFO regions and the Canadian Coast Guard.",
         ],
       },
       {
         role: "Programmer",
         period: "Sep 2023–Aug 2024",
         highlights: [
-          "Built a multithreaded Python Storage Explorer for metadata across an approximately 420 TB Azure storage estate, cutting staff file-location searches from hours to seconds or minutes.",
-          "Kept searches responsive during updates and preserved the last valid database when a refresh failed.",
+          "Built a multithreaded Python Storage Explorer using Azure Blob Inventory, MongoDB, and SQLite to search metadata across an approximately 420 TB storage estate, reducing file-location searches from hours to seconds or minutes.",
+          "Kept searches responsive during metadata refreshes and preserved the last valid database after failed updates.",
         ],
       },
     ],
@@ -702,10 +702,10 @@ export const workExperience: WorkExperience[] = [
     positions: [
       {
         role: "Frontend Developer",
-        period: "2025",
+        period: "Mar 2025 - May 2025",
         highlights: [
-          "Built and shipped a responsive Next.js marketing site supporting 20,000+ customers and reaching 23.9K monthly visits within four months of launch.",
-          "Implemented mobile navigation, a proxy-type selector, auto-scrolling testimonials, language-specific API examples with copy-to-clipboard, reusable components, and centralized content models.",
+          "Shipped a responsive Next.js site with React, TypeScript, and Tailwind CSS for Floxy, a platform serving 20,000+ customers; the site reached 23.9K monthly visits within four months.",
+          "Built reusable components and centralized content models for product pages, mobile navigation, proxy selection, and copyable API examples.",
         ],
       },
     ],
@@ -720,8 +720,8 @@ export const workExperience: WorkExperience[] = [
         role: "System Administrator Intern",
         period: "May 2023 - Aug 2023",
         highlights: [
-          "Managed Microsoft Cloud infrastructure with automated real-time backups, on-site hardware/software support, and computer configuration.",
-          "Tracked corporate financials using Excel (bank statements, payroll, taxes) and handled administrative operations including scheduling and client communications.",
+          "Configured Microsoft cloud backups for business files and supported day-to-day IT operations.",
+          "Built and configured employee computers and resolved on-site hardware, software, and connectivity issues.",
         ],
       },
     ],
