@@ -66,6 +66,16 @@ export function CaseStudy({
   story: CaseStudyStory;
 }) {
   const actions = project.links.filter((link) => link.label !== "Case Study");
+  const images = project.images ?? [
+    {
+      src: project.image,
+      alt: project.imageAlt,
+      label: project.title,
+      background: project.imageBackground,
+    },
+  ];
+  const previewImage = images.find((image) => image.src === story.preview.src);
+  const screenshots = images.filter((image) => image.src !== story.preview.src);
   return (
     <div className={styles.page}>
       <a className={styles.skipLink} href="#overview">
@@ -103,7 +113,9 @@ export function CaseStudy({
             ))}
           </div>
           <figure className={styles.preview}>
-            <div className={styles.imageFrame}>
+            <div
+              className={`${styles.imageFrame} ${previewImage?.background === "white" ? styles.lightFrame : ""}`}
+            >
               <Image
                 src={story.preview.src}
                 alt={story.preview.alt}
@@ -156,6 +168,16 @@ export function CaseStudy({
                 <dt>My role</dt>
                 <dd>{project.role}</dd>
               </div>
+              <div>
+                <dt>My contribution</dt>
+                <dd>{project.contribution}</dd>
+              </div>
+              {project.note ? (
+                <div>
+                  <dt>Context</dt>
+                  <dd>{project.note}</dd>
+                </div>
+              ) : null}
               {story.facts?.map((fact) => (
                 <div key={fact.label}>
                   <dt>{fact.label}</dt>
@@ -182,6 +204,34 @@ export function CaseStudy({
             </dl>
           </aside>
         </div>
+        {screenshots.length > 0 ? (
+          <section className={styles.screenshots} aria-labelledby="screenshots-title">
+            <h2 id="screenshots-title">More project screens</h2>
+            <p>Explore the interface. Select an image to view it at full size.</p>
+            <div className={styles.screenshotGrid}>
+              {screenshots.map((image) => (
+                <figure key={image.src}>
+                  <a
+                    className={`${styles.screenshotFrame} ${image.background === "white" ? styles.lightFrame : ""}`}
+                    href={image.src}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`View ${image.label} at full size (opens in a new tab)`}
+                  >
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      sizes="(min-width: 1024px) 476px, (min-width: 800px) 50vw, 100vw"
+                      className={styles.image}
+                    />
+                  </a>
+                  <figcaption>{image.label}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+        ) : null}
       </main>
       <Footer />
     </div>

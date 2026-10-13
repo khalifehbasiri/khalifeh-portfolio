@@ -1,5 +1,325 @@
 import type { CaseStudyStory } from "./CaseStudy";
 
+export const tandemStory: CaseStudyStory = {
+  discipline: "Object-oriented design & simulation",
+  introduction:
+    "A four-person C++/Qt course project that makes insulin-delivery workflows, glucose changes, and safety events visible in an educational desktop simulation.",
+  preview: {
+    src: "/images/projects/tandem-insulin-pump-simulator.jpg",
+    alt: "Educational insulin pump simulator showing a glucose chart with an extended-delivery interval",
+    caption:
+      "A frame from the team's bolus demonstration. The highlighted interval shows extended delivery in the simulated glucose history.",
+  },
+  problem:
+    "An insulin-pump simulation needs more than a familiar interface: inputs, delivery state, glucose trends, alerts, and history must agree. Our COMP 3004 team built an interactive Qt application to explore those workflows. My focus was the dosing logic and automated-control path.",
+  built: [
+    {
+      title: "Bolus calculation and confirmation.",
+      body: "I designed BolusManager for carbohydrate and correction components, detailed previews, manual delivery, input validation, and configurable limits, then connected delivery to the body/glucose simulator.",
+    },
+    {
+      title: "Glucose-driven control.",
+      body: "I developed ControlSystem to respond to simulated CGM readings, adjust the insulin rate, handle glucose trends, and manage suspension and resumption with safety checks.",
+    },
+    {
+      title: "Alerts and shared integration.",
+      body: "I implemented insulin- and glucose-related alert definitions and helped connect control results to the interface and history. Extended-bolus integration was shared with Julien Larivière-Chartier; profiles, charts, battery/cartridge management, and persistence were team contributions.",
+    },
+  ],
+  decisions: [
+    {
+      title: "Separate a suggested dose from delivery.",
+      body: "Calculation returns a breakdown for review before confirmation or override. Validation and limits belong in the domain component so interface actions follow the same rules.",
+    },
+    {
+      title: "Treat suspension as a delivery state.",
+      body: "Glucose control must respect whether delivery is available. Suspension stops adjustments; resumption checks the current conditions, including external battery and cartridge state, before delivery can continue.",
+    },
+    {
+      title: "Connect components through Qt signals and slots.",
+      body: "Readings, delivery decisions, alerts, chart updates, and history cooperate through events. Keeping responsibilities separate made it possible to integrate work across four contributors.",
+    },
+    {
+      title: "Make long-running behavior observable.",
+      body: "The team accelerated time to five simulated minutes per real second. Charts and recorded events make dosing intervals, glucose trends, and safety scenarios visible within a short demonstration.",
+    },
+  ],
+  learned:
+    "I practiced object-oriented domain design, event-driven Qt integration, and reasoning about state transitions. A calculation is only one part of a workflow: confirmation, invalid input, interruption, and recovery need equally clear behavior. Integrating shared components also taught me to make ownership and event contracts explicit.",
+  evidence:
+    "Four recorded walkthroughs cover profiles and automatic delivery, bolus behavior, battery shutdown, and cartridge alerts. The public repository contains documentation, UML diagrams, and demonstrations; the course implementation remains private. This is an educational simulation without clinical validation.",
+  facts: [
+    { label: "Team", value: "Four contributors · COMP 3004 · Carleton University" },
+    { label: "My focus", value: "BolusManager, ControlSystem, and dosing alerts" },
+    { label: "Simulation clock", value: "Five simulated minutes per real second" },
+  ],
+  details: {
+    title: "Watch the scenarios and explore the design",
+    content: (
+      <>
+        <ul className="list-disc pl-5">
+          <li><a href="https://youtu.be/dCezgP-P2d4" target="_blank" rel="noopener noreferrer">Profiles and automatic delivery ↗</a></li>
+          <li><a href="https://youtu.be/tJMpMrLWkEg" target="_blank" rel="noopener noreferrer">Manual, extended, and automatic bolus delivery ↗</a></li>
+          <li><a href="https://youtu.be/DuQRoASgmRc" target="_blank" rel="noopener noreferrer">Battery alerts, shutdown, and restart ↗</a></li>
+          <li><a href="https://youtu.be/sf8nXzPyNlg" target="_blank" rel="noopener noreferrer">Empty cartridge and stopped delivery ↗</a></li>
+        </ul>
+        <p>
+          <a href="https://github.com/khalifehbasiri/Tandem-t-slim-Insulin-Pump-Simulator/blob/main/docs/architecture.md" target="_blank" rel="noopener noreferrer">Architecture and UML diagrams ↗</a>
+          {" · "}
+          <a href="https://github.com/khalifehbasiri/Tandem-t-slim-Insulin-Pump-Simulator/blob/main/CONTRIBUTIONS.md" target="_blank" rel="noopener noreferrer">Team contribution breakdown ↗</a>
+        </p>
+      </>
+    ),
+  },
+};
+
+export const signLanguageStory: CaseStudyStory = {
+  discipline: "Computer vision & ML inference",
+  introduction:
+    "A React webcam interface and Flask inference API that turn MediaPipe hand landmarks into confidence-scored ASL alphabet predictions.",
+  preview: {
+    src: "/images/projects/sign-language-translator.png",
+    alt: "SignTranslate landing page with a hand-landmark illustration",
+    caption:
+      "The project introduction. The translation studio below shows the camera and message interface awaiting input.",
+  },
+  problem:
+    "A live alphabet recognizer has to connect camera tracking, model input, inference, and readable feedback. I built this project to take a TensorFlow classifier beyond a training script and make its predictions usable in a browser.",
+  built: [
+    {
+      title: "The camera and translation interface.",
+      body: "React displays the webcam feed and tracked hand landmarks, sends prediction requests, and presents the returned letter and confidence in a translation console.",
+    },
+    {
+      title: "A landmark-based training pipeline.",
+      body: "MediaPipe supplies 21 hand points, each with x, y, and z coordinates. Those 63 features form the input to the TensorFlow classifier and its converted TensorFlow Lite model.",
+    },
+    {
+      title: "A focused inference API.",
+      body: "Flask serves the lightweight model and returns a prediction with its confidence score. Training and conversion remain separate from the deployed inference runtime.",
+    },
+  ],
+  decisions: [
+    {
+      title: "Use hand geometry as the model input.",
+      body: "Landmarks give the browser and API an explicit feature contract: 21 points become one 63-value vector per prediction.",
+    },
+    {
+      title: "Keep inference separate from training.",
+      body: "A converted TensorFlow Lite model serves predictions while the extraction and training scripts remain available for improving the dataset and classifier.",
+    },
+    {
+      title: "Show confidence and withhold weak predictions.",
+      body: "The interface gates low-confidence results rather than always displaying a letter. Similar hand shapes still need better data and temporal modeling.",
+    },
+  ],
+  learned:
+    "I practiced the complete ML application path: extracting features, training and converting a model, serving inference, and connecting it to a live interface. Consistent input features and clear feedback matter as much as a working prediction endpoint.",
+  evidence:
+    "The demo and source are public. The current classifier uses one hand and one frame at a time; motion-based J and Z are unsupported. Similar letters, unfamiliar hand positions, and lighting can reduce accuracy. The project demonstrates alphabet recognition rather than full conversational translation.",
+  facts: [
+    { label: "Model input", value: "21 hand landmarks × 3 coordinates = 63 features" },
+    { label: "Inference path", value: "Webcam → MediaPipe → Flask → TensorFlow Lite" },
+  ],
+};
+
+export const collaborativeBoardStory: CaseStudyStory = {
+  discipline: "Full-stack development & reactive data",
+  introduction:
+    "A Next.js community board with live posts, votes, and threaded discussions backed by Convex and Clerk authentication.",
+  preview: {
+    src: "/images/projects/collaborative-board-feed.jpg",
+    alt: "Collab Board dashboard showing community posts, voting controls, filters, and comment buttons",
+    caption: "The working community feed, with post filters and voting controls.",
+  },
+  problem:
+    "A shared board quickly becomes more than CRUD: several people can post, vote, and reply at once, while each action has its own identity and ownership rules. I built the application to connect those interactions to a live feed and enforce permissions at the backend.",
+  built: [
+    {
+      title: "The community workflow.",
+      body: "A responsive Next.js interface takes visitors from the introduction to authentication, the feed, post creation, voting, and threaded comments.",
+    },
+    {
+      title: "Reactive data and related records.",
+      body: "Convex queries keep the interface synchronized with changes to posts, comments, and votes. Separate entities preserve authorship and each member's vote state.",
+    },
+    {
+      title: "Authenticated changes.",
+      body: "Clerk supplies identity; backend mutations enforce permissions and author ownership. Post deletion also cleans up related records.",
+    },
+  ],
+  decisions: [
+    {
+      title: "Subscribe to the shared data.",
+      body: "Reactive queries let updates reach the feed without adding manual refresh logic to every interaction.",
+    },
+    {
+      title: "Keep authorization at the write boundary.",
+      body: "A signed-in interface is only the start. Server functions check who is changing a record and whether that user owns it.",
+    },
+    {
+      title: "Represent votes as user state.",
+      body: "Individual vote records let the application distinguish a user's current choice from the aggregate count and handle toggling or switching votes consistently.",
+    },
+  ],
+  learned:
+    "I practiced modeling related data, connecting authentication to server permissions, and shipping complete interactions across frontend and backend. Live updates make relationships and ownership rules visible immediately, so cleanup and per-user state need to be designed alongside the feed.",
+  evidence:
+    "The live demo and repository are public. Search, pagination, notification preferences, and a broader automated permissions test suite remain follow-up work. The current release demonstrates the community flow rather than large-scale usage.",
+  facts: [
+    { label: "Data flow", value: "Next.js → Clerk identity → Convex queries and mutations" },
+    { label: "Core records", value: "Users, posts, comments, and votes" },
+  ],
+};
+
+export const floxyStory: CaseStudyStory = {
+  discipline: "Frontend development & product communication",
+  introduction:
+    "A responsive Next.js marketing site that helps customers explore proxy products and move from product information to usable API examples.",
+  preview: {
+    src: "/images/projects/floxy-marketing-site.png",
+    alt: "Floxy marketing website introducing its proxy products",
+    caption: "The public marketing site built for Floxy's proxy platform.",
+  },
+  problem:
+    "A platform with several proxy products needs a clear way to explain options, guide navigation, and help technical customers get started. I built Floxy's marketing frontend around reusable product content and practical integration examples.",
+  built: [
+    {
+      title: "The responsive marketing site.",
+      body: "I shipped the Next.js frontend with responsive navigation and product pages for a platform serving more than 20,000 customers.",
+    },
+    {
+      title: "Reusable product presentation.",
+      body: "Shared React components and centralized content models keep product information and selectors consistent across pages.",
+    },
+    {
+      title: "Copyable integration examples.",
+      body: "Language-specific API examples connect product explanations to the next action a developer needs to take.",
+    },
+  ],
+  decisions: [
+    {
+      title: "Model repeated content once.",
+      body: "Product pages share patterns. Reusable components and centralized content make changes easier to apply consistently as the offering grows.",
+    },
+    {
+      title: "Connect selection to integration.",
+      body: "Navigation and product selectors help customers explore the offering; copyable examples reduce the work between choosing a product and trying its API.",
+    },
+    {
+      title: "Build for mobile and discovery.",
+      body: "Responsive layouts and SEO were part of delivering a public Next.js product site to customers arriving from different devices and entry points.",
+    },
+  ],
+  learned:
+    "I learned to organize a commercial frontend around both customer questions and maintainable content. Reusable components are most useful when they preserve a clear path through the product, from first visit to a concrete integration example.",
+  evidence:
+    "The site reached 23.9K monthly visits within four months of launch. That is a traffic outcome, not an attributed conversion improvement. The public site shows the delivered frontend; this case study covers my marketing-site work.",
+  facts: [
+    { label: "Platform context", value: "20,000+ customers" },
+    { label: "Reported reach", value: "23.9K monthly visits within four months" },
+  ],
+};
+
+export const storageExplorerStory: CaseStudyStory = {
+  discipline: "Data tooling & background processing",
+  introduction:
+    "An internal Python application that makes file-location searches across approximately 420 TB of Azure data practical through indexed metadata and background refreshes.",
+  preview: {
+    src: "/images/brand/dfo-project-sharp.webp",
+    alt: "Fisheries and Oceans Canada organization mark",
+    caption: "Built for Fisheries and Oceans Canada. Internal interface screenshots are not published.",
+  },
+  problem:
+    "Staff needed to locate files across a large Azure data estate, where manual searches could take hours. The tool needed to search metadata efficiently, export useful results, and stay responsive while its index was refreshed.",
+  built: [
+    {
+      title: "Indexed file discovery.",
+      body: "I engineered a Python application using Azure Blob Inventory, MongoDB, and SQLite to search metadata across approximately 420 TB of enterprise data.",
+    },
+    {
+      title: "Responsive search and export.",
+      body: "Multithreaded work supports file-location queries, result exports, and background metadata refreshes without making the interface wait for all processing to finish.",
+    },
+    {
+      title: "Refreshes that preserve usable data.",
+      body: "Failed updates retain the last valid database so staff can keep searching while a refresh issue is resolved.",
+    },
+  ],
+  decisions: [
+    {
+      title: "Search metadata rather than file contents.",
+      body: "The immediate problem was finding where files lived. An indexed inventory targets that task without requiring every search to traverse the full data estate.",
+    },
+    {
+      title: "Move long-running work off the interface.",
+      body: "Inventory processing and refreshes need time. Background work keeps searches and result handling usable during those operations.",
+    },
+    {
+      title: "Keep the last valid index available.",
+      body: "An unsuccessful refresh should not turn a data-maintenance problem into a complete search outage. Preserving the valid database maintains a useful recovery point.",
+    },
+  ],
+  learned:
+    "I practiced designing tools around the scale and workflow of an enterprise data estate. Indexing solves the search problem only when refreshes, exports, responsiveness, and failure recovery also fit the way staff work.",
+  evidence:
+    "Staff file-location searches were reduced from hours to seconds or minutes. The 420 TB figure describes the underlying data estate, not the size of the metadata database. The application and operational data are internal to DFO; public source and interface screenshots are unavailable.",
+  facts: [
+    { label: "Organization", value: "Fisheries and Oceans Canada" },
+    { label: "Search scope", value: "Metadata for approximately 420 TB of Azure data" },
+  ],
+};
+
+export const geoNamesStory: CaseStudyStory = {
+  discipline: "API integration & geospatial validation",
+  introduction:
+    "An internal bilingual Python tool that validates geographic names and coordinates against authoritative records, developed with DFO clients from requirements through training.",
+  preview: {
+    src: "/images/brand/dfo-project-sharp.webp",
+    alt: "Fisheries and Oceans Canada organization mark",
+    caption: "Built for Fisheries and Oceans Canada. Internal interface screenshots are not published.",
+  },
+  problem:
+    "Geographic-name validation requires more than a text match: a record's coordinates, language, and authoritative identity matter too. DFO clients needed a repeatable way to check that information while reducing manual work.",
+  built: [
+    {
+      title: "Authoritative record checks.",
+      body: "I architected a modular Python tool integrating the Geographical Names Board of Canada API with bilingual validation and geospatial matching.",
+    },
+    {
+      title: "Concurrent validation workflows.",
+      body: "Multithreaded processing supports checks across names, coordinates, languages, and source records.",
+    },
+    {
+      title: "Delivery with a three-person team.",
+      body: "I led requirements discussions, client demonstrations, deployment, training, and support so the validation tool could become part of the team's working process.",
+    },
+  ],
+  decisions: [
+    {
+      title: "Combine names with location and language.",
+      body: "Text alone is insufficient for geographic records. Geospatial matching and bilingual rules give validation the context needed to distinguish candidates.",
+    },
+    {
+      title: "Use an authoritative reference.",
+      body: "The API integration anchors checks to recognized geographic-name records, making the reference behind each validation explicit.",
+    },
+    {
+      title: "Refine the workflow with clients.",
+      body: "Requirements, demonstrations, and training were part of development. Direct feedback helped align the tool with the records and processes staff actually needed to validate.",
+    },
+  ],
+  learned:
+    "I practiced leading a small team, integrating a public-record API, and translating client requirements into a usable validation workflow. Delivery includes helping people adopt the tool and supporting the process after deployment.",
+  evidence:
+    "CHS Atlantic reported that one process fell from two weeks to a few hours. That report applies to that workflow rather than every validation task. Source, operational records, and interface screenshots remain internal to DFO.",
+  facts: [
+    { label: "Team", value: "Lead developer · three-person team" },
+    { label: "Reference", value: "Geographical Names Board of Canada API" },
+    { label: "Reported outcome", value: "CHS Atlantic: one process reduced from two weeks to hours" },
+  ],
+};
+
 export const atelierStory: CaseStudyStory = {
   discipline: "System design",
   introduction:

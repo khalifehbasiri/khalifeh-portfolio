@@ -131,13 +131,12 @@ function ProjectCard({
           ))}
         </div>
         <div className={styles.links}>
-          {project.links.length ? (
-            project.links.map((link) => (
-              <ProjectAction key={link.href} link={link} />
-            ))
-          ) : (
+          {project.links.map((link) => (
+            <ProjectAction key={link.href} link={link} />
+          ))}
+          {project.note ? (
             <span className={styles.privateNote}>{project.note}</span>
-          )}
+          ) : null}
         </div>
       </div>
     </article>
