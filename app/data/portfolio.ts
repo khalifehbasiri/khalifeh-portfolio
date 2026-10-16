@@ -210,20 +210,20 @@ export const projects: Project[] = [
   },
   {
     id: "zdash",
-    title: "ZDash: AI-Assisted Diagnostics",
+    title: "ZDash: AI Diagnostic Agent",
     summary:
-      "Live CONSULT-I diagnostics with an AI assistant. OpenAI and pgvector power RAG over service manuals, grounded in vehicle context.",
-    summaryHighlights: ["AI assistant", "RAG"],
+      "A Windows vehicle diagnostics app with an AI agent that gathers live ECU data, searches service manuals, researches parts, and resumes saved investigations.",
+    summaryHighlights: ["AI agent", "saved investigations"],
     role: "Desktop & AI developer",
     contribution:
-      "Building telemetry, hybrid retrieval, citations, and user-approved AI tools.",
+      "Built hybrid RAG, LangChain tools, LangGraph investigation workflows, browser research, and evidence validation.",
     status: "In development",
     outcome: {
       headline: "RAG over 8,618 manual pages",
       detail: "Hybrid-search prototype with page-level citations.",
     },
     description:
-      "Building a Windows diagnostics app for Nissan and Infiniti CONSULT-I ECUs with live telemetry and guarded fault-code workflows. Integrated an AI assistant with Zod-validated, user-approved tools; prototyped Retrieval-Augmented Generation (RAG) over 8,618 service-manual pages using PostgreSQL/pgvector hybrid search and page-level citations.",
+      "Built an OpenAI-powered diagnostic agent for Nissan and Infiniti CONSULT-I vehicles with hybrid RAG over 8,618 service-manual pages, schema-defined LangChain tools, persistent LangGraph investigations, browser-based parts research, and application-enforced evidence validation.",
     image: "/images/projects/zdash-webpage.png",
     imageAlt:
       "ZDash website showing a classic Nissan 300ZX, live vehicle telemetry, and automotive ownership features",
@@ -248,12 +248,12 @@ export const projects: Project[] = [
     ],
     tags: [
       "TypeScript",
-      "React",
       "Electron",
       "SQLite",
-      "PostgreSQL/pgvector",
       "OpenAI API",
-      "AI Engineering",
+      "LangChain",
+      "LangGraph",
+      "PostgreSQL/pgvector",
       "RAG",
     ],
     links: [
@@ -624,6 +624,8 @@ export const skillGroups = [
       "Electron",
       "OpenAI API",
       "Zod",
+      "LangChain",
+      "LangGraph",
       "Docker",
       "Microsoft Azure",
       "Azure Blob Storage",
@@ -658,6 +660,8 @@ export const skillGroups = [
       "Web Security",
       "Machine Learning & AI",
       "AI Engineering",
+      "AI Agents",
+      "Tool Calling",
       "Prompt Engineering",
       "Retrieval-Augmented Generation",
       "Automotive Software",

@@ -31,6 +31,8 @@ const projectOnlyTagGroups: Record<string, SkillGroupLabel> = {
   Alembic: "Frameworks & Tools",
   WebSockets: "Frameworks & Tools",
   Electron: "Frameworks & Tools",
+  LangChain: "Frameworks & Tools",
+  LangGraph: "Frameworks & Tools",
   "Chrome Extensions": "Frameworks & Tools",
   "Manifest V3": "Frameworks & Tools",
   "GitHub API": "Frameworks & Tools",

@@ -540,9 +540,11 @@ export const jobTrackerStory: CaseStudyStory = {
 };
 
 export const zdashStory: CaseStudyStory = {
-  discipline: "AI engineering & RAG",
+  discipline: "AI engineering, agent workflows & RAG",
+  origin:
+    "ZDash started with my own car. I was using an outdated diagnostics program to read ECU data, then feeding those readings into ChatGPT to help me understand the problem and work through repairs. Moving information between the two tools gave me the idea: build a diagnostics app that connects directly to the ECU and includes an AI agent that can investigate the data.",
   introduction:
-    "A CONSULT-I diagnostics workspace with an AI assistant that connects vehicle context to cited service-manual evidence.",
+    "That became ZDash, a Windows diagnostics app for Nissan and Infiniti CONSULT-I vehicles. I built an OpenAI-powered diagnostic agent with hybrid service-manual retrieval, schema-defined LangChain tools, LangGraph investigation control, and browser-based parts research.",
   preview: {
     src: "/images/projects/zdash-ai-chatbot.jpg",
     alt: "ZDash AI chatbot with vehicle context and a sample diagnostic conversation",
@@ -550,48 +552,65 @@ export const zdashStory: CaseStudyStory = {
       "Local chatbot preview with simulated vehicle context. Manual retrieval is a development prototype.",
   },
   problem:
-    "A fault code alone rarely explains what to inspect next. Useful diagnostics need live observations, vehicle history, and the right service-manual pages. I’m building ZDash to bring those sources into one workspace without giving an AI model unrestricted control.",
+    "A useful diagnostic assistant needs more than a fault code and a generated explanation. It needs relevant vehicle history, fresh ECU observations, applicable service-manual evidence, and follow-up checks from the driver. I built ZDash’s AI workflow to gather that information through controlled tools, validate the evidence behind its answers, and preserve investigation progress across messages and application restarts.",
   built: [
     {
-      title: "The desktop diagnostics workspace.",
-      body: "Electron, React, and TypeScript connect CONSULT-I telemetry, recordings, maintenance history, and vehicle-specific conversations. SQLite keeps the local records durable.",
+      title: "Hybrid RAG over factory service manuals.",
+      body: "Prepared 83 Z32 manuals covering 8,618 pages. OpenAI’s text-embedding-3-small and PostgreSQL/pgvector combine semantic retrieval with full-text search. Retrieved passages retain manual year, section, and page metadata for citations.",
     },
     {
-      title: "An OpenAI assistant grounded in context.",
-      body: "GPT-5.4 mini through Responses receives the question, vehicle profile, recent observations, and retrieved excerpts instead of answering from the question alone.",
+      title: "A tool-using diagnostic agent.",
+      body: "Integrated GPT-5.4 mini through OpenAI Responses with selective access to vehicle details, fault codes, telemetry, recordings, maintenance, and other ownership records. LangChain’s schema-defined tools execute diagnostic retrieval, giving the model access to relevant information without sending the entire workspace upfront.",
     },
     {
-      title: "A hybrid RAG prototype.",
-      body: "Prepared 83 Z32 manuals covering 8,618 pages. text-embedding-3-small and PostgreSQL/pgvector combine semantic search with full-text search; passages retain year, section, and page citations.",
+      title: "Fresh ECU evidence.",
+      body: "Added controlled access to one fresh, read-only engine fault scan and up to four telemetry snapshots per message. Results expose timestamps, units, freshness, channel support, missing values, and simulator labels. Application code checks the active vehicle and connection before and after operations.",
+    },
+    {
+      title: "Browser-based parts research.",
+      body: "Integrated OpenAI Decisions to select actions from observed browser controls, with Electron validating and executing those actions. LangChain’s structured-output parser processes extracted product data before grounding and fitment checks. Saved product cards retain inspected links, source quotes, available prices and part numbers, and missing application details.",
+    },
+    {
+      title: "Persistent LangGraph investigations.",
+      body: "Implemented preparation, assessment, tool execution, answer, and waiting stages. A driver-check tool saves a specific question and pauses the investigation; the next reply resumes it with fresh permissions and runtime checks. SQLite checkpoints survive restarts and encrypted backup/restore.",
     },
   ],
   decisions: [
     {
-      title: "Use two retrieval signals.",
-      body: "Symptoms need semantic matching; fault codes and component names need exact terms. Reciprocal-rank fusion combines both result sets, keeping full-text fallback available if embeddings fail.",
+      title: "Combine semantic and exact-term retrieval.",
+      body: "Symptom descriptions benefit from semantic matching, while fault codes and component names need exact terms. Reciprocal-rank fusion combines both rankings, with full-text fallback when embeddings are unavailable.",
     },
     {
-      title: "Keep applicability visible.",
-      body: "Exact-year evidence comes first. Adjacent-year fallback carries a warning. Citation checks reject invented reference numbers, while flagged and unreviewed pages stay outside retrieval.",
+      title: "Give LangChain and LangGraph distinct responsibilities.",
+      body: "LangChain handles diagnostic tool schemas and structured product parsing. LangGraph controls execution stages, saved state, and pause/resume behavior. Grounding, permissions, and fitment remain application-enforced checks.",
     },
     {
-      title: "Validate proposals before writes.",
-      body: "Zod validates structured vehicle-data and expense proposals. The user reviews supported changes before application code applies them. The assistant has no unrestricted database or ECU command access.",
+      title: "Enforce permissions outside the model.",
+      body: "Tool availability depends on the request: diagnostics, shopping, records, or a combination. Shopping-only requests cannot access ECU tools. Explicit exclusions and permissions are checked again before execution. Browser research blocks purchasing, sign-in, uploads, and downloads.",
     },
     {
-      title: "Keep the workspace useful without cloud AI.",
-      body: "A deterministic local fallback uses captured observations when provider access fails. Local records, recordings, and telemetry remain usable independently of the assistant.",
+      title: "Validate evidence beyond its schema.",
+      body: "Structured output establishes a usable shape; it does not establish factual support. Manual citation checks reject invented references, including references written in prose. Product grounding preserves inspected evidence, while local fitment rules check year, chassis, exact engine, and applicable restrictions.",
+    },
+    {
+      title: "Bound execution and define recovery.",
+      body: "Investigations allow eight tool rounds, sixteen executions, and four manual searches, with request deadlines. Interrupted ECU and browser operations are not automatically replayed. Unsaved results remain unknown, while completed checkpoints support continuation. A deterministic local fallback remains available when cloud AI fails.",
     },
   ],
   learned:
-    "I learned that RAG quality starts with data preparation and source metadata. Retrieval relevance, citation validity, and factual support are separate checks. Tool schemas help describe a change; permissions and user review control whether it happens.",
+    "I learned to build an AI workflow around explicit evidence and state. Retrieval relevance, citation validity, and factual support require separate checks. Tool schemas define inputs, while application code controls access and validates results. Persistent investigations also require clear recovery rules: saving a conversation does not guarantee that every interrupted operation produced a durable result.",
   evidence:
-    "Retrieval tests cover rank fusion, year preference, fallback, and page exclusions. The corpus size is not an accuracy benchmark, and a valid citation does not prove an answer correct. Approved public sources, grounding evaluation, gateway authentication, and representative physical ECU testing remain release work.",
+    "Verified 122 tests, 17 UI workflows, build/typecheck, persistence, encrypted backup/restore, and browser behavior. These checks demonstrate implemented workflows; they do not establish diagnostic accuracy or physical-car reliability. Physical-car and packaged-Windows acceptance remain open. Supplier coverage is incomplete, and a process crash during browser research can lose listings collected before the tool returns. Manual retrieval remains a development prototype; the Z32 corpus does not establish coverage for other vehicles.",
+  nextSteps:
+    "Moving forward, I’m working on adding mobile and Apple CarPlay support to bring ZDash’s diagnostics and AI-assisted workflows into more accessible, in-car experiences.",
   facts: [
-    { label: "Assistant default", value: "GPT-5.4 mini · OpenAI Responses" },
+    { label: "Generation", value: "GPT-5.4 mini · OpenAI Responses" },
+    { label: "Browser decisions", value: "OpenAI Decisions · Electron execution" },
+    { label: "Tooling", value: "LangChain tools and structured-output parsing" },
+    { label: "Orchestration", value: "LangGraph · SQLite checkpoints" },
     {
       label: "Retrieval",
-      value: "text-embedding-3-small · PostgreSQL/pgvector",
+      value: "text-embedding-3-small · PostgreSQL/pgvector · hybrid search",
     },
   ],
   details: {

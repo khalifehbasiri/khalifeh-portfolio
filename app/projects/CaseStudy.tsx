@@ -10,6 +10,7 @@ import styles from "./case-study.module.css";
 
 export type CaseStudyStory = {
   discipline: string;
+  origin?: string;
   introduction: string;
   preview: { src: string; alt: string; caption: string };
   problem: string;
@@ -17,6 +18,7 @@ export type CaseStudyStory = {
   decisions: { title: string; body: string }[];
   learned: string;
   evidence: string;
+  nextSteps?: string;
   facts?: { label: string; value: string }[];
   details?: { title: string; content: ReactNode };
 };
@@ -98,6 +100,9 @@ export function CaseStudy({
             <h1 id="case-study-title">{project.title}</h1>
             <ProjectStatus status={project.status} />
           </div>
+          {story.origin ? (
+            <p className={styles.introduction}>{story.origin}</p>
+          ) : null}
           <p className={styles.introduction}>{story.introduction}</p>
           <div className={styles.actions}>
             {actions.map((action) => (
@@ -158,6 +163,12 @@ export function CaseStudy({
                 </div>
               </details>
             )}
+            {story.nextSteps ? (
+              <section className={styles.evidence} aria-labelledby="next-steps-title">
+                <h2 id="next-steps-title">What’s next</h2>
+                <p>{story.nextSteps}</p>
+              </section>
+            ) : null}
             <Link className={styles.returnLink} href="/projects">
               <span aria-hidden="true">←</span> Back to projects
             </Link>
