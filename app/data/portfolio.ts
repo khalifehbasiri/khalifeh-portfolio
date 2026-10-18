@@ -70,7 +70,7 @@ export const contact = {
 };
 
 export const profileSummary =
-  "Software developer building focused on Python and TypeScript applications across desktop, full-stack, and applied AI. I’ve delivered government tools, shipped responsive Next.js products used by real customers, and built AI workflows with validation, human review, and recovery.";
+  "I’m Khalifeh Basiri, a software developer based in Ottawa, Ontario. I build Python and TypeScript applications across desktop software, full-stack web development, and applied AI. I’ve delivered government tools, shipped responsive Next.js products used by real customers, and built AI workflows with validation, human review, and recovery.";
 
 export const projects: Project[] = [
   {

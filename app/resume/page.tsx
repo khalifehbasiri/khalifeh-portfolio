@@ -1,60 +1,135 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { resume } from "../data/resume";
+import styles from "./resume.module.css";
 
-const resumePath = "/Khalifeh_Basiri_Resume.pdf";
-
-export const metadata = {
+export const metadata: Metadata = {
   title: "Resume - Khalifeh Basiri",
-  description: "Preview and download Khalifeh Basiri's resume.",
+  description: "Read Khalifeh Basiri’s resume, including education, work experience, projects, and technical skills, or download the PDF.",
+  alternates: { canonical: "/resume" },
+  openGraph: {
+    title: "Resume - Khalifeh Basiri",
+    description: "Education, work experience, projects, and technical skills. Read online or download the PDF.",
+    url: "/resume",
+    images: ["/opengraph-image"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Resume - Khalifeh Basiri",
+    description: "Education, work experience, projects, and technical skills. Read online or download the PDF.",
+    images: ["/opengraph-image"],
+  },
 };
 
-export default function ResumePage() {
+function Highlights({ items }: { items: string[] }) {
   return (
-    <main className="min-h-screen bg-background text-foreground">
-      <section className="mx-auto flex min-h-screen max-w-5xl flex-col px-6 py-8 md:h-screen">
-        <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-          <div>
-            <Link
-              href="/"
-              className="font-mono text-sm text-muted transition-colors hover:text-accent"
-            >
-              Back to portfolio
-            </Link>
-            <h1 className="mt-4 text-3xl font-semibold tracking-tight">
-              Khalifeh Basiri Resume
-            </h1>
-          </div>
+    <ul className={styles.highlights}>
+      {items.map((item) => <li key={item}>{item}</li>)}
+    </ul>
+  );
+}
 
-          <a
-            href={resumePath}
-            download
-            className="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
-          >
-            Download PDF
-          </a>
-        </div>
+export default function ResumePage() {
+  const phoneDigits = resume.phone.replace(/\D/g, "");
+  const phoneNumber = phoneDigits.length === 10 ? `+1${phoneDigits}` : `+${phoneDigits}`;
+  return (
+    <main className={styles.page}>
+      <nav className={styles.toolbar} aria-label="Resume actions">
+        <Link href="/" className={styles.backLink}>
+          <span aria-hidden="true">← </span>Back to portfolio
+        </Link>
+        <a className={styles.download} href="/Khalifeh_Basiri_Resume.pdf" download="Khalifeh_Basiri_Resume.pdf">
+          Download PDF<span aria-hidden="true"> ↓</span>
+        </a>
+      </nav>
 
-        <div className="min-h-[70vh] flex-1 overflow-hidden rounded-lg border border-border bg-surface md:min-h-0">
-          <object
-            data={`${resumePath}#toolbar=1&navpanes=0`}
-            type="application/pdf"
-            className="h-full min-h-[70vh] w-full md:min-h-0"
-          >
-            <div className="flex min-h-[70vh] flex-col items-center justify-center gap-4 px-6 text-center">
-              <p className="max-w-md text-muted">
-                This browser cannot preview the PDF inline. You can still
-                download it directly.
-              </p>
-              <a
-                href={resumePath}
-                download
-                className="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
-              >
-                Download PDF
-              </a>
+      <article id="resume-document" aria-label="Khalifeh Basiri resume">
+        <header className={styles.header}>
+          <h1>{resume.name}</h1>
+          <p className={styles.contact}>
+            <span>{resume.location}</span><span aria-hidden="true"> | </span>
+            <a href={`tel:${phoneNumber}`}>{resume.phone}</a><span aria-hidden="true"> | </span>
+            <a href={`mailto:${resume.email}`}>{resume.email}</a>
+          </p>
+          <p className={styles.profiles}>
+            {resume.profiles.map((profile, index) => (
+              <span key={profile.href}>
+                {index > 0 ? <span aria-hidden="true"> | </span> : null}
+                <a href={profile.href}>{profile.label}</a>
+              </span>
+            ))}
+          </p>
+        </header>
+
+        <section className={styles.section} aria-labelledby="resume-education">
+          <h2 id="resume-education">Education</h2>
+          {resume.education.map((entry) => (
+            <div key={entry.school + entry.degree} className={styles.entry}>
+              <div className={styles.row}>
+                <h3>{entry.school}</h3>
+                <span className={styles.secondary}>{entry.location}</span>
+              </div>
+              <div className={styles.row}>
+                <p>{entry.degree}</p>
+                <span className={styles.secondary}>{entry.year}</span>
+              </div>
             </div>
-          </object>
-        </div>
-      </section>
+          ))}
+        </section>
+
+        <section className={styles.section} aria-labelledby="resume-experience">
+          <h2 id="resume-experience">Work Experience</h2>
+          {resume.experience.map((employer) => (
+            <div key={employer.company} className={styles.entry}>
+              <div className={styles.row}>
+                <h3>{employer.href ? <a href={employer.href}>{employer.company}</a> : employer.company}</h3>
+                <span className={styles.secondary}>{employer.location}</span>
+              </div>
+              {employer.positions.map((position) => (
+                <div key={position.role} className={styles.position}>
+                  <div className={styles.row}>
+                    <h4>{position.role}</h4>
+                    <span className={styles.secondary}>{position.period}</span>
+                  </div>
+                  <Highlights items={position.highlights} />
+                </div>
+              ))}
+            </div>
+          ))}
+        </section>
+
+        <section className={styles.section} aria-labelledby="resume-projects">
+          <h2 id="resume-projects">Projects</h2>
+          {resume.projects.map((project) => (
+            <div key={project.name} className={styles.entry}>
+              <h3>{project.name}</h3>
+              <div className={styles.projectMeta}>
+                <p>{project.technologies}</p>
+                <p className={styles.projectLinks}>
+                  {project.links.map((link, index) => (
+                    <span key={link.href}>
+                      {index > 0 ? <span aria-hidden="true"> | </span> : null}
+                      <a href={link.href}>{link.label}</a>
+                    </span>
+                  ))}
+                </p>
+              </div>
+              <Highlights items={project.highlights} />
+            </div>
+          ))}
+        </section>
+
+        <section className={styles.section} aria-labelledby="resume-skills">
+          <h2 id="resume-skills">Technical Skills</h2>
+          <dl className={styles.skills}>
+            {resume.skills.map((skill) => (
+              <div key={skill.label}>
+                <dt>{skill.label}:</dt>{" "}<dd>{skill.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      </article>
     </main>
   );
 }

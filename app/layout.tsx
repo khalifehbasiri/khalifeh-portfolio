@@ -18,11 +18,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://kbasiri.com"),
   title: "Khalifeh Basiri - Software Developer",
   description:
-    "Portfolio of Khalifeh Basiri - software developer building Python, Azure, machine learning, and full-stack web applications.",
+    "Khalifeh Basiri is a software developer in Ottawa, Ontario, building Python and TypeScript applications across desktop software, full-stack web development, and applied AI.",
   openGraph: {
     title: "Khalifeh Basiri - Software Developer",
     description:
-      "Software developer building Python, Azure, machine learning, and full-stack web applications.",
+      "Ottawa-based software developer building Python and TypeScript applications across desktop software, full-stack web development, and applied AI.",
     url: "/",
     siteName: "Khalifeh Basiri",
     images: [
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Khalifeh Basiri - Software Developer",
     description:
-      "Software developer building Python, Azure, machine learning, and full-stack web applications.",
+      "Ottawa-based software developer building Python and TypeScript applications across desktop software, full-stack web development, and applied AI.",
     images: ["/opengraph-image"],
   },
 };

@@ -3,10 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "npm run resume:sync",
     "dev": "next dev",
+    "prebuild": "npm run resume:sync",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "resume:sync": "node scripts/sync-resume.mjs",
+    "test": "node --test scripts/sync-resume.test.mjs"
+  },
+  "engines": {
+    "node": ">=22.13.0"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
@@ -21,6 +28,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.7",
+    "pdfjs-dist": "6.4.299",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
