@@ -62,13 +62,6 @@
   margin: auto;
   padding: 48px 24px 72px;
 }
-.eyebrow {
-  margin-bottom: 14px;
-  font:
-    11px/1.5 var(--font-geist-mono),
-    monospace;
-  color: var(--accent);
-}
 .titleRow {
   display: flex;
   flex-wrap: wrap;

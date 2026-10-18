@@ -95,7 +95,6 @@ export function CaseStudy({
       </header>
       <main className={styles.main}>
         <section className={styles.hero} aria-labelledby="case-study-title">
-          <p className={styles.eyebrow}>{story.discipline} / Case study</p>
           <div className={styles.titleRow}>
             <h1 id="case-study-title">{project.title}</h1>
             <ProjectStatus status={project.status} />

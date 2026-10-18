@@ -5,7 +5,6 @@ export function Skills() {
   return (
     <section id="skills" className="py-20">
       <div className="mx-auto max-w-5xl px-6">
-        <p className="mb-2 font-mono text-sm text-accent">Tech Stack</p>
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">
           Skills
         </h2>

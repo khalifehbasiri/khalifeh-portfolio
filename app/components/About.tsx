@@ -2,8 +2,6 @@ export function About() {
   return (
     <section id="about" className="py-20">
       <div className="mx-auto max-w-5xl px-6">
-        <p className="mb-2 font-mono text-sm text-accent">About Me</p>
-
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">
           A bit more
         </h2>

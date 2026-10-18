@@ -104,7 +104,6 @@ export function Experience() {
       className="border-t border-border/60 bg-surface/40 py-20"
     >
       <div className="mx-auto max-w-5xl px-6">
-        <p className="mb-2 font-mono text-sm text-accent">Background</p>
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">
           Experience
         </h2>
