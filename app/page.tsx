@@ -6,6 +6,7 @@ import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { Projects } from "./components/Projects";
+import { PortfolioMotion } from "./components/PortfolioMotion";
 import { Skills } from "./components/Skills";
 import { contact, profileSummary, projects, socialLinks } from "./data/portfolio";
 
@@ -39,14 +40,14 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(profile).replace(/</g, "\\u003c") }}
       />
       <Header />
-      <main>
+      <PortfolioMotion>
         <Hero />
         <Projects projects={projects} />
         <Skills />
         <Experience />
         <About />
         <Contact />
-      </main>
+      </PortfolioMotion>
       <Footer />
     </>
   );
