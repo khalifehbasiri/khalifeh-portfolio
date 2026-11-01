@@ -20,6 +20,8 @@ export type CaseStudyStory = {
   evidence: string;
   nextSteps?: string;
   facts?: { label: string; value: string }[];
+  demos?: { title: string; description: string; href: string; image: string }[];
+  architecture?: { introduction: string; steps: { title: string; body: string }[] };
   details?: { title: string; content: ReactNode };
 };
 
@@ -132,6 +134,26 @@ export function CaseStudy({
             <figcaption>{story.preview.caption}</figcaption>
           </figure>
         </section>
+        {story.demos ? (
+          <section className={styles.demos} aria-labelledby="demos-title">
+            <h2 id="demos-title">See the simulator in action</h2>
+            <p>Four team-recorded walkthroughs, from dose delivery to interruption and recovery. Opens on YouTube.</p>
+            <div className={styles.demoGrid}>
+              {story.demos.map((demo) => (
+                <a key={demo.href} className={styles.demoCard} href={demo.href} target="_blank" rel="noopener noreferrer">
+                  <div className={styles.demoImage}>
+                    <Image src={demo.image} alt="" fill sizes="(min-width: 800px) 220px, 35vw" className={styles.image} />
+                    <span className={styles.play} aria-hidden="true">▶</span>
+                  </div>
+                  <div className={styles.demoCopy}>
+                    <h3>{demo.title} <span aria-hidden="true">↗</span></h3>
+                    <p>{demo.description}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+        ) : null}
         <div className={styles.readingLayout}>
           <div className={styles.story}>
             <section id="overview" className={styles.section}>
@@ -142,6 +164,17 @@ export function CaseStudy({
               <h2>What I built</h2>
               <StoryList items={story.built} />
             </section>
+            {story.architecture ? (
+              <section className={styles.section} aria-labelledby="architecture-title">
+                <h2 id="architecture-title">Inside the C++ / Qt architecture</h2>
+                <p>{story.architecture.introduction}</p>
+                <ol className={styles.architectureFlow}>
+                  {story.architecture.steps.map((step) => (
+                    <li key={step.title}><strong>{step.title}</strong><p>{step.body}</p></li>
+                  ))}
+                </ol>
+              </section>
+            ) : null}
             <section id="decisions" className={styles.section}>
               <h2>Why I built it this way</h2>
               <StoryList items={story.decisions} />

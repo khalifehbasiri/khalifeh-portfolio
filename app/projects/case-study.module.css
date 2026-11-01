@@ -161,6 +161,81 @@
   align-items: start;
   gap: 64px;
 }
+.demos {
+  margin-bottom: 40px;
+}
+.demos h2 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.demos > p {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+.demoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+.demoCard {
+  display: flex;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+}
+.demoCard:hover {
+  border-color: var(--accent);
+}
+.demoImage {
+  position: relative;
+  flex: 0 0 38%;
+  min-height: 140px;
+}
+.play {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: #0004;
+  font-size: 24px;
+  text-shadow: 0 2px 8px #000;
+}
+.demoCopy {
+  padding: 18px;
+}
+.demoCopy h3 {
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 600;
+}
+.demoCopy p {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+}
+.architectureFlow {
+  margin-top: 18px;
+  padding-left: 26px;
+  border-left: 1px solid var(--accent);
+  list-style: decimal;
+}
+.architectureFlow li {
+  padding: 0 0 18px 6px;
+}
+.architectureFlow li:last-child {
+  padding-bottom: 0;
+}
+.architectureFlow li::marker {
+  color: var(--accent);
+  font-family: var(--font-geist-mono), monospace;
+}
 .story {
   min-width: 0;
   color: #b6b6c0;
@@ -285,6 +360,9 @@
   margin-top: 30px;
 }
 @media (max-width: 799px) {
+  .demoGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
   .screenshotGrid {
     grid-template-columns: minmax(0, 1fr);
   }

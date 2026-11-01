@@ -270,15 +270,15 @@ export const projects: Project[] = [
     id: "tandem-insulin-pump-simulator",
     title: "Tandem t:slim X2 Insulin Pump Simulator",
     summary:
-      "An educational C++/Qt simulation of insulin delivery and glucose changes, with boluses, basal adjustments, and safety constraints.",
-    summaryHighlights: ["simulation", "safety constraints"],
-    role: "C++ / Qt developer",
+      "C++11 / Qt dosing and automated-control logic: validated bolus calculations, glucose-driven rate adjustments, and guarded suspend/resume behavior.",
+    summaryHighlights: ["C++11 / Qt", "automated-control logic"],
+    role: "C++ / Qt developer · dosing & control",
     contribution:
       "Owned dosing logic, limits, alerts, and suspend/resume behavior in a four-person team.",
     status: "Completed",
     outcome: {
-      headline: "4 scenario walkthroughs",
-      detail: "Dosing, profiles, battery safety, and cartridge alerts.",
+      headline: "Event-driven C++ domain logic",
+      detail: "BolusManager + ControlSystem, demonstrated across 4 team walkthroughs.",
     },
     description:
       "Engineered bolus and automated insulin-delivery logic within a four-person C++/Qt team, including carbohydrate and correction calculations, manual and extended dosing, CGM-driven basal adjustments, safety limits, suspend/resume behavior, and alerts.",
@@ -311,12 +311,13 @@ export const projects: Project[] = [
         fit: "contain",
       },
     ],
-    tags: ["C++", "Qt", "Qt Charts", "SQLite", "UML"],
+    tags: ["C++11", "Qt", "Signals / Slots", "Qt Charts", "Qt SQL", "SQLite", "UML"],
     links: [
       {
         label: "GitHub",
         href: "https://github.com/khalifehbasiri/Tandem-t-slim-Insulin-Pump-Simulator",
       },
+      { label: "Watch Demo", href: "https://youtu.be/tJMpMrLWkEg" },
       { label: "Case Study", href: "/projects/tandem-insulin-pump-simulator" },
     ],
     featured: true,

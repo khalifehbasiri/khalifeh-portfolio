@@ -1,9 +1,9 @@
 import type { CaseStudyStory } from "./CaseStudy";
 
 export const tandemStory: CaseStudyStory = {
-  discipline: "Object-oriented design & simulation",
+  discipline: "C++11 · Qt · Object-oriented systems",
   introduction:
-    "A four-person C++/Qt course project that makes insulin-delivery workflows, glucose changes, and safety events visible in an educational desktop simulation.",
+    "I built the dosing and automated-control logic behind a C++11 / Qt insulin-pump simulator: turning glucose readings and user inputs into validated doses, delivery-state transitions, and escalating alerts. Developed with a four-person team at Carleton University.",
   preview: {
     src: "/images/projects/tandem-insulin-pump-simulator.jpg",
     alt: "Educational insulin pump simulator showing a glucose chart with an extended-delivery interval",
@@ -11,21 +11,35 @@ export const tandemStory: CaseStudyStory = {
       "A frame from the team's bolus demonstration. The highlighted interval shows extended delivery in the simulated glucose history.",
   },
   problem:
-    "An insulin-pump simulation needs more than a familiar interface: inputs, delivery state, glucose trends, alerts, and history must agree. Our COMP 3004 team built an interactive Qt application to explore those workflows. My focus was the dosing logic and automated-control path.",
+    "A dose calculation is only useful if the rest of the system can deliver it consistently. Our COMP 3004 project had to coordinate user confirmation, changing glucose readings, delivery interruptions, alerts, charts, and persisted history. My responsibility was the C++ domain logic at the center of those workflows: deciding how much insulin to deliver, when to adjust it, and when delivery must stop or remain suspended.",
   built: [
     {
-      title: "Bolus calculation and confirmation.",
-      body: "I designed BolusManager for carbohydrate and correction components, detailed previews, manual delivery, input validation, and configurable limits, then connected delivery to the body/glucose simulator.",
+      title: "BolusManager: from inputs to a confirmed dose.",
+      body: "I designed the carbohydrate and correction calculations, using the active personal profile to produce a detailed dose preview. I built manual-bolus interface logic, correction-dose confirmation, input validation, and configurable safety limits, then integrated manual delivery with the body/glucose simulator.",
     },
     {
-      title: "Glucose-driven control.",
-      body: "I developed ControlSystem to respond to simulated CGM readings, adjust the insulin rate, handle glucose trends, and manage suspension and resumption with safety checks.",
+      title: "ControlSystem: glucose-driven delivery decisions.",
+      body: "I designed the automated-control flow around simulated continuous glucose monitor (CGM) readings. It evaluates glucose levels and trends, adjusts the background insulin rate, and manages automatic suspension and resumption against configured thresholds and delivery-state guards.",
     },
     {
-      title: "Alerts and shared integration.",
-      body: "I implemented insulin- and glucose-related alert definitions and helped connect control results to the interface and history. Extended-bolus integration was shared with Julien Larivière-Chartier; profiles, charts, battery/cartridge management, and persistence were team contributions.",
+      title: "Alert definitions and escalation.",
+      body: "I implemented definitions and escalation behavior for glucose excursions, rapid rises or drops, potential insulin overdose or underdose, system faults, and failed delivery resumption. I connected insulin-control results across the interface and backend so decisions could drive delivery state, visualization, and event history.",
+    },
+    {
+      title: "Integration across a four-person Qt application.",
+      body: "I helped integrate extended-bolus behavior with Julien Larivière-Chartier, who shared the final delivery and visualization path. The broader application brought together teammates’ profile management, body simulation, charting, battery/cartridge handling, alert UI, and SQLite persistence.",
     },
   ],
+  architecture: {
+    introduction:
+      "The application separates presentation, domain logic, simulation, and infrastructure into cooperating QObject-based components. Qt signals and slots connect user actions and simulated readings to my dosing/control components, then carry their results to the rest of the application.",
+    steps: [
+      { title: "Inputs and profile", body: "BolusWindow supplies carbohydrate and glucose inputs; BodySimulator emits glucose readings and direction changes. The active PersonalProfile supplies dosing parameters." },
+      { title: "C++ domain decisions — my focus", body: "BolusManager validates and previews a requested dose. ControlSystem evaluates readings, trends, limits, and delivery availability to adjust, suspend, or resume insulin delivery." },
+      { title: "Simulation and safety feedback", body: "Delivery updates the body/glucose simulation. Rejected inputs, unsafe glucose conditions, and blocked resumption enter the alert path; subsequent readings feed back into automated control." },
+      { title: "Visible, recorded outcomes", body: "Qt Charts visualizes glucose history and delivery intervals. Qt SQL / SQLite persists bolus events, basal-rate changes, and warnings for review in the records and alert-log windows." },
+    ],
+  },
   decisions: [
     {
       title: "Separate a suggested dose from delivery.",
@@ -33,7 +47,7 @@ export const tandemStory: CaseStudyStory = {
     },
     {
       title: "Treat suspension as a delivery state.",
-      body: "Glucose control must respect whether delivery is available. Suspension stops adjustments; resumption checks the current conditions, including external battery and cartridge state, before delivery can continue.",
+      body: "A recovering glucose reading is not enough to restart delivery. ControlSystem checks a delivery-state provider so an empty cartridge or unavailable battery can still block resumption. This keeps recovery dependent on the whole system state.",
     },
     {
       title: "Connect components through Qt signals and slots.",
@@ -45,29 +59,31 @@ export const tandemStory: CaseStudyStory = {
     },
   ],
   learned:
-    "I practiced object-oriented domain design, event-driven Qt integration, and reasoning about state transitions. A calculation is only one part of a workflow: confirmation, invalid input, interruption, and recovery need equally clear behavior. Integrating shared components also taught me to make ownership and event contracts explicit.",
+    "This project pushed my C++ work beyond isolated algorithms into a stateful desktop system. I learned to separate calculation from side effects, define responsibilities across QObject-based components, and reason about interruption and recovery through state machines. Integrating with three teammates made signal/slot contracts and shared delivery state as important as the calculation itself.",
   evidence:
-    "Four recorded walkthroughs cover profiles and automatic delivery, bolus behavior, battery shutdown, and cartridge alerts. The public repository contains documentation, UML diagrams, and demonstrations; the course implementation remains private. This is an educational simulation without clinical validation.",
+    "The team used scenario-driven acceptance testing in the running Qt application, checking user actions, simulated state, alerts, and stored records together. Our final submission included a 23-item requirements traceability matrix, UML class and state-machine diagrams, sequence diagrams, and Doxygen documentation. Four final demonstrations show successful-use and safety scenarios. The public repository shares design documentation and demos; the course source remains private. This is an educational simulation without clinical validation.",
   facts: [
     { label: "Team", value: "Four contributors · COMP 3004 · Carleton University" },
     { label: "My focus", value: "BolusManager, ControlSystem, and dosing alerts" },
     { label: "Simulation clock", value: "Five simulated minutes per real second" },
+    { label: "Design & verification", value: "UML · state machines · 23-item requirements traceability matrix" },
+  ],
+  demos: [
+    { title: "Bolus delivery & glucose response", description: "Start here for my dosing work: manual, extended, and automatic boluses, graph highlights, alerts, and event history.", href: "https://youtu.be/tJMpMrLWkEg", image: "/images/projects/tandem-insulin-pump-simulator.jpg" },
+    { title: "Profiles & automated delivery", description: "Create and activate personal profiles, schedule delivery settings, and review recorded background-rate changes.", href: "https://youtu.be/dCezgP-P2d4", image: "/images/projects/tandem-profile.jpg" },
+    { title: "Battery shutdown & recovery", description: "Follow low and critical battery alerts through automatic shutdown, restart, and persisted warning history.", href: "https://youtu.be/DuQRoASgmRc", image: "/images/projects/tandem-battery.jpg" },
+    { title: "Empty cartridge & delivery stop", description: "See how the integrated system handles an empty cartridge, stops insulin delivery, and records warnings.", href: "https://youtu.be/sf8nXzPyNlg", image: "/images/projects/tandem-cartridge.jpg" },
   ],
   details: {
-    title: "Watch the scenarios and explore the design",
+    title: "Explore the engineering documentation",
     content: (
       <>
-        <ul className="list-disc pl-5">
-          <li><a href="https://youtu.be/dCezgP-P2d4" target="_blank" rel="noopener noreferrer">Profiles and automatic delivery ↗</a></li>
-          <li><a href="https://youtu.be/tJMpMrLWkEg" target="_blank" rel="noopener noreferrer">Manual, extended, and automatic bolus delivery ↗</a></li>
-          <li><a href="https://youtu.be/DuQRoASgmRc" target="_blank" rel="noopener noreferrer">Battery alerts, shutdown, and restart ↗</a></li>
-          <li><a href="https://youtu.be/sf8nXzPyNlg" target="_blank" rel="noopener noreferrer">Empty cartridge and stopped delivery ↗</a></li>
-        </ul>
         <p>
           <a href="https://github.com/khalifehbasiri/Tandem-t-slim-Insulin-Pump-Simulator/blob/main/docs/architecture.md" target="_blank" rel="noopener noreferrer">Architecture and UML diagrams ↗</a>
           {" · "}
           <a href="https://github.com/khalifehbasiri/Tandem-t-slim-Insulin-Pump-Simulator/blob/main/CONTRIBUTIONS.md" target="_blank" rel="noopener noreferrer">Team contribution breakdown ↗</a>
         </p>
+        <p><a href="https://github.com/khalifehbasiri/Tandem-t-slim-Insulin-Pump-Simulator/blob/main/docs/verification-and-traceability.md" target="_blank" rel="noopener noreferrer">Scenario-based verification and requirements traceability ↗</a></p>
       </>
     ),
   },
