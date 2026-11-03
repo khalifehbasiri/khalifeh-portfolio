@@ -688,9 +688,10 @@ export const workExperience: WorkExperience[] = [
         role: "Software Developer",
         period: "Aug 2024–Dec 2025",
         highlights: [
-          "Built a bilingual Python geographic-name validator that replaced manual entry-by-entry checks with validation completed in minutes.",
-          "Expanded it into the modular Name Manager; CHS Atlantic reported that one process fell from two weeks to a few hours.",
-          "Led a three-person Agile team and worked directly with DFO clients from requirements and demos through deployment, training, and support.",
+          "Built a bilingual Python geographic-name validator using the GNBC REST API and geospatial matching, replacing manual checks with validation completed in minutes.",
+          "Expanded it into the modular Name Manager with comparison, search, and geospatial helper tools; CHS Atlantic reported one process fell from two weeks to a few hours.",
+          "Led a three-person Agile team and worked directly with clients through requirements, demos, deployment, training, and support.",
+          "Tested API, database, threading, and geospatial workflows and validated releases with users in five DFO regions and the Canadian Coast Guard.",
         ],
       },
       {
@@ -713,8 +714,8 @@ export const workExperience: WorkExperience[] = [
         role: "Frontend Developer",
         period: "Mar 2025 - May 2025",
         highlights: [
-          "Built and shipped a responsive Next.js marketing site supporting 20,000+ customers and reaching 23.9K monthly visits within four months of launch.",
-          "Implemented mobile navigation, a proxy-type selector, auto-scrolling testimonials, language-specific API examples with copy-to-clipboard, reusable components, and centralized content models.",
+          "Built and shipped Floxy’s responsive frontend using Next.js, React, TypeScript, and Tailwind CSS for a proxy infrastructure startup serving 20,000+ customers; the website reached 23.9K monthly visits within four months.",
+          "Connected frontend interfaces to existing backend APIs and organized the UI into reusable components and centralized content models, keeping product pages and language-specific API examples consistent and easy to update.",
         ],
       },
     ],
@@ -729,8 +730,9 @@ export const workExperience: WorkExperience[] = [
         role: "System Administrator Intern",
         period: "May 2023 - Aug 2023",
         highlights: [
-          "Managed Microsoft Cloud infrastructure with automated real-time backups, on-site hardware/software support, and computer configuration.",
-          "Tracked corporate financials using Excel (bank statements, payroll, taxes) and handled administrative operations including scheduling and client communications.",
+          "Configured Microsoft cloud backups for business files and supported day-to-day IT operations.",
+          "Built and configured employee computers and resolved on-site hardware, software, and connectivity issues.",
+          "Maintained financial records in Excel and supported scheduling, correspondence, and client communications.",
         ],
       },
     ],
