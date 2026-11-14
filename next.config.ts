@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   async rewrites() {
-    return ["projects", "skills", "experience", "about", "contact"].map(
+    return ["projects", "skills", "experience", "education", "about", "contact"].map(
       (section) => ({
         source: `/${section}`,
         destination: "/",

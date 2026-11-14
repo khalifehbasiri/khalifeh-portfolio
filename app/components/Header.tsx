@@ -8,6 +8,7 @@ const navItems = [
   { label: "Projects", href: "projects" },
   { label: "Skills", href: "skills" },
   { label: "Experience", href: "experience" },
+  { label: "Education", href: "education" },
   { label: "About", href: "about" },
   { label: "Contact", href: "contact" },
 ];
@@ -72,7 +73,7 @@ export function Header() {
           kbasiri<span className="text-accent">.</span>com
         </Link>
 
-        <nav aria-label="Primary navigation" className="hidden items-center gap-6 sm:flex">
+        <nav aria-label="Primary navigation" className="hidden items-center gap-4 sm:flex md:gap-6">
           {navItems.map((item) => (
             <Link
               key={item.href}

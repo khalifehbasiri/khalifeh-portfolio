@@ -63,7 +63,7 @@ export function PortfolioMotion({ children }: { children: ReactNode }) {
       const skills = root.current!.querySelector("#skills h2")?.nextElementSibling;
       if (skills) enter(skills.children, skills, { y: 24, opacity: 0.55, stagger: 0.1 });
 
-      for (const entry of root.current!.querySelectorAll("#experience .space-y-10 > div")) {
+      for (const entry of root.current!.querySelectorAll(":is(#experience, #education) .space-y-10 > div")) {
         enter(entry, entry, { x: -24, y: 0, opacity: 0.5 });
       }
 

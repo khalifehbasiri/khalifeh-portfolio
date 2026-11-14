@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { education, workExperience, type WorkExperience } from "../data/portfolio";
+import { workExperience, type WorkExperience } from "../data/portfolio";
 
 function EmployerEntry({ experience }: { experience: WorkExperience }) {
   return (
@@ -39,64 +39,6 @@ function EmployerEntry({ experience }: { experience: WorkExperience }) {
   );
 }
 
-function TimelineEntry({
-  period,
-  title,
-  subtitle,
-  location,
-  highlights,
-  image,
-  imageAlt,
-  imageFit = "contain",
-}: {
-  period: string;
-  title: string;
-  subtitle: string;
-  location: string;
-  highlights: string[];
-  image?: string;
-  imageAlt?: string;
-  imageFit?: "cover" | "contain";
-}) {
-  return (
-    <div className="grid grid-cols-[84px_1fr] gap-5 sm:grid-cols-[144px_1fr] sm:gap-8">
-      <div className="flex flex-col items-center sm:items-start">
-        {image && imageAlt ? (
-          <div className="relative size-20 overflow-hidden rounded-xl border border-border bg-surface-raised sm:size-28">
-            <Image
-              src={image}
-              alt={imageAlt}
-              fill
-              sizes="(min-width: 640px) 112px, 80px"
-              className={
-                imageFit === "cover" ? "object-cover" : "object-contain"
-              }
-            />
-          </div>
-        ) : null}
-        <p className="mt-3 text-center font-mono text-[11px] leading-relaxed text-muted sm:text-left sm:text-xs">
-          {period}
-        </p>
-      </div>
-      <div>
-        <h3 className="font-medium text-foreground">{title}</h3>
-        <p className="mt-0.5 text-sm text-accent">{subtitle}</p>
-        <p className="mt-0.5 text-xs text-muted">{location}</p>
-        <ul className="mt-3 space-y-2">
-          {highlights.map((highlight) => (
-            <li
-              key={highlight}
-              className="text-sm leading-relaxed text-muted before:mr-2 before:text-accent before:content-['->']"
-            >
-              {highlight}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
-}
-
 export function Experience() {
   return (
     <section
@@ -108,38 +50,10 @@ export function Experience() {
           Experience
         </h2>
 
-        <div className="mt-10 space-y-12">
-          <div>
-            <h3 className="mb-6 text-sm font-medium uppercase tracking-wider text-muted">
-              Work
-            </h3>
-            <div className="space-y-10">
-              {workExperience.map((item) => (
-                <EmployerEntry key={item.company} experience={item} />
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <h3 className="mb-6 text-sm font-medium uppercase tracking-wider text-muted">
-              Education
-            </h3>
-            <div className="space-y-10">
-              {education.map((item) => (
-                <TimelineEntry
-                  key={item.school}
-                  period={item.period}
-                  title={item.degree}
-                  subtitle={item.school}
-                  location={item.location}
-                  highlights={item.details}
-                  image={item.image}
-                  imageAlt={item.imageAlt}
-                  imageFit={item.imageFit}
-                />
-              ))}
-            </div>
-          </div>
+        <div className="mt-10 space-y-10">
+          {workExperience.map((item) => (
+            <EmployerEntry key={item.company} experience={item} />
+          ))}
         </div>
       </div>
     </section>
