@@ -3,7 +3,7 @@ import { education } from "../data/portfolio";
 
 export function Education() {
   return (
-    <section id="education" aria-labelledby="education-heading" className="border-t border-border/60 py-20">
+    <section id="education" aria-labelledby="education-heading" className="py-20">
       <div className="mx-auto max-w-5xl px-6">
         <h2 id="education-heading" className="text-2xl font-semibold tracking-tight text-foreground">
           Education

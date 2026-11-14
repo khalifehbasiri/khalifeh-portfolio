@@ -41,10 +41,7 @@ function EmployerEntry({ experience }: { experience: WorkExperience }) {
 
 export function Experience() {
   return (
-    <section
-      id="experience"
-      className="border-t border-border/60 bg-surface/40 py-20"
-    >
+    <section id="experience" className="py-20">
       <div className="mx-auto max-w-5xl px-6">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">
           Experience

@@ -4,10 +4,7 @@ import { EmailCopyButton } from "./EmailCopyButton";
 
 export function Contact() {
   return (
-    <section
-      id="contact"
-      className="border-t border-border/60 bg-surface/40 py-20"
-    >
+    <section id="contact" className="py-20">
       <div className="mx-auto max-w-5xl px-6">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">
           Let&apos;s connect

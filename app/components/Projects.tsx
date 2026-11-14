@@ -224,10 +224,7 @@ export function Projects({ projects }: { projects: Project[] }) {
   );
 
   return (
-    <section
-      id="projects"
-      className="border-t border-border/60 bg-surface/40 py-20"
-    >
+    <section id="projects" className="py-20">
       <div className="mx-auto max-w-5xl px-6">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">
           Projects

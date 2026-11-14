@@ -30,6 +30,19 @@ body {
   font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
 
+.portfolio-main > section {
+  background-color: var(--background);
+}
+
+.portfolio-main > section:nth-of-type(even),
+.portfolio-main + footer {
+  background-color: var(--surface);
+}
+
+.portfolio-main > section + section {
+  border-top: 1px solid var(--border);
+}
+
 ::selection {
   background: color-mix(in srgb, var(--accent) 30%, transparent);
 }

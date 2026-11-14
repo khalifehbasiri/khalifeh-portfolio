@@ -126,5 +126,5 @@ export function PortfolioMotion({ children }: { children: ReactNode }) {
     return () => media.revert();
   }, { scope: root });
 
-  return <main ref={root}>{children}</main>;
+  return <main ref={root} className="portfolio-main">{children}</main>;
 }
