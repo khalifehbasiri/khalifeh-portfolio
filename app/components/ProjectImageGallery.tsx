@@ -22,14 +22,15 @@ const getPageVisible = () => document.visibilityState === "visible";
 const serverReducedMotion = () => true;
 const serverPageVisible = () => false;
 
+export const projectImageSizes =
+  "(min-width: 1024px) 280px, (min-width: 640px) calc(50vw - 54px), calc(100vw - 84px)";
+
 export function ProjectImageGallery({
   images,
   title,
-  eager = false,
 }: {
   images: ProjectImage[];
   title: string;
-  eager?: boolean;
 }) {
   const [index, setIndex] = useState(0);
   const [hovered, setHovered] = useState(false);
@@ -105,8 +106,7 @@ export function ProjectImageGallery({
             src={image.src}
             alt={image.alt}
             fill
-            loading={eager ? "eager" : "lazy"}
-            sizes="(min-width: 640px) 352px, 84vw"
+            sizes={projectImageSizes}
             className={`${styles.image} ${image.fit === "contain" ? styles.contain : styles.cover}`}
           />
           {visible ? (
@@ -117,7 +117,7 @@ export function ProjectImageGallery({
               aria-hidden
               fill
               loading="eager"
-              sizes="(min-width: 640px) 352px, 84vw"
+              sizes={projectImageSizes}
               className={styles.preload}
             />
           ) : null}

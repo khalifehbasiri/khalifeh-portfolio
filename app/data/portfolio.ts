@@ -11,6 +11,8 @@ export type ProjectImage = {
   background?: "white" | "dark";
 };
 
+export type ProjectTopic = "teamwork" | "ai" | "real-users" | "personal-tools";
+
 export type Project = {
   id: string;
   title: string;
@@ -27,15 +29,16 @@ export type Project = {
     | "Internal";
   outcome: { headline: string; detail: string };
   description: string;
-  image: string;
-  imageAlt: string;
+  image?: string;
+  imageAlt?: string;
   imageFit?: "cover" | "contain";
   imageBackground?: "white";
   images?: ProjectImage[];
   tags: string[];
   links: ProjectLink[];
   featured?: boolean;
-  category: "work" | "personal";
+  topics?: ProjectTopic[];
+  category: "work" | "personal" | "coursework";
   /** Shown when there are no links (e.g. internal work projects). */
   note?: string;
 };
@@ -136,6 +139,7 @@ export const projects: Project[] = [
       { label: "Case Study", href: "/projects/job-tracker-ai" },
     ],
     featured: true,
+    topics: ["ai", "personal-tools"],
     category: "personal",
   },
   {
@@ -264,6 +268,7 @@ export const projects: Project[] = [
       { label: "Case Study", href: "/projects/zdash" },
     ],
     featured: true,
+    topics: ["ai", "personal-tools"],
     category: "personal",
   },
   {
@@ -311,7 +316,7 @@ export const projects: Project[] = [
         fit: "contain",
       },
     ],
-    tags: ["C++11", "Qt", "Signals / Slots", "Qt Charts", "Qt SQL", "SQLite", "UML"],
+    tags: ["C++", "Qt", "Signals / Slots", "Qt Charts", "Qt SQL", "SQLite", "UML"],
     links: [
       {
         label: "GitHub",
@@ -320,8 +325,8 @@ export const projects: Project[] = [
       { label: "Watch Demo", href: "https://youtu.be/tJMpMrLWkEg" },
       { label: "Case Study", href: "/projects/tandem-insulin-pump-simulator" },
     ],
-    featured: true,
-    category: "personal",
+    topics: ["teamwork"],
+    category: "coursework",
   },
   {
     id: "leetbridge",
@@ -393,7 +398,7 @@ export const projects: Project[] = [
         href: "/projects/leetbridge",
       },
     ],
-    featured: true,
+    topics: ["real-users", "personal-tools"],
     category: "personal",
   },
   {
@@ -448,7 +453,7 @@ export const projects: Project[] = [
       },
       { label: "Case Study", href: "/projects/sign-language-translator" },
     ],
-    featured: true,
+    topics: ["ai"],
     category: "personal",
   },
   {
@@ -495,7 +500,6 @@ export const projects: Project[] = [
       },
       { label: "Case Study", href: "/projects/collaborative-board" },
     ],
-    featured: true,
     category: "personal",
   },
   {
@@ -524,6 +528,7 @@ export const projects: Project[] = [
       },
       { label: "Case Study", href: "/projects/floxy-landing-page" },
     ],
+    topics: ["real-users"],
     category: "work",
   },
   {
@@ -554,6 +559,7 @@ export const projects: Project[] = [
       "Multithreading",
     ],
     links: [{ label: "Case Study", href: "/projects/storage-explorer" }],
+    topics: ["real-users"],
     category: "work",
     note: "Internal - DFO",
   },
@@ -585,8 +591,145 @@ export const projects: Project[] = [
       "Multithreading",
     ],
     links: [{ label: "Case Study", href: "/projects/geo-names-validator" }],
+    topics: ["teamwork", "real-users"],
     category: "work",
     note: "Internal - DFO",
+  },
+  {
+    id: "celebration-fireworks",
+    title: "Celebration Fireworks",
+    summary:
+      "A two-student computer graphics project that stages real-time particle fireworks above a procedurally generated forest.",
+    summaryHighlights: ["two-student computer graphics project", "procedurally generated forest"],
+    role: "C++ / OpenGL environment developer",
+    contribution:
+      "Built recursive tree geometry, the textured ground, and the night skybox. Integrated and tested the scene with my teammate’s particle system and camera.",
+    status: "Completed",
+    outcome: {
+      headline: "Two-person graphics team",
+      detail: "COMP 3009 at Carleton University · April 2024.",
+    },
+    description:
+      "Developed the environment for a C++ and OpenGL simulation with Dylan Tombs-Koscinski, then jointly integrated and tested the trees, ground, and skybox with his fireworks and camera.",
+    images: [
+      {
+        src: "/images/projects/celebration-fireworks-scene.webp",
+        alt: "Firework bursts above a moonlit forest in the original OpenGL simulation",
+        label: "Integrated night scene",
+      },
+      {
+        src: "/images/projects/celebration-fireworks-tree.webp",
+        alt: "Close-up of a procedurally generated tree with branching geometry and leaves",
+        label: "Procedural tree",
+        fit: "contain",
+      },
+      {
+        src: "/images/projects/celebration-fireworks-particles.webp",
+        alt: "A cloud of blue firework particles dispersing against a skybox",
+        label: "Particle system detail",
+        fit: "contain",
+      },
+    ],
+    tags: ["C++", "OpenGL", "GLSL"],
+    links: [
+      { label: "GitHub", href: "https://github.com/khalifehbasiri/Celebration-Fireworks" },
+    ],
+    topics: ["teamwork"],
+    category: "coursework",
+  },
+  {
+    id: "photo-editing-program",
+    title: "Photo Editing Program",
+    summary:
+      "A Python image editor built by four students, with color filters, edge detection, image flips, and curve drawing.",
+    summaryHighlights: ["built by four students"],
+    role: "Python developer",
+    contribution:
+      "Implemented blue-channel isolation, sepia, and vertical flipping, and co-built the interactive command interface.",
+    status: "Completed",
+    outcome: {
+      headline: "Four-person engineering team",
+      detail: "ECOR 1042 at Carleton University · 2021.",
+    },
+    description:
+      "Built image filters and the interactive editor with Arun Ichsanow, Jason Perrins, and Ephraim Inyang. The original course submission also included batch processing.",
+    image: "/images/projects/photo-editing-filters.webp",
+    imageAlt: "A synthetic landscape shown before editing and after blue-channel isolation, sepia, and vertical flipping",
+    imageFit: "contain",
+    tags: ["Python", "NumPy", "Pillow", "Tkinter", "Image Processing"],
+    links: [
+      { label: "GitHub", href: "https://github.com/khalifehbasiri/Photo-editing-Program" },
+    ],
+    topics: ["teamwork"],
+    category: "coursework",
+  },
+  {
+    id: "elevator-dispatch-studio",
+    title: "Elevator Dispatch Studio",
+    summary:
+      "A Qt desktop simulator for configuring buildings, scheduling passenger trips, and observing how cars respond to calls and safety events.",
+    summaryHighlights: ["scheduling passenger trips", "safety events"],
+    role: "C++ / Qt developer",
+    contribution:
+      "Built nearest-car dispatch, queued requests, and a dashboard that shows car positions as the simulation clock advances.",
+    status: "Completed",
+    outcome: {
+      headline: "Configurable dispatch simulation",
+      detail: "Up to 20 floors, six cars, and 50 passengers.",
+    },
+    description:
+      "A Qt Widgets simulator for passenger journeys, dispatch decisions, and scenarios including fire recall, overload, and emergency stops.",
+    image: "/images/projects/elevator-dispatch-studio.png",
+    imageAlt: "Elevator Dispatch Studio showing the building view, scheduled events, and a completed passenger trip",
+    tags: ["C++", "Qt", "Discrete-Event Simulation"],
+    links: [
+      { label: "GitHub", href: "https://github.com/khalifehbasiri/elevator-dispatch-simulator" },
+    ],
+    category: "coursework",
+  },
+  {
+    id: "ai-resume-builder",
+    title: "AI Resume Builder",
+    summary:
+      "An open-source AI resume coach that interviews candidates and ties resume claims back to their documented experience.",
+    summaryHighlights: ["ties resume claims back to their documented experience"],
+    role: "AI workflow developer",
+    contribution:
+      "Built the interview workflow, a reusable experience bank, resume templates, and offline Python checks.",
+    status: "Released",
+    outcome: {
+      headline: "Evidence-backed resume writing",
+      detail: "Available as a portable prompt and an installable agent skill.",
+    },
+    description:
+      "Designed a provider-neutral resume workflow for gathering evidence, matching qualifications, and tailoring resumes while preserving source facts.",
+    tags: ["Python", "AI Engineering", "Prompt Engineering", "Agent Skills", "LaTeX"],
+    links: [
+      { label: "GitHub", href: "https://github.com/khalifehbasiri/AI-Resume-Builder" },
+    ],
+    topics: ["ai", "personal-tools"],
+    category: "personal",
+  },
+  {
+    id: "java-adventure-game",
+    title: "Java Adventure Game",
+    summary:
+      "A text adventure with connected rooms, a command parser, and an inventory of objects players can pick up and drop.",
+    role: "Java developer",
+    contribution:
+      "Built room navigation, inventory commands, and a teleportation item that remembers a location.",
+    status: "Completed",
+    outcome: {
+      headline: "Command-driven gameplay",
+      detail: "Players can backtrack, explore, and return to saved rooms.",
+    },
+    description:
+      "A Java text adventure that models players' commands, rooms, and items as objects.",
+    tags: ["Java", "Object-Oriented Programming"],
+    links: [
+      { label: "GitHub", href: "https://github.com/khalifehbasiri/Adventure-game" },
+    ],
+    category: "personal",
   },
 ];
 

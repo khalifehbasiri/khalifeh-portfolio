@@ -1,11 +1,29 @@
+"use client";
+
+import gsap from "gsap";
+import { Flip } from "gsap/Flip";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import Link from "next/link";
-import type { Project, ProjectLink } from "../data/portfolio";
+import { useLayoutEffect, useRef, useState } from "react";
+import type { Project, ProjectLink, ProjectTopic } from "../data/portfolio";
 import { getTechTagColors } from "../lib/tech-stack-colors";
-import { ProjectImageGallery } from "./ProjectImageGallery";
+import { ProjectImageGallery, projectImageSizes } from "./ProjectImageGallery";
 import { ProjectStatus } from "./ProjectStatus";
-import { ProjectCardRail } from "./ProjectCardRail";
 import styles from "./project-card.module.css";
+
+gsap.registerPlugin(Flip, ScrollTrigger);
+
+const categories: { value: "featured" | "all" | ProjectTopic; label: string }[] = [
+  { value: "featured", label: "Featured" },
+  { value: "all", label: "All projects" },
+  { value: "teamwork", label: "Teamwork" },
+  { value: "ai", label: "AI & ML" },
+  { value: "real-users", label: "Real users" },
+  { value: "personal-tools", label: "Personal tools" },
+];
+
+type Category = (typeof categories)[number]["value"];
 
 function ProjectAction({ link }: { link: ProjectLink }) {
   const content = (
@@ -31,46 +49,33 @@ function ProjectAction({ link }: { link: ProjectLink }) {
   );
 }
 
-function ProjectCard({
-  project,
-  eager = false,
-  leadOnDesktop = false,
-}: {
-  project: Project;
-  eager?: boolean;
-  leadOnDesktop?: boolean;
-}) {
+function ProjectCard({ project }: { project: Project }) {
   return (
-    <article
-      className={`${styles.card} ${leadOnDesktop ? styles.leadingCard : ""}`}
-    >
-      <div className={styles.media}>
-        {project.images && project.images.length > 1 ? (
-          <ProjectImageGallery
-            images={project.images}
-            title={project.title}
-            eager={eager}
-          />
-        ) : (
-          <div className={styles.staticImage}>
-            <Image
-              src={project.image}
-              alt={project.imageAlt}
-              fill
-              loading={eager ? "eager" : "lazy"}
-              sizes="(min-width: 640px) 316px, 84vw"
-              className={
-                project.imageFit === "contain"
-                  ? "object-contain p-5"
-                  : "object-cover"
-              }
-            />
-          </div>
-        )}
-      </div>
+    <article className={styles.card}>
+      {project.images?.length || project.image ? (
+        <div className={styles.media} data-project-preview>
+          {project.images?.length ? (
+            <ProjectImageGallery images={project.images} title={project.title} />
+          ) : project.image ? (
+            <div className={styles.staticImage}>
+              <Image
+                src={project.image}
+                alt={project.imageAlt ?? ""}
+                fill
+                sizes={projectImageSizes}
+                className={
+                  project.imageFit === "contain"
+                    ? "object-contain p-5"
+                    : "object-cover"
+                }
+              />
+            </div>
+          ) : null}
+        </div>
+      ) : null}
       <div className={styles.body}>
         <div className={styles.titleRow}>
-          <h4 className={styles.title}>{project.title}</h4>
+          <h3 className={styles.title}>{project.title}</h3>
           <ProjectStatus status={project.status} />
         </div>
         <div className={styles.context}>
@@ -80,7 +85,9 @@ function ProjectCard({
               ? project.note
                 ? "Internal work"
                 : "Contract work"
-              : "Personal project"}
+              : project.category === "coursework"
+                ? "Course project"
+                : "Personal project"}
           </span>
         </div>
         <p className={styles.summary}>
@@ -143,85 +150,78 @@ function ProjectCard({
   );
 }
 
-function ProjectRow({
-  id,
-  title,
-  description,
-  projects,
-  eagerFirstImage = false,
-  centerProjectId,
-}: {
-  id: string;
-  title: string;
-  description: string;
-  projects: Project[];
-  eagerFirstImage?: boolean;
-  centerProjectId?: string;
-}) {
-  return (
-    <div aria-labelledby={id}>
-      <div className="mx-auto mb-4 flex max-w-5xl items-end justify-between gap-4 px-6">
-        <div>
-          <h3 id={id} className="text-lg font-medium text-foreground">
-            {title}
-          </h3>
-          <p className="mt-1 text-sm text-muted">{description}</p>
-        </div>
-        <span className="shrink-0 font-mono text-xs text-muted" aria-hidden>
-          Scroll &lt;-&gt;
-        </span>
-      </div>
-
-      <div className="mx-auto max-w-5xl px-6 lg:max-w-[1600px] lg:px-8">
-        <ProjectCardRail
-          labelId={id}
-          initialIndex={
-            centerProjectId
-              ? Math.max(
-                  0,
-                  projects.findIndex(
-                    (project) => project.id === centerProjectId,
-                  ),
-                )
-              : Math.min(2, Math.floor(projects.length / 2))
-          }
-        >
-          {projects.map((project, index) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              eager={eagerFirstImage && index === 0}
-              leadOnDesktop={
-                id === "personal-projects" &&
-                project.id === "sign-language-translator"
-              }
-            />
-          ))}
-        </ProjectCardRail>
-      </div>
-    </div>
-  );
-}
-
 export function Projects({ projects }: { projects: Project[] }) {
-  const featuredProjectOrder = [
-    "job-tracker-ai",
-    "zdash",
-    "gallery-web-app",
-    "sign-language-translator",
-  ];
-  const personalProjects = projects
-    .filter((project) => project.category === "personal")
-    .sort((a, b) => {
-      const rank = (project: Project) => {
-        const index = featuredProjectOrder.indexOf(project.id);
-        return index === -1 ? featuredProjectOrder.length : index;
-      };
-      return rank(a) - rank(b);
-    });
-  const workProjects = projects.filter(
-    (project) => project.category === "work",
+  const [category, setCategory] = useState<Category>("featured");
+  const [technology, setTechnology] = useState("");
+  const grid = useRef<HTMLDivElement>(null);
+  const technologySelect = useRef<HTMLSelectElement>(null);
+  const previousLayout = useRef<Flip.FlipState | null>(null);
+  const animation = useRef<gsap.core.Timeline | null>(null);
+
+  const technologies = [...new Set(projects.flatMap((project) => project.tags))]
+    .sort((a, b) => a.localeCompare(b, "en"));
+  const matchingIds = new Set(
+    projects
+      .filter((project) => {
+        const matchesCategory =
+          category === "all" ||
+          (category === "featured" ? project.featured : project.topics?.includes(category));
+        return matchesCategory && (!technology || project.tags.includes(technology));
+      })
+      .map((project) => project.id),
   );
+
+  function updateFilters(nextCategory: Category, nextTechnology: string) {
+    if (nextCategory === category && nextTechnology === technology) return;
+    if (grid.current && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      previousLayout.current = Flip.getState(Array.from(grid.current.children));
+    } else {
+      animation.current?.revert();
+    }
+    setCategory(nextCategory);
+    setTechnology(nextTechnology);
+  }
+
+  useLayoutEffect(() => {
+    const layout = previousLayout.current;
+    previousLayout.current = null;
+
+    if (layout) {
+      animation.current = Flip.from(layout, {
+        duration: 0.42,
+        ease: "power2.inOut",
+        scale: true,
+        prune: true,
+        absoluteOnLeave: true,
+        onEnter: (cards) => gsap.from(cards, {
+          opacity: 0,
+          y: 12,
+          duration: 0.28,
+          ease: "power2.out",
+          clearProps: "opacity,transform",
+        }),
+        onLeave: (cards) => gsap.to(cards, {
+          opacity: 0,
+          duration: 0.2,
+          ease: "power2.out",
+        }),
+      });
+    }
+
+    ScrollTrigger.refresh();
+  }, [category, technology]);
+
+  useLayoutEffect(() => {
+    const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const stopAnimation = () => {
+      if (motionPreference.matches) animation.current?.revert();
+    };
+    motionPreference.addEventListener("change", stopAnimation);
+    return () => {
+      motionPreference.removeEventListener("change", stopAnimation);
+      animation.current?.revert();
+    };
+  }, []);
 
   return (
     <section id="projects" className="py-20">
@@ -230,25 +230,65 @@ export function Projects({ projects }: { projects: Project[] }) {
           Projects
         </h2>
         <p className="mt-3 max-w-2xl text-muted">
-          Applied AI, computer vision, and the systems that make useful products
-          reliable.
+          Explore by the kind of work or the technologies behind it.
         </p>
-      </div>
-      <div className="mt-10 space-y-12">
-        <ProjectRow
-          id="personal-projects"
-          title="Personal Projects"
-          description="Independent builds and experiments."
-          projects={personalProjects}
-          eagerFirstImage
-          centerProjectId="zdash"
-        />
-        <ProjectRow
-          id="work-projects"
-          title="Internal & Contract Work"
-          description="Production tools and client work."
-          projects={workProjects}
-        />
+        <div className={styles.filters}>
+          <div className={styles.categories} role="group" aria-label="Project category">
+            {categories.map(({ value, label }) => (
+              <button
+                key={value}
+                type="button"
+                aria-pressed={category === value}
+                aria-controls="project-results"
+                onClick={() => updateFilters(value, value === "featured" ? "" : technology)}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+          <label className={styles.technology}>
+            Tech stack
+            <select
+              ref={technologySelect}
+              value={technology}
+              aria-controls="project-results"
+              onChange={(event) => {
+                const value = event.currentTarget.value;
+                updateFilters(category === "featured" && value ? "all" : category, value);
+              }}
+            >
+              <option value="">All technologies</option>
+              {technologies.map((tag) => (
+                <option key={tag} value={tag}>{tag}</option>
+              ))}
+            </select>
+          </label>
+        </div>
+        <p className={styles.count} role="status">
+          {matchingIds.size} {matchingIds.size === 1 ? "project" : "projects"}
+        </p>
+        <div id="project-results" className={styles.grid} ref={grid}>
+          {projects.map((project) => (
+            <div
+              className={styles.gridItem}
+              key={project.id}
+              inert={!matchingIds.has(project.id)}
+            >
+              <ProjectCard project={project} />
+            </div>
+          ))}
+        </div>
+        {matchingIds.size === 0 ? (
+          <div className={styles.empty}>
+            <p>No projects match this category and technology.</p>
+            <button type="button" onClick={() => {
+              technologySelect.current?.focus();
+              updateFilters("all", "");
+            }}>
+              Clear filters
+            </button>
+          </div>
+        ) : null}
       </div>
     </section>
   );

@@ -51,15 +51,6 @@ export function PortfolioMotion({ children }: { children: ReactNode }) {
         enter(intro, heading, { y: 22, stagger: 0.1 });
       }
 
-      for (const rail of root.current!.querySelectorAll<HTMLElement>("[role='region']")) {
-        const cards = Array.from(rail.querySelectorAll("article"));
-        // Follow visual order, including the rail's existing CSS ordering.
-        cards.sort((a, b) => a.offsetLeft - b.offsetLeft);
-        enter(cards, rail, {
-          y: 38, scale: 0.97, rotation: 0.6, duration: 0.85, stagger: 0.09,
-        });
-      }
-
       const skills = root.current!.querySelector("#skills h2")?.nextElementSibling;
       if (skills) enter(skills.children, skills, { y: 24, opacity: 0.55, stagger: 0.1 });
 
@@ -88,9 +79,9 @@ export function PortfolioMotion({ children }: { children: ReactNode }) {
     media.add("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)", () => {
       const removeListeners: (() => void)[] = [];
 
-      for (const card of root.current!.querySelectorAll("article")) {
-        const preview = card.firstElementChild;
-        if (!preview) continue;
+      for (const preview of root.current!.querySelectorAll("[data-project-preview]")) {
+        const card = preview.closest("article");
+        if (!card) continue;
 
         gsap.set(preview, { transformPerspective: 700 });
         const rotateX = gsap.quickTo(preview, "rotationX", { duration: 0.45, ease: "power3.out" });

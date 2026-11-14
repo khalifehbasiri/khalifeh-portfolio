@@ -72,8 +72,8 @@ export function CaseStudy({
   const actions = project.links.filter((link) => link.label !== "Case Study");
   const images = project.images ?? [
     {
-      src: project.image,
-      alt: project.imageAlt,
+      src: project.image ?? story.preview.src,
+      alt: project.imageAlt ?? story.preview.alt,
       label: project.title,
       background: project.imageBackground,
     },

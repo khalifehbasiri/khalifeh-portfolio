@@ -60,8 +60,8 @@ export const resume = {
           "role": "Frontend Developer",
           "period": "Mar. 2025 – May 2025",
           "highlights": [
-            "Built Floxy’s responsive Next.js site with React, TypeScript, and Tailwind CSS for a platform with 20,000+ customers; the site reached 23.9K monthly visits within four months.",
-            "Organized the site into reusable components and centralized content models, keeping product pages and language-specific API examples consistent and easy to update."
+            "Built Floxy’s responsive Next.js site with React, TypeScript, and Tailwind CSS for a proxy infrastructure startup serving 20,000+ customers; the site reached 23.9K monthly visits within four months.",
+            "Connected frontend interfaces to backend APIs and organized the site into reusable components and centralized frontend content models, keeping product pages and language-specific API examples consistent and easy to update."
           ]
         }
       ]
@@ -79,7 +79,7 @@ export const resume = {
       ],
       "highlights": [
         "Engineered a Windows vehicle diagnostics app for Nissan and Infiniti CONSULT-I ECUs with live telemetry, fault-code diagnostics, and SQLite/WAL session recording.",
-        "Built a diagnostic agent using LangChain tools and LangGraph orchestration, with scoped tool permissions and SQLite checkpoints for resumable investigations; prototyped RAG over 8,618 service-manual pages using PostgreSQL/pgvector hybrid search and page-level citations."
+        "Built an LLM-powered diagnostic agent using LangChain tools and LangGraph orchestration, with scoped tool permissions and SQLite checkpoints for resumable investigations; prototyped RAG over 8,618 service-manual pages using PostgreSQL/pgvector hybrid search and page-level citations."
       ]
     },
     {
