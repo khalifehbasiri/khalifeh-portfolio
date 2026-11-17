@@ -38,7 +38,7 @@ export type Project = {
   links: ProjectLink[];
   featured?: boolean;
   topics?: ProjectTopic[];
-  category: "work" | "personal" | "coursework";
+  category: "work" | "personal" | "coursework" | "ai-skill";
   /** Shown when there are no links (e.g. internal work projects). */
   note?: string;
 };
@@ -708,7 +708,7 @@ export const projects: Project[] = [
       { label: "GitHub", href: "https://github.com/khalifehbasiri/AI-Resume-Builder" },
     ],
     topics: ["ai", "personal-tools"],
-    category: "personal",
+    category: "ai-skill",
   },
   {
     id: "java-adventure-game",

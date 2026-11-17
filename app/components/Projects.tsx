@@ -10,6 +10,7 @@ import type { Project, ProjectLink, ProjectTopic } from "../data/portfolio";
 import { getTechTagColors } from "../lib/tech-stack-colors";
 import { ProjectImageGallery, projectImageSizes } from "./ProjectImageGallery";
 import { ProjectStatus } from "./ProjectStatus";
+import { TechnologyFilter } from "./TechnologyFilter";
 import styles from "./project-card.module.css";
 
 gsap.registerPlugin(Flip, ScrollTrigger);
@@ -24,6 +25,12 @@ const categories: { value: "featured" | "all" | ProjectTopic; label: string }[] 
 ];
 
 type Category = (typeof categories)[number]["value"];
+
+const projectCategoryLabels = {
+  personal: "Personal project",
+  coursework: "Course project",
+  "ai-skill": "AI skill",
+};
 
 function ProjectAction({ link }: { link: ProjectLink }) {
   const content = (
@@ -85,9 +92,7 @@ function ProjectCard({ project }: { project: Project }) {
               ? project.note
                 ? "Internal work"
                 : "Contract work"
-              : project.category === "coursework"
-                ? "Course project"
-                : "Personal project"}
+              : projectCategoryLabels[project.category]}
           </span>
         </div>
         <p className={styles.summary}>
@@ -154,7 +159,7 @@ export function Projects({ projects }: { projects: Project[] }) {
   const [category, setCategory] = useState<Category>("featured");
   const [technology, setTechnology] = useState("");
   const grid = useRef<HTMLDivElement>(null);
-  const technologySelect = useRef<HTMLSelectElement>(null);
+  const technologyInput = useRef<HTMLInputElement>(null);
   const previousLayout = useRef<Flip.FlipState | null>(null);
   const animation = useRef<gsap.core.Timeline | null>(null);
 
@@ -246,23 +251,15 @@ export function Projects({ projects }: { projects: Project[] }) {
               </button>
             ))}
           </div>
-          <label className={styles.technology}>
-            Tech stack
-            <select
-              ref={technologySelect}
-              value={technology}
-              aria-controls="project-results"
-              onChange={(event) => {
-                const value = event.currentTarget.value;
-                updateFilters(category === "featured" && value ? "all" : category, value);
-              }}
-            >
-              <option value="">All technologies</option>
-              {technologies.map((tag) => (
-                <option key={tag} value={tag}>{tag}</option>
-              ))}
-            </select>
-          </label>
+          <TechnologyFilter
+            inputRef={technologyInput}
+            technologies={technologies}
+            value={technology}
+            onSelect={(value) => updateFilters(
+              category === "featured" && value ? "all" : category,
+              value,
+            )}
+          />
         </div>
         <p className={styles.count} role="status">
           {matchingIds.size} {matchingIds.size === 1 ? "project" : "projects"}
@@ -282,7 +279,7 @@ export function Projects({ projects }: { projects: Project[] }) {
           <div className={styles.empty}>
             <p>No projects match this category and technology.</p>
             <button type="button" onClick={() => {
-              technologySelect.current?.focus();
+              technologyInput.current?.focus();
               updateFilters("all", "");
             }}>
               Clear filters
