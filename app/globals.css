@@ -1,14 +1,36 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0c0c0e;
-  --foreground: #ededed;
-  --muted: #8b8b96;
-  --border: #2a2a32;
-  --surface: #131316;
-  --surface-raised: #1a1a1f;
-  --accent: #6ee7b7;
-  --accent-foreground: #0c0c0e;
+  color-scheme: light dark;
+  --background: light-dark(#fff, #0c0c0e);
+  --foreground: light-dark(#0e0e0e, #ededed);
+  --muted: light-dark(#616161, #8b8b96);
+  --border: light-dark(#e5e5e5, #2a2a32);
+  --control-border: light-dark(#8c8c8c, #2a2a32);
+  --surface: light-dark(#f7f7f7, #131316);
+  --surface-raised: light-dark(#efefef, #1a1a1f);
+  --accent: light-dark(#171717, #6ee7b7);
+  --accent-foreground: light-dark(#fafafa, #0c0c0e);
+  --reading-foreground: light-dark(#4b4b4b, #b6b6c0);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+@custom-variant dark {
+  &:where(:root[data-theme="dark"] *) {
+    @slot;
+  }
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme]) *) {
+      @slot;
+    }
+  }
 }
 
 @theme inline {
@@ -16,6 +38,7 @@
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-border: var(--border);
+  --color-control-border: var(--control-border);
   --color-surface: var(--surface);
   --color-surface-raised: var(--surface-raised);
   --color-accent: var(--accent);

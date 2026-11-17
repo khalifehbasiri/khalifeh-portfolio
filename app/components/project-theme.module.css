@@ -11,8 +11,8 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
   white-space: nowrap;
-  background: #ffffff08;
-  color: #a5a6b0;
+  background: light-dark(#ededed, #ffffff08);
+  color: light-dark(#525252, #a5a6b0);
 }
 .status::before {
   content: "";
@@ -22,10 +22,10 @@
   background: currentColor;
 }
 .live {
-  background: #6ee7b711;
-  color: #7cd5ac;
+  background: light-dark(#e7f3ec, #6ee7b711);
+  color: light-dark(#255638, #7cd5ac);
 }
 .development {
-  background: #e4bd7011;
-  color: #e4bd70;
+  background: light-dark(#fbf0df, #e4bd7011);
+  color: light-dark(#70501d, #e4bd70);
 }

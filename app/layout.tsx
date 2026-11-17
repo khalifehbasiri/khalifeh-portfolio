@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { NavigationHandler } from './components/NavigationHandler';
+import { initializeTheme } from "./lib/theme";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -51,8 +52,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth antialiased`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: initializeTheme }} />
+      </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <NavigationHandler />
         {children}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ThemeToggle } from "../components/ThemeToggle";
 import { resume } from "../data/resume";
 import styles from "./resume.module.css";
 
@@ -38,9 +39,12 @@ export default function ResumePage() {
         <Link href="/" className={styles.backLink}>
           <span aria-hidden="true">← </span>Back to portfolio
         </Link>
-        <a className={styles.download} href="/Khalifeh_Basiri_Resume.pdf" download="Khalifeh_Basiri_Resume.pdf">
-          Download PDF<span aria-hidden="true"> ↓</span>
-        </a>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <a className={styles.download} href="/Khalifeh_Basiri_Resume.pdf" download="Khalifeh_Basiri_Resume.pdf">
+            Download PDF<span aria-hidden="true"> ↓</span>
+          </a>
+        </div>
       </nav>
 
       <article id="resume-document" aria-label="Khalifeh Basiri resume">

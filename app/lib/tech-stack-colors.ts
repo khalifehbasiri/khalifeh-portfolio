@@ -1,21 +1,23 @@
 import { skillGroups } from "../data/portfolio";
 
+const lightBadge = "border-border bg-background text-foreground";
+
 export const skillGroupColors = {
   Languages: {
-    heading: "text-emerald-300",
-    badge: "border-emerald-400/30 bg-emerald-400/10 text-emerald-200",
+    heading: "text-foreground dark:text-emerald-300",
+    badge: `${lightBadge} dark:border-emerald-400/30 dark:bg-emerald-400/10 dark:text-emerald-200`,
   },
   "Frameworks & Tools": {
-    heading: "text-sky-300",
-    badge: "border-sky-400/30 bg-sky-400/10 text-sky-200",
+    heading: "text-foreground dark:text-sky-300",
+    badge: `${lightBadge} dark:border-sky-400/30 dark:bg-sky-400/10 dark:text-sky-200`,
   },
   Databases: {
-    heading: "text-violet-300",
-    badge: "border-violet-400/30 bg-violet-400/10 text-violet-200",
+    heading: "text-foreground dark:text-violet-300",
+    badge: `${lightBadge} dark:border-violet-400/30 dark:bg-violet-400/10 dark:text-violet-200`,
   },
   Domains: {
-    heading: "text-amber-300",
-    badge: "border-amber-400/30 bg-amber-400/10 text-amber-200",
+    heading: "text-foreground dark:text-amber-300",
+    badge: `${lightBadge} dark:border-amber-400/30 dark:bg-amber-400/10 dark:text-amber-200`,
   },
 } as const;
 
@@ -60,7 +62,7 @@ const projectOnlyTagGroups: Record<string, SkillGroupLabel> = {
 
 const neutralColors = {
   heading: "text-foreground",
-  badge: "border-border bg-surface-raised text-muted",
+  badge: `${lightBadge} dark:bg-surface-raised dark:text-muted`,
 };
 
 function isSkillGroupLabel(label: string): label is SkillGroupLabel {

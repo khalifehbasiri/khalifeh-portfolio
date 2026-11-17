@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Footer } from "../components/Footer";
 import { ProjectStatus } from "../components/ProjectStatus";
+import { ThemeToggle } from "../components/ThemeToggle";
 import type { Project } from "../data/portfolio";
 import { CaseStudyFocus } from "./CaseStudyFocus";
 import styles from "./case-study.module.css";
@@ -90,9 +91,12 @@ export function CaseStudy({
           <Link className={styles.brand} href="/">
             kbasiri<span>.</span>com
           </Link>
-          <Link className={styles.link} href="/projects">
-            <span aria-hidden="true">←</span> All projects
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link className={styles.link} href="/projects">
+              <span aria-hidden="true">←</span> All projects
+            </Link>
+            <ThemeToggle />
+          </div>
         </div>
       </header>
       <main className={styles.main}>

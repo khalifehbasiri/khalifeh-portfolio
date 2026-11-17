@@ -68,7 +68,7 @@ export function ContactForm({ actionLinks = [] }: ContactFormProps) {
             type="text"
             required
             autoComplete="name"
-            className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted focus:border-accent"
+            className="w-full rounded-lg border border-control-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted focus:border-accent"
             placeholder="Your name"
           />
         </label>
@@ -82,7 +82,7 @@ export function ContactForm({ actionLinks = [] }: ContactFormProps) {
             type="email"
             required
             autoComplete="email"
-            className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted focus:border-accent"
+            className="w-full rounded-lg border border-control-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted focus:border-accent"
             placeholder="you@example.com"
           />
         </label>
@@ -101,7 +101,7 @@ export function ContactForm({ actionLinks = [] }: ContactFormProps) {
           name="message"
           required
           rows={6}
-          className="w-full resize-y rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted focus:border-accent"
+          className="w-full resize-y rounded-lg border border-control-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted focus:border-accent"
           placeholder="Tell me what you would like to build or discuss."
         />
       </label>

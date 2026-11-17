@@ -121,6 +121,8 @@ export const projects: Project[] = [
       "Python",
       "OpenAI API",
       "PySide6",
+      "Qt",
+      "QML",
       "Pydantic",
       "SQLite",
       "AI Engineering",

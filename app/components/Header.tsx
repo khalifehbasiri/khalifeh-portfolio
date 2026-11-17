@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { scrollToSection } from '../lib/navigation';
+import { ThemeToggle } from './ThemeToggle';
 
 const navItems = [
   { label: "Projects", href: "projects" },
@@ -87,6 +88,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <ThemeToggle />
           <a
             href="/resume"
             target="_blank"

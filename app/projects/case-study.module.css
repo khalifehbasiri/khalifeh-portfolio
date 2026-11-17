@@ -78,7 +78,7 @@
 .introduction {
   max-width: 720px;
   margin-top: 16px;
-  color: #b6b6c0;
+  color: var(--reading-foreground);
   font-size: 16px;
   line-height: 1.65;
   text-wrap: pretty;
@@ -238,7 +238,7 @@
 }
 .story {
   min-width: 0;
-  color: #b6b6c0;
+  color: var(--reading-foreground);
   font-size: 14px;
   line-height: 1.8;
   overflow-wrap: anywhere;
