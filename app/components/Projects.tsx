@@ -5,7 +5,7 @@ import { Flip } from "gsap/Flip";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import Link from "next/link";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import type { Project, ProjectLink, ProjectTopic } from "../data/portfolio";
 import { getTechTagColors } from "../lib/tech-stack-colors";
 import { ProjectImageGallery, projectImageSizes } from "./ProjectImageGallery";
@@ -158,7 +158,9 @@ function ProjectCard({ project }: { project: Project }) {
 export function Projects({ projects }: { projects: Project[] }) {
   const [category, setCategory] = useState<Category>("featured");
   const [technology, setTechnology] = useState("");
+  const [scrollDirections, setScrollDirections] = useState({ left: false, right: false });
   const grid = useRef<HTMLDivElement>(null);
+  const viewport = useRef<HTMLDivElement>(null);
   const technologyInput = useRef<HTMLInputElement>(null);
   const previousLayout = useRef<Flip.FlipState | null>(null);
   const animation = useRef<gsap.core.Timeline | null>(null);
@@ -171,10 +173,32 @@ export function Projects({ projects }: { projects: Project[] }) {
         const matchesCategory =
           category === "all" ||
           (category === "featured" ? project.featured : project.topics?.includes(category));
-        return matchesCategory && (!technology || project.tags.includes(technology));
+        return matchesCategory && (!technology || project.tags.some((tag) => tag === technology));
       })
       .map((project) => project.id),
   );
+  const horizontal = matchingIds.size > 1 && matchingIds.size < 6;
+  const canScroll = horizontal && (scrollDirections.left || scrollDirections.right);
+
+  const updateScrollDirections = useCallback((rail: HTMLDivElement) => {
+    const left = rail.scrollLeft > 1;
+    const right = rail.scrollLeft + rail.clientWidth < rail.scrollWidth - 1;
+    setScrollDirections((previous) =>
+      previous.left === left && previous.right === right ? previous : { left, right },
+    );
+  }, []);
+
+  function scrollProjects(direction: number) {
+    const rail = viewport.current;
+    const track = grid.current;
+    const card = track?.querySelector<HTMLElement>(":scope > :not([inert])");
+    if (!rail || !track || !card) return;
+
+    rail.scrollBy({
+      left: direction * (card.offsetWidth + parseFloat(getComputedStyle(track).columnGap)),
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+    });
+  }
 
   function updateFilters(nextCategory: Category, nextTechnology: string) {
     if (nextCategory === category && nextTechnology === technology) return;
@@ -190,6 +214,8 @@ export function Projects({ projects }: { projects: Project[] }) {
   useLayoutEffect(() => {
     const layout = previousLayout.current;
     previousLayout.current = null;
+    const rail = horizontal ? viewport.current : null;
+    if (rail) rail.scrollLeft = 0;
 
     if (layout) {
       animation.current = Flip.from(layout, {
@@ -198,6 +224,9 @@ export function Projects({ projects }: { projects: Project[] }) {
         scale: true,
         prune: true,
         absoluteOnLeave: true,
+        onComplete: () => {
+          if (rail) updateScrollDirections(rail);
+        },
         onEnter: (cards) => gsap.from(cards, {
           opacity: 0,
           y: 12,
@@ -214,7 +243,16 @@ export function Projects({ projects }: { projects: Project[] }) {
     }
 
     ScrollTrigger.refresh();
-  }, [category, technology]);
+  }, [category, technology, horizontal, updateScrollDirections]);
+
+  useLayoutEffect(() => {
+    const rail = viewport.current;
+    if (!horizontal || !rail) return;
+
+    const observer = new ResizeObserver(() => updateScrollDirections(rail));
+    observer.observe(rail);
+    return () => observer.disconnect();
+  }, [category, technology, horizontal, updateScrollDirections]);
 
   useLayoutEffect(() => {
     const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -229,7 +267,7 @@ export function Projects({ projects }: { projects: Project[] }) {
   }, []);
 
   return (
-    <section id="projects" className="py-20">
+    <section id="projects" className={`${styles.section} py-20`}>
       <div className="mx-auto max-w-5xl px-6">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">
           Projects
@@ -261,19 +299,62 @@ export function Projects({ projects }: { projects: Project[] }) {
             )}
           />
         </div>
-        <p className={styles.count} role="status">
-          {matchingIds.size} {matchingIds.size === 1 ? "project" : "projects"}
-        </p>
-        <div id="project-results" className={styles.grid} ref={grid}>
-          {projects.map((project) => (
-            <div
-              className={styles.gridItem}
-              key={project.id}
-              inert={!matchingIds.has(project.id)}
-            >
-              <ProjectCard project={project} />
+        <div className={styles.resultsBar}>
+          <p className={styles.count} role="status">
+            {matchingIds.size} {matchingIds.size === 1 ? "project" : "projects"}
+          </p>
+          {canScroll ? (
+            <div className={styles.scrollControls} role="group" aria-label="Scroll project results">
+              <button
+                type="button"
+                aria-controls="project-results"
+                aria-label="Scroll projects left"
+                disabled={!scrollDirections.left}
+                onClick={() => scrollProjects(-1)}
+              >
+                <span aria-hidden="true">←</span>
+              </button>
+              <button
+                type="button"
+                aria-controls="project-results"
+                aria-label="Scroll projects right"
+                disabled={!scrollDirections.right}
+                onClick={() => scrollProjects(1)}
+              >
+                <span aria-hidden="true">→</span>
+              </button>
             </div>
-          ))}
+          ) : null}
+        </div>
+        <div
+          ref={viewport}
+          className={horizontal ? styles.scrollViewport : undefined}
+          role={canScroll ? "region" : undefined}
+          aria-label={canScroll ? "Project results" : undefined}
+          tabIndex={horizontal ? (canScroll ? 0 : -1) : undefined}
+          onScroll={horizontal ? (event) => updateScrollDirections(event.currentTarget) : undefined}
+          onKeyDown={canScroll ? (event) => {
+            if (event.target !== event.currentTarget) return;
+            if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+            event.preventDefault();
+            scrollProjects(event.key === "ArrowLeft" ? -1 : 1);
+          } : undefined}
+        >
+          <div
+            id="project-results"
+            className={`${styles.results} ${horizontal ? styles.rail : styles.grid}`}
+            ref={grid}
+          >
+            {projects.map((project) => (
+              <div
+                className={styles.gridItem}
+                key={project.id}
+                inert={!matchingIds.has(project.id)}
+              >
+                <ProjectCard project={project} />
+              </div>
+            ))}
+          </div>
         </div>
         {matchingIds.size === 0 ? (
           <div className={styles.empty}>

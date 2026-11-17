@@ -1,3 +1,7 @@
+.section {
+  container-type: inline-size;
+}
+
 .filters {
   display: flex;
   flex-wrap: wrap;
@@ -113,23 +117,107 @@
 }
 
 .filters :is(button, input):focus-visible,
+.scrollControls button:focus-visible,
+.scrollViewport:focus-visible,
 .empty button:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
+.resultsBar {
+  display: flex;
+  min-height: 36px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-block: 6px 12px;
+}
+
 .count {
-  margin: 12px 0 16px;
   color: var(--muted);
   font-size: 13px;
 }
 
-.grid {
+.scrollControls {
+  display: flex;
+  gap: 6px;
+}
+
+.scrollControls button {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--background);
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.scrollControls button:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+.scrollControls button:disabled {
+  color: var(--muted);
+  cursor: default;
+  opacity: 0.5;
+}
+
+.scrollViewport {
+  --rail-gutter: clamp(12px, 2cqw, 32px);
+  --rail-fade: clamp(20px, 4cqw, 64px);
+  width: 100cqw;
+  margin-inline: calc((100% - 100cqw) / 2);
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scroll-padding-inline: var(--rail-gutter);
+  scroll-snap-type: x proximity;
+  scrollbar-color: var(--muted) transparent;
+  scrollbar-width: thin;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black var(--rail-fade),
+    black calc(100% - var(--rail-fade)),
+    transparent
+  );
+}
+
+.scrollViewport[tabindex="0"] {
+  padding-bottom: 10px;
+}
+
+.scrollViewport:focus-visible {
+  outline-offset: -2px;
+}
+
+.results {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
   gap: 18px;
   overflow-anchor: none;
+}
+
+.grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.rail {
+  width: max-content;
+  min-width: 100%;
+  justify-content: center;
+  grid-auto-flow: column;
+  grid-auto-columns: min(84cqw, 21.5rem);
+  padding-inline: var(--rail-gutter);
+}
+
+.rail .gridItem {
+  scroll-snap-align: start;
 }
 
 .gridItem {

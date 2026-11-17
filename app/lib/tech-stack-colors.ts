@@ -1,92 +1,24 @@
 import { skillGroups } from "../data/portfolio";
 
-export const skillGroupColors = {
-  Languages: {
-    heading: "text-emerald-800 dark:text-emerald-300",
-    badge: "border-emerald-600/30 bg-emerald-100/75 text-emerald-800 dark:border-emerald-400/30 dark:bg-emerald-400/10 dark:text-emerald-200",
-  },
-  "Frameworks & Tools": {
-    heading: "text-sky-800 dark:text-sky-300",
-    badge: "border-sky-600/30 bg-sky-100/75 text-sky-800 dark:border-sky-400/30 dark:bg-sky-400/10 dark:text-sky-200",
-  },
-  Databases: {
-    heading: "text-violet-800 dark:text-violet-300",
-    badge: "border-violet-600/30 bg-violet-100/75 text-violet-800 dark:border-violet-400/30 dark:bg-violet-400/10 dark:text-violet-200",
-  },
-  Domains: {
-    heading: "text-amber-800 dark:text-amber-300",
-    badge: "border-amber-600/30 bg-amber-100/75 text-amber-800 dark:border-amber-400/30 dark:bg-amber-400/10 dark:text-amber-200",
-  },
+const skillGroupColors = {
+  language: "border-emerald-600/30 bg-emerald-100/75 text-emerald-800 dark:border-emerald-400/30 dark:bg-emerald-400/10 dark:text-emerald-200",
+  tool: "border-sky-600/30 bg-sky-100/75 text-sky-800 dark:border-sky-400/30 dark:bg-sky-400/10 dark:text-sky-200",
+  data: "border-violet-600/30 bg-violet-100/75 text-violet-800 dark:border-violet-400/30 dark:bg-violet-400/10 dark:text-violet-200",
+  practice: "border-amber-600/30 bg-amber-100/75 text-amber-800 dark:border-amber-400/30 dark:bg-amber-400/10 dark:text-amber-200",
 } as const;
 
-type SkillGroupLabel = keyof typeof skillGroupColors;
-
-const projectOnlyTagGroups: Record<string, SkillGroupLabel> = {
-  "Raspberry Pi": "Frameworks & Tools",
-  FastAPI: "Frameworks & Tools",
-  PySide6: "Frameworks & Tools",
-  QML: "Frameworks & Tools",
-  Pydantic: "Frameworks & Tools",
-  SQLAlchemy: "Frameworks & Tools",
-  Alembic: "Frameworks & Tools",
-  WebSockets: "Frameworks & Tools",
-  Electron: "Frameworks & Tools",
-  LangChain: "Frameworks & Tools",
-  LangGraph: "Frameworks & Tools",
-  "Chrome Extensions": "Frameworks & Tools",
-  "Manifest V3": "Frameworks & Tools",
-  "GitHub API": "Frameworks & Tools",
-  "Embedded Systems": "Domains",
-  "Automotive Software": "Domains",
-  "Automotive Diagnostics": "Domains",
-  "AI Integration": "Domains",
-  "Structured Outputs": "Domains",
-  RAG: "Domains",
-  "Hybrid Search": "Domains",
-  "Tool Calling": "Domains",
-  "AI Classification": "Domains",
-  "Human Review": "Domains",
-  "Model Inference": "Domains",
-  "API Integration": "Domains",
-  "Least Privilege": "Domains",
-  "Recoverable Workflows": "Domains",
-  SEO: "Domains",
-  Multithreading: "Domains",
-  Geospatial: "Domains",
-  Bilingual: "Domains",
-  "Data Validation": "Domains",
-  UML: "Domains",
-};
-
-const neutralColors = {
-  heading: "text-foreground",
-  badge: "border-border bg-background text-foreground dark:bg-surface-raised dark:text-muted",
-};
-
-function isSkillGroupLabel(label: string): label is SkillGroupLabel {
-  return label in skillGroupColors;
-}
-
-const techTagGroups = new Map<string, SkillGroupLabel>(
-  Object.entries(projectOnlyTagGroups),
-);
+const techTagGroups = new Map<string, keyof typeof skillGroupColors>();
 
 for (const group of skillGroups) {
-  if (!isSkillGroupLabel(group.label)) continue;
-
-  for (const skill of group.skills) {
-    techTagGroups.set(skill, group.label);
+  for (const [skill] of group.skills) {
+    techTagGroups.set(skill, group.tone);
   }
 }
 
-export function getSkillGroupColors(label: string) {
-  return isSkillGroupLabel(label) ? skillGroupColors[label] : neutralColors;
-}
-
 export function getTechTagColors(tag: string) {
-  const groupLabel = techTagGroups.get(tag);
+  const tone = techTagGroups.get(tag);
 
-  return groupLabel
-    ? getSkillGroupColors(groupLabel).badge
-    : neutralColors.badge;
+  return tone
+    ? skillGroupColors[tone]
+    : "border-border bg-background text-foreground dark:bg-surface-raised dark:text-muted";
 }

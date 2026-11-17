@@ -13,6 +13,8 @@ export type ProjectImage = {
 
 export type ProjectTopic = "teamwork" | "ai" | "real-users" | "personal-tools";
 
+type ProjectSkill = (typeof skillGroups)[number]["skills"][number][0];
+
 export type Project = {
   id: string;
   title: string;
@@ -34,7 +36,7 @@ export type Project = {
   imageFit?: "cover" | "contain";
   imageBackground?: "white";
   images?: ProjectImage[];
-  tags: string[];
+  tags: ProjectSkill[];
   links: ProjectLink[];
   featured?: boolean;
   topics?: ProjectTopic[];
@@ -260,7 +262,7 @@ export const projects: Project[] = [
       "LangChain",
       "LangGraph",
       "PostgreSQL/pgvector",
-      "RAG",
+      "Retrieval-Augmented Generation (RAG)",
     ],
     links: [
       {
@@ -588,8 +590,7 @@ export const projects: Project[] = [
     tags: [
       "Python",
       "REST APIs",
-      "Geospatial",
-      "Bilingual",
+      "Geospatial Data",
       "Data Validation",
       "Multithreading",
     ],
@@ -739,88 +740,144 @@ export const projects: Project[] = [
 export const skillGroups = [
   {
     label: "Languages",
+    tone: "language",
     skills: [
-      "Python",
-      "TypeScript",
-      "JavaScript",
-      "C",
-      "C++",
-      "Java",
-      "SQL",
-      "HTML",
-      "CSS",
+      ["Python", "python"],
+      ["TypeScript", "typescript"],
+      ["JavaScript", "javascript"],
+      ["C", "c"],
+      ["C++", "cplusplus"],
+      ["Java", "java"],
+      ["SQL", "symbol-database"],
+      ["HTML", "html5"],
+      ["CSS", "css3"],
+      ["QML", "qt"],
+      ["GLSL", "opengl"],
     ],
   },
   {
-    label: "Frameworks & Tools",
+    label: "Frameworks & Libraries",
+    tone: "tool",
     skills: [
-      "Next.js",
-      "React",
-      "Angular",
-      "RxJS",
-      "NgRx SignalStore",
-      "Node.js",
-      "Express.js",
-      "Tailwind CSS",
-      "Flask",
-      "Qt",
-      "Qt Charts",
-      "TensorFlow",
-      "TensorFlow Lite",
-      "MediaPipe",
-      "Electron",
-      "OpenAI API",
-      "Zod",
-      "LangChain",
-      "LangGraph",
-      "Docker",
-      "Microsoft Azure",
-      "Azure Blob Storage",
-      "Supabase Storage",
-      "Clerk",
-      "Vercel",
-      "Bun",
-      "Git",
-      "GitHub",
-      "Linux/Unix",
-      "REST APIs",
+      ["Next.js", "nextjs"],
+      ["React", "react"],
+      ["Angular", "angular"],
+      ["RxJS", "rxjs"],
+      ["NgRx SignalStore", "ngrx"],
+      ["Express.js", "express"],
+      ["Tailwind CSS", "tailwindcss"],
+      ["Flask", "flask"],
+      ["Qt", "qt"],
+      ["PySide6", "qt"],
+      ["Qt Charts", "qt"],
+      ["Qt SQL", "qt"],
+      ["Tkinter", "symbol-window"],
+      ["NumPy", "numpy"],
+      ["Pillow", "pillow.png"],
+      ["Pydantic", "pydantic"],
+      ["Zod", "zod"],
+      ["OpenGL", "opengl"],
+      ["TensorFlow", "tensorflow"],
+      ["TensorFlow Lite", "tensorflow"],
+      ["MediaPipe", "mediapipe"],
+      ["LangChain", "langchain"],
+      ["LangGraph", "langgraph"],
+    ],
+  },
+  {
+    label: "Platforms",
+    tone: "tool",
+    skills: [
+      ["Node.js", "nodejs"],
+      ["Bun", "bun"],
+      ["Electron", "electron"],
+      ["Linux/Unix", "linux"],
     ],
   },
   {
     label: "Databases",
+    tone: "data",
     skills: [
-      "MongoDB",
-      "SQLite",
-      "PostgreSQL",
-      "PostgreSQL/pgvector",
-      "Redis",
-      "SQL",
-      "Oracle",
-      "Convex",
+      ["MongoDB", "mongodb"],
+      ["SQLite", "sqlite"],
+      ["PostgreSQL", "postgresql"],
+      ["PostgreSQL/pgvector", "postgresql"],
+      ["Redis", "redis"],
+      ["Oracle", "oracle"],
+      ["Convex", "convex"],
     ],
   },
   {
-    label: "Domains",
+    label: "Services",
+    tone: "tool",
     skills: [
-      "Web Development",
-      "System Design",
-      "Web Security",
-      "Machine Learning & AI",
-      "AI Engineering",
-      "AI Agents",
-      "Tool Calling",
-      "Prompt Engineering",
-      "Retrieval-Augmented Generation",
-      "Automotive Software",
-      "Computer Vision",
-      "Cloud & Containers",
-      "Database Management",
-      "Geospatial Data",
-      "Testing & Release Management",
-      "Stakeholder Collaboration",
+      ["OpenAI API", "openai"],
+      ["Microsoft Azure", "azure"],
+      ["Azure Blob Storage", "azure"],
+      ["Supabase Storage", "supabase"],
+      ["Clerk", "clerk"],
+      ["Vercel", "vercel"],
     ],
   },
-];
+  {
+    label: "Tools",
+    tone: "tool",
+    skills: [
+      ["Docker", "docker"],
+      ["Git", "git"],
+      ["GitHub", "github"],
+      ["LaTeX", "latex"],
+      ["Chrome Extensions", "chrome"],
+    ],
+  },
+  {
+    label: "Standards & APIs",
+    tone: "tool",
+    skills: [
+      ["REST APIs", "symbol-code"],
+      ["GitHub API", "github"],
+      ["Manifest V3", "chrome"],
+      ["Agent Skills", "symbol-ai"],
+      ["Signals / Slots", "qt"],
+    ],
+  },
+  {
+    label: "AI & Data",
+    tone: "practice",
+    skills: [
+      ["Machine Learning & AI", "symbol-ai"],
+      ["AI Engineering", "symbol-ai"],
+      ["AI Agents", "symbol-ai"],
+      ["Tool Calling", "symbol-code"],
+      ["Prompt Engineering", "symbol-ai"],
+      ["Structured Outputs", "symbol-code"],
+      ["Retrieval-Augmented Generation (RAG)", "symbol-ai"],
+      ["Computer Vision", "symbol-image"],
+      ["Image Processing", "symbol-image"],
+      ["Database Management", "symbol-database"],
+      ["Data Validation", "symbol-database"],
+      ["Geospatial Data", "symbol-map"],
+    ],
+  },
+  {
+    label: "Engineering Practices",
+    tone: "practice",
+    skills: [
+      ["Web Development", "symbol-code"],
+      ["System Design", "symbol-workflow"],
+      ["Object-Oriented Programming", "symbol-code"],
+      ["UML", "symbol-workflow"],
+      ["Web Security", "symbol-shield"],
+      ["SEO", "symbol-search"],
+      ["Cloud & Containers", "symbol-cloud"],
+      ["Automotive Software", "symbol-code"],
+      ["Multithreading", "symbol-workflow"],
+      ["Discrete-Event Simulation", "symbol-workflow"],
+      ["Testing & Release Management", "symbol-workflow"],
+      ["Stakeholder Collaboration", "symbol-language"],
+    ],
+  },
+] as const;
 
 export const workExperience: WorkExperience[] = [
   // {
@@ -831,7 +888,7 @@ export const workExperience: WorkExperience[] = [
   //   positions: [
   //     {
   //       role: "Software Engineer",
-  //       period: "Oct 2025 - Present",
+  //       period: "Sep 2025 - Present",
   //       highlights: [
   //         "Owning features end to end at Caesar, an AI-first startup building sales agents for e-commerce, from defining requirements through implementation and testing, with a focus on platform monitoring, backend performance, and reliability."
   //       ],
