@@ -2,16 +2,16 @@
 
 :root {
   color-scheme: light dark;
-  --background: light-dark(#fff, #0c0c0e);
-  --foreground: light-dark(#0e0e0e, #ededed);
-  --muted: light-dark(#616161, #8b8b96);
-  --border: light-dark(#e5e5e5, #2a2a32);
-  --control-border: light-dark(#8c8c8c, #2a2a32);
-  --surface: light-dark(#f7f7f7, #131316);
-  --surface-raised: light-dark(#efefef, #1a1a1f);
-  --accent: light-dark(#171717, #6ee7b7);
-  --accent-foreground: light-dark(#fafafa, #0c0c0e);
-  --reading-foreground: light-dark(#4b4b4b, #b6b6c0);
+  --background: light-dark(#fff9ed, #0c0c0e);
+  --foreground: light-dark(#261d17, #ededed);
+  --muted: light-dark(#67594e, #8b8b96);
+  --border: light-dark(#e5d6be, #2a2a32);
+  --control-border: light-dark(#8b7565, #2a2a32);
+  --surface: light-dark(#f8efdf, #131316);
+  --surface-raised: light-dark(#f1e3ce, #1a1a1f);
+  --accent: light-dark(#ad3b23, #6ee7b7);
+  --accent-foreground: light-dark(#fff9ed, #0c0c0e);
+  --reading-foreground: light-dark(#53443a, #b6b6c0);
 }
 
 :root[data-theme="light"] {
