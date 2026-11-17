@@ -6,10 +6,10 @@ import { scrollToSection } from '../lib/navigation';
 import { ThemeToggle } from './ThemeToggle';
 
 const navItems = [
-  { label: "Projects", href: "projects" },
-  { label: "Skills", href: "skills" },
   { label: "Experience", href: "experience" },
   { label: "Education", href: "education" },
+  { label: "Projects", href: "projects" },
+  { label: "Skills", href: "skills" },
   { label: "About", href: "about" },
   { label: "Contact", href: "contact" },
 ];

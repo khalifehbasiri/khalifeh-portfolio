@@ -327,6 +327,7 @@ export const projects: Project[] = [
       { label: "Watch Demo", href: "https://youtu.be/tJMpMrLWkEg" },
       { label: "Case Study", href: "/projects/tandem-insulin-pump-simulator" },
     ],
+    featured: true,
     topics: ["teamwork"],
     category: "coursework",
   },
@@ -609,7 +610,7 @@ export const projects: Project[] = [
     status: "Completed",
     outcome: {
       headline: "Two-person graphics team",
-      detail: "COMP 3009 at Carleton University · April 2024.",
+      detail: "Computer Graphics at Carleton University · April 2024.",
     },
     description:
       "Developed the environment for a C++ and OpenGL simulation with Dylan Tombs-Koscinski, then jointly integrated and tested the trees, ground, and skybox with his fireworks and camera.",
@@ -651,7 +652,7 @@ export const projects: Project[] = [
     status: "Completed",
     outcome: {
       headline: "Four-person engineering team",
-      detail: "ECOR 1042 at Carleton University · 2021.",
+      detail: "Data Management at Carleton University · 2021.",
     },
     description:
       "Built image filters and the interactive editor with Arun Ichsanow, Jason Perrins, and Ephraim Inyang. The original course submission also included batch processing.",
@@ -822,6 +823,21 @@ export const skillGroups = [
 ];
 
 export const workExperience: WorkExperience[] = [
+  // {
+  //   company: "Caesar",
+  //   location: "Remote",
+  //   image: "/images/brand/Caesar-logo.png",
+  //   imageAlt: "Caesar logo",
+  //   positions: [
+  //     {
+  //       role: "Software Engineer",
+  //       period: "Oct 2025 - Present",
+  //       highlights: [
+  //         "Owning features end to end at Caesar, an AI-first startup building sales agents for e-commerce, from defining requirements through implementation and testing, with a focus on platform monitoring, backend performance, and reliability."
+  //       ],
+  //     },
+  //   ],
+  // },
   {
     company: "Fisheries and Oceans Canada",
     location: "Ottawa, ON",
@@ -831,7 +847,7 @@ export const workExperience: WorkExperience[] = [
     positions: [
       {
         role: "Software Developer",
-        period: "Aug 2024–Dec 2025",
+        period: "Aug 2024 – Dec 2025",
         highlights: [
           "Built a bilingual Python geographic-name validator using the GNBC REST API and geospatial matching, replacing manual checks with validation completed in minutes.",
           "Expanded it into the modular Name Manager with comparison, search, and geospatial helper tools; CHS Atlantic reported one process fell from two weeks to a few hours.",
@@ -841,7 +857,7 @@ export const workExperience: WorkExperience[] = [
       },
       {
         role: "Programmer",
-        period: "Sep 2023–Aug 2024",
+        period: "Sep 2023 – Aug 2024",
         highlights: [
           "Built a multithreaded Python Storage Explorer for metadata across an approximately 420 TB Azure storage estate, cutting staff file-location searches from hours to seconds or minutes.",
           "Kept searches responsive during updates and preserved the last valid database when a refresh failed.",

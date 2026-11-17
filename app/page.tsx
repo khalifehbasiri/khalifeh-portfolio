@@ -43,10 +43,10 @@ export default function Home() {
       <Header />
       <PortfolioMotion>
         <Hero />
-        <Projects projects={projects} />
-        <Skills />
         <Experience />
         <Education />
+        <Projects projects={projects} />
+        <Skills />
         <About />
         <Contact />
       </PortfolioMotion>

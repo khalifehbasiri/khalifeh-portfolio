@@ -11,7 +11,7 @@ export const tandemStory: CaseStudyStory = {
       "A frame from the team's bolus demonstration. The highlighted interval shows extended delivery in the simulated glucose history.",
   },
   problem:
-    "A dose calculation is only useful if the rest of the system can deliver it consistently. Our COMP 3004 project had to coordinate user confirmation, changing glucose readings, delivery interruptions, alerts, charts, and persisted history. My responsibility was the C++ domain logic at the center of those workflows: deciding how much insulin to deliver, when to adjust it, and when delivery must stop or remain suspended.",
+    "A dose calculation is only useful if the rest of the system can deliver it consistently. Our simulator had to coordinate user confirmation, changing glucose readings, delivery interruptions, alerts, charts, and persisted history. My responsibility was the C++ domain logic at the center of those workflows: deciding how much insulin to deliver, when to adjust it, and when delivery must stop or remain suspended.",
   built: [
     {
       title: "BolusManager: from inputs to a confirmed dose.",
@@ -63,7 +63,7 @@ export const tandemStory: CaseStudyStory = {
   evidence:
     "The team used scenario-driven acceptance testing in the running Qt application, checking user actions, simulated state, alerts, and stored records together. Our final submission included a 23-item requirements traceability matrix, UML class and state-machine diagrams, sequence diagrams, and Doxygen documentation. Four final demonstrations show successful-use and safety scenarios. The public repository shares design documentation and demos; the course source remains private. This is an educational simulation without clinical validation.",
   facts: [
-    { label: "Team", value: "Four contributors · COMP 3004 · Carleton University" },
+    { label: "Team", value: "Four contributors · Object-Oriented Software Engineering · Carleton University" },
     { label: "My focus", value: "BolusManager, ControlSystem, and dosing alerts" },
     { label: "Simulation clock", value: "Five simulated minutes per real second" },
     { label: "Design & verification", value: "UML · state machines · 23-item requirements traceability matrix" },
