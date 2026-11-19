@@ -1,3 +1,5 @@
+import { features } from "process";
+
 export type ProjectLink = {
   label: string;
   href: string;
@@ -880,21 +882,24 @@ export const skillGroups = [
 ] as const;
 
 export const workExperience: WorkExperience[] = [
-  // {
-  //   company: "Caesar",
-  //   location: "Remote",
-  //   image: "/images/brand/Caesar-logo.png",
-  //   imageAlt: "Caesar logo",
-  //   positions: [
-  //     {
-  //       role: "Software Engineer",
-  //       period: "Sep 2025 - Present",
-  //       highlights: [
-  //         "Owning features end to end at Caesar, an AI-first startup building sales agents for e-commerce, from defining requirements through implementation and testing, with a focus on platform monitoring, backend performance, and reliability."
-  //       ],
-  //     },
-  //   ],
-  // },
+  {
+    company: "Caesar",
+    location: "Remote",
+    image: "/images/brand/Caesar-logo.png",
+    imageAlt: "Caesar logo",
+    positions: [
+      {
+        role: "Software Engineer",
+        period: "Sep 2025 - Present (Freelance)",
+        highlights: [
+          "Owning features end to end at Caesar, an AI-first startup building sales agents for e-commerce, with a focus on platform monitoring, backend performance, and agentic workflows."
+          // "Lead an infrastructure dashboard project at Caesar, an AI-first startup building sales agents for e-commerce. Map how messaging works across providers and design and build a dashboard to assess reliability and sending capacity ahead of launch.",
+          // "Optimized PostgreSQL queries and removed redundant backend processing to make admin dashboards more responsive.",
+          // "Built dashboard features with React and TypeScript that help the team diagnose message delivery failures and track AI operating costs.",
+        ],
+      },
+    ],
+  },
   {
     company: "Fisheries and Oceans Canada",
     location: "Ottawa, ON",
