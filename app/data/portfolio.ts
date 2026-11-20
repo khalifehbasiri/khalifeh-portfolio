@@ -890,7 +890,7 @@ export const workExperience: WorkExperience[] = [
     positions: [
       {
         role: "Software Engineer",
-        period: "Sep 2025 - Present (Freelance)",
+        period: "Sep 2026 - Present (Freelance)",
         highlights: [
           "Owning features end to end at Caesar, an AI-first startup building sales agents for e-commerce, with a focus on platform monitoring, backend performance, and agentic workflows."
           // "Lead an infrastructure dashboard project at Caesar, an AI-first startup building sales agents for e-commerce. Map how messaging works across providers and design and build a dashboard to assess reliability and sending capacity ahead of launch.",
