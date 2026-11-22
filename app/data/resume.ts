@@ -23,21 +23,35 @@ export const resume = {
       "school": "Carleton University",
       "location": "Ottawa, ON",
       "degree": "Bachelor of Computer Science, GPA: 3.5/4.0",
-      "year": "2026"
+      "year": "June 2026"
     }
   ],
   "experience": [
     {
-      "company": "Fisheries and Oceans Canada (DFO) | Government of Canada",
+      "company": "Caesar",
+      "location": "Remote",
+      "href": "https://www.caesar.io/",
+      "positions": [
+        {
+          "role": "Software Engineer (Freelance)",
+          "period": "Sep. 2026 – Present",
+          "highlights": [
+            "Own the React and TypeScript dashboard for Caesar’s e-commerce sales agent infrastructure, mapping messaging systems and defining health metrics for reliability, capacity, and launch readiness.",
+            "Optimized PostgreSQL queries and backend processing to improve dashboard responsiveness, and strengthened Shopify integration reliability through improved authentication error handling."
+          ]
+        }
+      ]
+    },
+    {
+      "company": "Fisheries and Oceans Canada (DFO)",
       "location": "Ottawa, ON",
       "positions": [
         {
           "role": "Software Developer (internship)",
           "period": "Aug. 2024 – Dec. 2025",
           "highlights": [
-            "Built a bilingual Python geographic-name validator using the GNBC REST API and geospatial matching, replacing manual entry-by-entry file checks with validation completed in minutes.",
-            "Expanded the validator into a modular Name Manager with comparison, GNBC search, and geospatial helper workflows; CHS Atlantic reported one process fell from two weeks to a few hours.",
-            "Led a three-person Agile team and worked directly with DFO clients through requirements, design, development, demos, deployment, and user training for the Name Manager.",
+            "Built a modular Python app for validating, comparing, and searching geographic names using the GNBC REST API and geospatial matching, replacing manual entry-by-entry file checks with validation completed in minutes.",
+            "Led a three-person Agile team through DFO client requirements, design, development, demos, deployment, and training. CHS Atlantic reported a workflow using the app’s search and helper tools went from two weeks to a few hours.",
             "Performed integration, regression, and user-acceptance testing (UAT) across API, database, threading, and geospatial workflows; validated releases with users in five DFO regions and the Canadian Coast Guard and supported production."
           ]
         },
@@ -45,7 +59,7 @@ export const resume = {
           "role": "Programmer (internship)",
           "period": "Sep. 2023 – Aug. 2024",
           "highlights": [
-            "Engineered a multithreaded Python Storage Explorer using Azure Blob Inventory, MongoDB, and SQLite to search and export metadata across a 420 TB+ Azure storage estate; cut DFO staff’s file-location searches from hours to seconds or minutes.",
+            "Engineered a multithreaded Python Storage Explorer with Azure Blob Inventory and SQLite to search and export metadata across 420 TB+ of Azure storage, reducing file search times for DFO staff from hours to seconds or minutes.",
             "Implemented metadata refresh handling that kept searches responsive and preserved the last valid database after failed updates, allowing staff to continue using the Explorer."
           ]
         }
@@ -141,7 +155,7 @@ export const resume = {
       "value": "React, Next.js, Angular, Express, Node.js, Electron, Flask, Qt, Qt Charts, TensorFlow, TensorFlow Lite, MediaPipe, Tailwind CSS, pytest, LangChain, LangGraph"
     },
     {
-      "label": "Cloud, APIs, and tools",
+      "label": "Cloud and APIs",
       "value": "Microsoft Azure, Azure Blob Storage, QGIS, Docker, Git, Linux, REST APIs, OpenAI API, OAuth"
     },
     {
