@@ -115,23 +115,6 @@ export const resume = {
       ]
     },
     {
-      "name": "Job-Tracker-AI",
-      "technologies": "Python, PySide6, OpenAI API, SQLite, Pydantic",
-      "links": [
-        {
-          "label": "GitHub",
-          "href": "https://github.com/khalifehbasiri/Job-Tracker-AI"
-        },
-        {
-          "label": "Download",
-          "href": "https://github.com/khalifehbasiri/Job-Tracker-AI/releases"
-        }
-      ],
-      "highlights": [
-        "Built a Python desktop job tracker with Gmail/Outlook OAuth integration and a two-stage AI pipeline using the OpenAI Decisions API for email classification and the Responses API for structured extraction."
-      ]
-    },
-    {
       "name": "Tandem t:slim X2 Insulin Pump Simulator",
       "technologies": "C++, Qt, SQLite, UML",
       "links": [
