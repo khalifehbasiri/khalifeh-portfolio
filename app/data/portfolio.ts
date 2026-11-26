@@ -892,10 +892,8 @@ export const workExperience: WorkExperience[] = [
         role: "Software Engineer",
         period: "Sep 2026 - Present (Freelance)",
         highlights: [
-          "Owning features end to end at Caesar, an AI-first startup building sales agents for e-commerce, with a focus on platform monitoring, backend performance, and AI infrastructure."
-          // "Lead an infrastructure dashboard project at Caesar, an AI-first startup building sales agents for e-commerce. Map how messaging works across providers and design and build a dashboard to assess reliability and sending capacity ahead of launch.",
-          // "Optimized PostgreSQL queries and removed redundant backend processing to make admin dashboards more responsive.",
-          // "Built dashboard features with React and TypeScript that help the team diagnose message delivery failures and track AI operating costs.",
+          "Own the React and TypeScript dashboard for Caesar’s e-commerce sales agent infrastructure, mapping messaging systems and defining health metrics for reliability, capacity, and launch readiness.",
+          "Optimized PostgreSQL queries and backend processing to improve dashboard responsiveness, and strengthened Shopify integration reliability through improved authentication error handling.",
         ],
       },
     ],

@@ -3,16 +3,13 @@
 import { useSyncExternalStore } from "react";
 import { themeStorageKey } from "../lib/theme";
 
-const systemDark = "(prefers-color-scheme: dark)";
 const themeChange = "portfolio-theme-change";
 
 function isLight() {
-  const theme = document.documentElement.dataset.theme;
-  return theme ? theme === "light" : !window.matchMedia(systemDark).matches;
+  return document.documentElement.dataset.theme !== "dark";
 }
 
 function subscribe(onChange: () => void) {
-  const preference = window.matchMedia(systemDark);
   const syncStorage = (event: StorageEvent) => {
     if (event.key !== themeStorageKey && event.key !== null) return;
     if (event.newValue === "light" || event.newValue === "dark") {
@@ -23,18 +20,16 @@ function subscribe(onChange: () => void) {
     onChange();
   };
 
-  preference.addEventListener("change", onChange);
   window.addEventListener(themeChange, onChange);
   window.addEventListener("storage", syncStorage);
   return () => {
-    preference.removeEventListener("change", onChange);
     window.removeEventListener(themeChange, onChange);
     window.removeEventListener("storage", syncStorage);
   };
 }
 
 export function ThemeToggle() {
-  const light = useSyncExternalStore(subscribe, isLight, () => false);
+  const light = useSyncExternalStore(subscribe, isLight, () => true);
 
   function toggle() {
     const theme = isLight() ? "dark" : "light";
@@ -50,9 +45,9 @@ export function ThemeToggle() {
   return (
     <button
       type="button"
-      aria-label="Light mode"
-      aria-pressed={light}
-      title="Toggle light mode"
+      aria-label="Dark mode"
+      aria-pressed={!light}
+      title="Toggle dark mode"
       onClick={toggle}
       className="inline-flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-lg text-muted transition-colors hover:bg-surface-raised hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
     >
